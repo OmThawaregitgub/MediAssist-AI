@@ -27,11 +27,11 @@ Check out the live application or see the interface below!
 
 ### 1. Main Chat Interface
 The initial interface showing the welcoming message and the chat layout.
-![Main Chat Interface](images/Screenshot%20(419).png)
+![Main Chat Interface](https://github.com/OmThawaregitgub/MediAssist-AI/blob/master/Images/Screenshot%20(419).png?raw=true)
 
 ### 2. RAG-Powered Answer
 A demonstration of the system successfully retrieving context and generating a grounded response.
-![RAG-Powered Answer Example](images/Screenshot%20(420).png)
+![RAG-Powered Answer Example](https://github.com/OmThawaregitgub/MediAssist-AI/blob/master/Images/Screenshot%20(420).png?raw=true)
 
 ---
 
