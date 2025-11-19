@@ -3,17 +3,13 @@
 import os
 from google import genai
 from google.genai.errors import APIError
-from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
-API_KEY = os.getenv("API_KEY")
+import streamlit as st
+api_key = st.secrets["my_api_key"]
 
 # Check if the API key is available
-if not API_KEY:
-    # A cleaner way to handle this on Streamlit Cloud is to prompt
-    # the user or stop the app, but for this context we raise an error.
-    raise ValueError("API_KEY not found in environment variables or .env file.")
+
 
 class GeminiLLM:
     def __init__(self, model_name="gemini-2.5-flash"):
@@ -47,3 +43,4 @@ class GeminiLLM:
         except Exception as e:
             print(f"An unexpected embedding error occurred: {e}")
             return None
+
