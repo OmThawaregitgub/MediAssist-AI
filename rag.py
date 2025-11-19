@@ -1,47 +1,58 @@
-# llm.py
+import chromadb
+from llm import GeminiLLM # <-- Must successfully import this now
 
-import os
-from google import genai
-from google.genai.errors import APIError
+class RAGPipeline:
+    def __init__(self, collection_name="my_rag"):
 
-# Load environment variables from .env file
-import streamlit as st
-api_key = st.secrets["GEMINI_API_KEY"]
+        # Use in-memory client for Streamlit Cloud (NO local disk)
+        self.client = chromadb.Client()
 
-# Check if the API key is available
+        # Safe collection creation
+        self.collection = self.client.get_or_create_collection(
+            name=collection_name,
+            metadata={"hnsw:space": "cosine"}
+        )
 
+        self.llm = GeminiLLM()
 
-class GeminiLLM:
-    def __init__(self, model_name="gemini-2.5-flash"):
-        self.client = genai.Client(api_key=API_KEY)
-        self.model_name = model_name
-        self.embedding_model = "text-embedding-004" # Use a stable embedding model
-
-    def generate(self, prompt: str) -> str:
-        try:
-            response = self.client.models.generate_content(
-                model=self.model_name,
-                contents=prompt,
+    # ---- Add document to vector store ----
+    def add_document(self, doc_id: str, text: str):
+        # We must use the LLM to create an embedding first
+        emb = self.llm.embed(text) 
+        if emb:
+            self.collection.add(
+                ids=[doc_id],
+                embeddings=[emb],
+                documents=[text],
             )
-            return response.text
-        except APIError as e:
-            return f"Error from LLM: Could not generate content. {e}"
-        except Exception as e:
-            return f"An unexpected error occurred: {e}"
 
-    def embed(self, text: str):
-        try:
-            response = self.client.models.embed_content(
-                model=self.embedding_model,
-                content=text,
-                task_type="RETRIEVAL_DOCUMENT"
-            )
-            return response['embedding']
-        except APIError as e:
-            print(f"Embedding error: {e}")
-            return None # Return None on failure
-        except Exception as e:
-            print(f"An unexpected embedding error occurred: {e}")
-            return None
+    # ---- RAG Query ----
+    def ask(self, query: str) -> str:
+        q_emb = self.llm.embed(query)
+        
+        # Guard clause if embedding fails
+        if q_emb is None:
+            return "Error: Could not generate embedding for the query."
 
+        results = self.collection.query(
+            query_embeddings=[q_emb],
+            n_results=3
+        )
 
+        retrieved_docs = results["documents"][0] if results["documents"] else []
+
+        context = "\n\n".join(retrieved_docs)
+
+        final_prompt = f"""
+Use the following context to answer accurately and concisely.
+
+Context:
+{context}
+
+Question:
+{query}
+
+Answer:
+"""
+
+        return self.llm.generate(final_prompt)
