@@ -4,11 +4,16 @@ from llm import GeminiLLM
 from pubmed_data import RECORDS
 
 class RAGPipeline:
-    def __init__(self):
-        self.client = chromadb.Client()
-        self.collection = self.client.create_collection("medical_data")
-        self.llm = GeminiLLM()
-        self._load_data()
+    def __init__(self, persist_directory="./chroma_db"):
+        self.client = chromadb.PersistentClient(path=persist_directory)
+        
+        # Try to get existing collection, create if it doesn't exist
+        try:
+            self.collection = self.client.get_collection("medical_data")
+        except Exception as e:
+            # If collection doesn't exist, create it
+            self.collection = self.client.create_collection("medical_data")
+        
 
     def _load_data(self):
         for record in RECORDS:
@@ -41,3 +46,4 @@ class RAGPipeline:
 
     def get_collection_info(self):
         return "Medical assistant ready"
+
