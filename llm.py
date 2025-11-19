@@ -7,12 +7,13 @@ from dotenv import load_dotenv
 import streamlit as st
 import sys
 
+
 # Load .env variables for local development only
 if "streamlit" not in sys.modules:
     load_dotenv()
 
 # --- API KEY RETRIEVAL LOGIC ---
-API_KEY = None
+API_KEY = os.getenv("API_KEY")
 SECRET_NAME = "GEMINI_API_KEY"
 
 # 1. Try Streamlit Secrets (Recommended for Streamlit Cloud)
@@ -61,6 +62,7 @@ class GeminiLLM:
         except Exception as e:
             print(f"An unexpected embedding error occurred: {e}")
             return None
+
 
 
 
