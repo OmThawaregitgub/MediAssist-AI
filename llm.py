@@ -22,10 +22,7 @@ if API_KEY is None:
     API_KEY = os.getenv(SECRET_NAME)
 
 # 3. Final Check
-if not API_KEY:
-    # Raise error if key is still missing
-    raise ValueError(f"{SECRET_NAME} not found. Please ensure it is set in Streamlit Cloud Secrets or your local .env file.")
-
+print(API_KEY)
 class GeminiLLM:
     def __init__(self, model_name="gemini-2.5-flash"):
         # The client initialization uses the successfully retrieved API_KEY
@@ -59,4 +56,5 @@ class GeminiLLM:
         except Exception as e:
             print(f"An unexpected embedding error occurred: {e}")
             return None
+
 
