@@ -5,22 +5,15 @@ import streamlit as st
 class LLMClient:
     def __init__(self):
         try:
-            api_key = st.secrets['GEMINI_API_KEY']
-            if not api_key:
-                raise ValueError("API_KEY not found in environment variables. Please check your Streamlit Cloud secrets or .env file.")
+            # Use the correct secret name - either 'API_KEY' or 'GEMINI_API_KEY'
+            api_key = st.secrets['API_KEY']  # Change this if you used different name
             
-            # Check if API key looks valid (starts with AIza)
-            if not api_key.startswith('AIza'):
-                raise ValueError("Invalid API key format. Google Gemini keys usually start with 'AIza'")
+            if not api_key:
+                raise ValueError("API_KEY not found in secrets")
             
             genai.configure(api_key=api_key)
             self.model = genai.GenerativeModel('gemini-pro')
             
-            # Test the connection
-            test_response = self.model.generate_content("Hello")
-            if not hasattr(test_response, 'text'):
-                raise ValueError("API key test failed - no response from Gemini")
-                
             print("✅ Gemini API connected successfully")
             
         except Exception as e:
@@ -37,9 +30,8 @@ class LLMClient:
             if hasattr(response, 'text') and response.text:
                 return response.text
             else:
-                return "I apologize, but I couldn't generate a proper response. The API returned an empty response."
+                return "I apologize, but I couldn't generate a proper response."
                 
         except Exception as e:
-            error_msg = f"API Error: {str(e)}"
-            print(f"LLM Generation Error: {error_msg}")
-            return "I'm experiencing technical difficulties with the AI service. Please check your API key and try again."
+            print(f"LLM Generation Error: {str(e)}")
+            return "I'm experiencing technical difficulties. Please try again in a moment."
