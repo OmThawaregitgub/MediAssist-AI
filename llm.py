@@ -3,30 +3,28 @@ from google import genai
 
 class GeminiLLM:
     def __init__(self):
-        # Load key from Streamlit secrets
+        # Streamlit Secrets (recommended)
         self.api_key = st.secrets["GEMINI_API_KEY"]
-        if not self.api_key:
-            raise ValueError("GEMINI_API_KEY missing in Streamlit Secrets")
 
-        # Create client
+        # Initialize Gemini client
         self.client = genai.Client(api_key=self.api_key)
 
         # Models
         self.embed_model = "text-embedding-004"
         self.chat_model = "gemini-1.5-flash"
 
-    # -------- Embedding --------
+    # -------- EMBEDDING --------
     def embed(self, text: str):
         response = self.client.models.embed_content(
             model=self.embed_model,
-            content=text
+            contents=[text]    # <-- FIXED: must be a list
         )
         return response["embedding"]
 
-    # -------- Text Generation --------
+    # -------- TEXT GENERATION --------
     def generate(self, prompt: str):
         response = self.client.models.generate_content(
             model=self.chat_model,
-            contents=prompt
+            contents=[prompt]   # <-- FIXED: must be a list
         )
         return response.text
