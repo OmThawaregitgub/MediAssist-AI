@@ -17,7 +17,7 @@ SECRET_NAME = "GEMINI_API_KEY"
 
 # 1. Try Streamlit Secrets (Recommended for Streamlit Cloud)
 if SECRET_NAME in st.secrets:
-    API_KEY = st.secrets[GEMINI_API_KEY]
+    API_KEY = st.secrets['GEMINI_API_KEY']
 
 # 2. Fallback to Environment Variables (Works for Streamlit Cloud secrets too)
 if API_KEY is None:
@@ -61,6 +61,7 @@ class GeminiLLM:
         except Exception as e:
             print(f"An unexpected embedding error occurred: {e}")
             return None
+
 
 
 
