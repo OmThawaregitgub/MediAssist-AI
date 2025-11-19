@@ -4,7 +4,7 @@ from llm import GeminiLLM
 from pubmed_data import RECORDS
 
 class RAGPipeline:
-    def __init__(self, collection_name="knowledge_base"):
+    def __init__(self, collection_name="medical_rag"):
         self.client = chromadb.EphemeralClient()
         self.collection = self.client.get_or_create_collection(name=collection_name)
         self.llm = GeminiLLM()
@@ -28,22 +28,21 @@ class RAGPipeline:
                         documents=[document_text],
                         metadatas=[{
                             "pmid": record['pmid'],
-                            "title": record['title"],
+                            "title": record['title'],
                             "journal": record['journal'], 
                             "publication_date": record['publication_date'],
                             "source": "pubmed"
                         }]
                     )
         except Exception as e:
-            print(f"Database note: {e}")
+            print(f"Data loading: {e}")
 
     def ask(self, query: str) -> str:
         try:
-            # ALWAYS pass query to LLM first for natural conversation
-            # Check if it might be a medical question
+            # ALWAYS pass query to LLM - no hardcoded responses
+            # Check if medical question
             if self._is_medical_question(query.lower()):
-                # Try to find relevant research
-                results = self.collection.query(query_texts=[query], n_results=2)
+                results = self.collection.query(query_texts=[query], n_results=3)
                 retrieved_docs = results["documents"][0] if results["documents"] else []
                 retrieved_metadatas = results["metadatas"][0] if results["metadatas"] else []
 
@@ -53,25 +52,30 @@ class RAGPipeline:
                     for meta in retrieved_metadatas:
                         sources_info += f"• {meta.get('title', 'Unknown')} ({meta.get('journal', 'Unknown journal')}, {meta.get('publication_date', 'Unknown year')})\n"
                     
-                    enhanced_prompt = f"Question: {query}\n\nRelevant Research:\n{context}\n\nPlease answer the question:"
-                    answer = self.llm.generate(enhanced_prompt)
+                    # Pass query + context to LLM
+                    prompt = f"Question: {query}\n\nResearch Context:\n{context}\n\nPlease answer the question based on the research:"
+                    answer = self.llm.generate(prompt)
                     return answer + sources_info
             
-            # For non-medical or when no research found, just use LLM
+            # For non-medical questions, just use LLM directly
             return self.llm.generate(query)
                 
         except Exception as e:
-            # Fallback to direct LLM
+            # If anything fails, use LLM directly
             return self.llm.generate(query)
 
     def _is_medical_question(self, query: str) -> bool:
-        """Check if question might be medical"""
-        medical_keywords = ['cancer', 'medical', 'health', 'disease', 'treatment', 'symptom', 'diagnosis', 'patient']
+        """Check if question is medical-related"""
+        medical_keywords = [
+            'cancer', 'medical', 'health', 'disease', 'treatment', 'symptom',
+            'diagnosis', 'patient', 'therapy', 'drug', 'medicine', 'hospital',
+            'doctor', 'surgery', 'vaccine', 'infection', 'virus', 'pain'
+        ]
         return any(keyword in query for keyword in medical_keywords)
 
     def get_collection_info(self):
         try:
             count = self.collection.count()
-            return f"Loaded {count} research articles"
+            return f"Medical database: {count} articles"
         except:
             return "Assistant ready"
