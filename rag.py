@@ -1,6 +1,7 @@
-# rag.py - UPDATED FOR STREAMLIT CLOUD
+# rag.py
 import chromadb
 from llm import GeminiLLM
+from pubmed_data import RECORDS  # Import your PubMed data
 
 class RAGPipeline:
     def __init__(self, collection_name="medical_rag"):
@@ -14,46 +15,37 @@ class RAGPipeline:
 
         self.llm = GeminiLLM()
         
-        # Initialize with sample medical data
-        self._initialize_sample_data()
+        # Initialize with PubMed data
+        self._initialize_pubmed_data()
 
-    def _initialize_sample_data(self):
-        """Add sample medical data for demonstration"""
-        sample_docs = [
-            {
-                "id": "doc1",
-                "text": "Intermittent fasting (IF) involves cycling between periods of eating and fasting. Common methods include 16:8 (16 hours fasting, 8 hours eating) and 5:2 (5 days normal eating, 2 days restricted calories). Studies show benefits for weight loss and metabolic health.",
-                "metadata": {"source": "medical_guide", "topic": "definition"}
-            },
-            {
-                "id": "doc2", 
-                "text": "Research indicates intermittent fasting can improve insulin sensitivity and aid weight loss. Participants in clinical trials showed 3-8% body weight reduction over 8-12 weeks with improved metabolic markers including blood sugar control.",
-                "metadata": {"source": "clinical_study", "topic": "benefits"}
-            },
-            {
-                "id": "doc3",
-                "text": "Intermittent fasting may benefit Type 2 diabetes patients by improving glycemic control. However, patients on insulin or sulfonylureas should be closely monitored for hypoglycemia risks during fasting periods. Medical supervision is recommended.",
-                "metadata": {"source": "diabetes_journal", "topic": "diabetes"}
-            },
-            {
-                "id": "doc4",
-                "text": "Breast cancer risk factors include age, family history, genetic mutations (BRCA1/BRCA2), hormonal factors, obesity, alcohol consumption, and radiation exposure. Regular screening through mammography is recommended for early detection.",
-                "metadata": {"source": "oncology_guide", "topic": "cancer"}
-            },
-            {
-                "id": "doc5",
-                "text": "Common intermittent fasting protocols: 16:8 method (daily 16-hour fast), 5:2 diet (2 days of severe calorie restriction per week), alternate-day fasting, and eat-stop-eat (24-hour fasts 1-2 times per week). Each has different adherence rates and health outcomes.",
-                "metadata": {"source": "nutrition_review", "topic": "methods"}
-            }
-        ]
-        
-        # Add documents - ChromaDB will handle embeddings automatically
-        for doc in sample_docs:
-            self.collection.add(
-                ids=[doc["id"]],
-                documents=[doc["text"]],
-                metadatas=[doc["metadata"]]
-            )
+    def _initialize_pubmed_data(self):
+        """Add PubMed breast cancer research data to ChromaDB"""
+        if self.collection.count() == 0:  # Only add if collection is empty
+            for i, record in enumerate(RECORDS):
+                # Create document text from title and abstract
+                abstract_text = ""
+                if isinstance(record['abstract'], dict):
+                    # Join all abstract sections
+                    abstract_text = " ".join(record['abstract'].values())
+                elif isinstance(record['abstract'], str):
+                    abstract_text = record['abstract']
+                
+                document_text = f"Title: {record['title']}\nAbstract: {abstract_text}"
+                
+                # Add to ChromaDB
+                self.collection.add(
+                    ids=[f"pubmed_{record['pmid']}"],
+                    documents=[document_text],
+                    metadatas=[{
+                        "pmid": record['pmid'],
+                        "title": record['title'],
+                        "journal": record['journal'],
+                        "authors": record['authors'],
+                        "publication_date": record['publication_date'],
+                        "source": "pubmed"
+                    }]
+                )
+            print(f"✅ Loaded {len(RECORDS)} PubMed articles into ChromaDB")
 
     def ask(self, query: str) -> str:
         try:
@@ -64,30 +56,48 @@ class RAGPipeline:
             )
 
             retrieved_docs = results["documents"][0] if results["documents"] else []
+            retrieved_metadatas = results["metadatas"][0] if results["metadatas"] else []
 
             if retrieved_docs:
                 context = "\n\n".join(retrieved_docs)
-                final_prompt = f"""
-You are MediAssist AI, a medical research assistant. Use the context below to answer accurately.
+                
+                # Create sources information
+                sources_info = "\n\n📚 **Sources:**\n"
+                for meta in retrieved_metadatas:
+                    sources_info += f"• {meta.get('title', 'Unknown')} ({meta.get('journal', 'Unknown journal')}, {meta.get('publication_date', 'Unknown year')})\n"
 
-Context:
+                final_prompt = f"""
+You are MediAssist AI, a medical research assistant specializing in breast cancer research.
+
+Use the following research context from PubMed articles to answer the question accurately. Provide evidence-based information.
+
+Research Context:
 {context}
 
 Question: {query}
 
-Provide a clear, evidence-based answer:
+Provide a clear, evidence-based answer citing the available research:
 """
-                return self.llm.generate(final_prompt)
+                answer = self.llm.generate(final_prompt)
+                return answer + sources_info
             else:
                 # Fallback to general medical knowledge
                 general_prompt = f"""
-You are MediAssist AI, a helpful medical assistant. Answer this question based on your medical knowledge:
+You are MediAssist AI, a helpful medical assistant. Answer this medical question based on your knowledge:
 
 Question: {query}
 
-Provide a helpful and accurate response:
+Provide a helpful and accurate response. If this is about breast cancer, mention that you're using general medical knowledge since no specific research was found:
 """
                 return self.llm.generate(general_prompt)
                 
         except Exception as e:
             return f"Error retrieving information: {str(e)}"
+
+    def get_collection_info(self):
+        """Check how many documents are in the collection"""
+        try:
+            count = self.collection.count()
+            return f"Medical database has {count} research articles"
+        except Exception as e:
+            return f"Error checking collection: {e}"
