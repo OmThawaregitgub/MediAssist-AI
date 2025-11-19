@@ -1,9 +1,44 @@
-# streamlit_app.py
+# streamlit_app.py (Updated to include data loading)
 
 import streamlit as st
-from rag import RAGPipeline
+import json
+# Import your RAG class
+from rag import RAGPipeline 
 
 st.set_page_config(page_title="RAG Chat Assistant", layout="wide")
+
+# --- DATA LOADING (Streamlit's cache ensures this runs ONCE) ---
+@st.cache_resource
+def initialize_rag_pipeline(data_path="pubmed_articles.json"):
+    """Initializes RAG, loads data into in-memory ChromaDB, and returns the pipeline."""
+    try:
+        # 1. Initialize RAG (creates in-memory ChromaDB)
+        rag_pipeline = RAGPipeline()
+        
+        # 2. Load pre-fetched data (assuming you save the abstract list to JSON)
+        with open(data_path, 'r') as f:
+            records = json.load(f)
+
+        # 3. Add documents to the RAG pipeline's in-memory ChromaDB
+        for rec in records:
+            # Flatten the abstract structure from the fetched record
+            if isinstance(rec["abstract"], dict):
+                abstract_text = " ".join(rec["abstract"].values())
+            else:
+                abstract_text = rec["abstract"]
+                
+            document = f"Title: {rec['title']}\nAbstract: {abstract_text}"
+            
+            # Add to the in-memory vector store
+            rag_pipeline.add_document(rec["pmid"], document)
+            
+        print(f"Successfully loaded {len(records)} articles into in-memory ChromaDB.")
+        return rag_pipeline
+
+    except Exception as e:
+        st.error(f"Error during RAG initialization or data loading: {e}")
+        return None
+
 
 # ---- REMOVE TOP BLANK SPACE ----
 st.markdown("""
@@ -20,14 +55,22 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---- SESSION INIT ----
+# Initialize RAG Pipeline and cache it
+if "rag" not in st.session_state:
+    st.session_state.rag = initialize_rag_pipeline()
+
 if "chat" not in st.session_state:
     st.session_state.chat = []
 
-if "rag" not in st.session_state:
-    st.session_state.rag = RAGPipeline()
+# Guard clause to handle loading failure
+if st.session_state.rag is None:
+    st.stop()
+
 
 # ---- TITLE ----
 st.markdown("<h2 style='text-align:center;'>💬 RAG Chat Assistant</h2>", unsafe_allow_html=True)
+
+# ... (rest of the style and chat history display remains the same) ...
 
 # ---- STYLE ----
 st.markdown("""
@@ -75,7 +118,8 @@ user_query = st.text_input("Ask your question:", key="input_text")
 if st.button("Send"):
     if user_query.strip():
         st.session_state.chat.append(("user", user_query))
-        answer = st.session_state.rag.ask(user_query)
+        # Use the initialized RAG instance from session state
+        answer = st.session_state.rag.ask(user_query) 
         st.session_state.chat.append(("bot", answer))
         st.rerun()
 
