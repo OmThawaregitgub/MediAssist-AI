@@ -3,9 +3,8 @@ from google import genai
 
 class GeminiLLM:
     def __init__(self):
-        # Load API key from Streamlit secrets
+        # Load API key from secrets
         self.api_key = st.secrets["GEMINI_API_KEY"]
-
         if not self.api_key:
             raise ValueError("GEMINI_API_KEY missing in Streamlit Secrets!")
 
@@ -24,10 +23,10 @@ class GeminiLLM:
         )
         return response["embedding"]
 
-    # Generate text using LLM
-    def generate(self, prompt: str) -> str:
+    # Generate answer
+    def generate(self, prompt: str):
         response = self.client.models.generate_content(
             model=self.chat_model,
-            contents=prompt,
+            contents=prompt
         )
         return response.text
