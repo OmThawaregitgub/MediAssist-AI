@@ -1,63 +1,63 @@
-# streamlit_app.py (FINAL, CLEANED VERSION)
+# streamlit_app.py
 
 import streamlit as st
-import json
-# --- Use the reliable Python file for raw data ---
 from rag import RAGPipeline
-from pubmed_data import RECORDS as records 
-# ------------------------------------------------
 
-st.set_page_config(page_title="MediAssist AI Chat Assistant", layout="wide")
+st.set_page_config(page_title="MediAssist AI - Breast Cancer Research", layout="wide")
 
-# --- DATA LOADING (Streamlit's cache ensures this runs ONCE) ---
-@st.cache_resource
-def initialize_rag_pipeline(records_to_load):
-    """Initializes RAG, loads data into in-memory ChromaDB, and returns the pipeline."""
-    try:
-        # 1. Initialize RAG (creates in-memory ChromaDB)
-        rag_pipeline = RAGPipeline()
-        
-        # 2. Add documents to the RAG pipeline's in-memory ChromaDB
-        for rec in records_to_load:
-            # Flatten the abstract structure from the fetched record
-            if isinstance(rec["abstract"], dict):
-                # Join all section values (e.g., OBJECTIVE, RESULTS, CONCLUSION)
-                abstract_text = " ".join(rec["abstract"].values())
-            else:
-                abstract_text = rec["abstract"]
-                
-            document = f"Title: {rec['title']}\nAbstract: {abstract_text}"
-            
-            # Add to the in-memory vector store
-            rag_pipeline.add_document(rec["pmid"], document)
-            
-        print(f"Successfully loaded {len(records_to_load)} articles into in-memory ChromaDB.")
-        return rag_pipeline
-
-    except Exception as e:
-        # Catches API key, embedding, or structure errors
-        st.error(f"Error during RAG initialization or data loading: {e}")
-        return None
-
-# ---- REMOVE TOP BLANK SPACE (CSS Styling) ----
+# ---- REMOVE TOP BLANK SPACE ----
 st.markdown("""
 <style>
-/* Remove top margin/padding */
 .main > div {
     padding-top: 0px !important;
 }
-
 .block-container {
     padding-top: 0rem !important;
 }
+</style>
+""", unsafe_allow_html=True)
 
-/* Chat bubble styles */
+# ---- SESSION INIT ----
+if "chat" not in st.session_state:
+    st.session_state.chat = []
+
+if "rag" not in st.session_state:
+    with st.spinner("🔄 Loading medical research database..."):
+        st.session_state.rag = RAGPipeline()
+        info = st.session_state.rag.get_collection_info()
+    st.sidebar.success(info)
+
+# ---- TITLE ----
+st.markdown("<h2 style='text-align:center;'>🏥 MediAssist AI - Breast Cancer Research Assistant</h2>", unsafe_allow_html=True)
+
+# ---- SIDEBAR INFO ----
+st.sidebar.markdown("### ℹ️ About")
+st.sidebar.info("This AI assistant answers medical questions using PubMed research articles about breast cancer.")
+
+# Sample questions
+st.sidebar.markdown("### 💡 Sample Questions")
+sample_questions = [
+    "What are the latest breast cancer treatments?",
+    "Tell me about triple-negative breast cancer",
+    "What is intermittent fasting in cancer treatment?",
+    "How does immunotherapy work for breast cancer?",
+    "What are the risk factors for breast cancer?"
+]
+
+for question in sample_questions:
+    if st.sidebar.button(question, key=question):
+        st.session_state.input_text = question
+
+# ---- STYLE ----
+st.markdown("""
+<style>
 .chat-box {
-    height: 70vh;
+    height: 60vh;
     overflow-y: auto;
     padding: 10px;
     border-radius: 10px;
     background-color: #1e1e1e;
+    margin-bottom: 20px;
 }
 .user-msg {
     background: #0059ff;
@@ -66,6 +66,8 @@ st.markdown("""
     margin: 8px;
     color: white;
     width: fit-content;
+    max-width: 80%;
+    margin-left: auto;
 }
 .bot-msg {
     background: #2e2e2e;
@@ -74,27 +76,10 @@ st.markdown("""
     margin: 8px;
     color: white;
     width: fit-content;
+    max-width: 80%;
 }
 </style>
 """, unsafe_allow_html=True)
-
-
-# ---- SESSION INIT & RAG Initialization ----
-
-# Initialize RAG Pipeline and cache it, passing the imported data
-if "rag" not in st.session_state:
-    st.session_state.rag = initialize_rag_pipeline(records) # <-- Uses the imported data
-
-if "chat" not in st.session_state:
-    st.session_state.chat = []
-
-# Guard clause to handle loading failure (e.g., if API key failed)
-if st.session_state.rag is None:
-    st.stop()
-
-
-# ---- TITLE ----
-st.markdown("<h2 style='text-align:center;'>💬 RAG Chat Assistant</h2>", unsafe_allow_html=True)
 
 # ---- CHAT HISTORY AREA ----
 st.markdown("<div class='chat-box'>", unsafe_allow_html=True)
@@ -108,16 +93,21 @@ for role, msg in st.session_state.chat:
 st.markdown("</div>", unsafe_allow_html=True)
 
 # ---- INPUT AT BOTTOM ----
-user_query = st.text_input("Ask your question:", key="input_text")
+col1, col2 = st.columns([4, 1])
+with col1:
+    user_query = st.text_input("Ask your medical question:", key="input_text", 
+                              placeholder="e.g., What are the latest breast cancer treatments?")
+with col2:
+    send_btn = st.button("Send", use_container_width=True)
 
-if st.button("Send"):
-    if user_query.strip():
-        st.session_state.chat.append(("user", user_query))
+if send_btn and user_query.strip():
+    st.session_state.chat.append(("user", user_query))
+    with st.spinner("🔍 Searching medical research..."):
         answer = st.session_state.rag.ask(user_query)
-        st.session_state.chat.append(("bot", answer))
-        st.rerun()
+    st.session_state.chat.append(("bot", answer))
+    st.rerun()
 
 # ---- CLEAR CHAT ----
-if st.button("Clear Chat"):
+if st.button("Clear Chat History"):
     st.session_state.chat = []
     st.rerun()
