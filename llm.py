@@ -1,23 +1,30 @@
-import openai
+import google.generativeai as genai
 import os
 import streamlit as st
 
 class LLMClient:
     def __init__(self):
         try:
-            # Get OpenAI key from secrets
             api_key = st.secrets['GEMINI_API_KEY']
-            
             if not api_key:
-                raise ValueError("OpenAI_key not found in environment variables or Streamlit secrets.")
+                raise ValueError("API_KEY not found in environment variables. Please check your Streamlit Cloud secrets or .env file.")
             
-            openai.api_key = api_key
-            self.client = openai.OpenAI(api_key=api_key)
+            # Check if API key looks valid (starts with AIza)
+            if not api_key.startswith('AIza'):
+                raise ValueError("Invalid API key format. Google Gemini keys usually start with 'AIza'")
             
-            print("✅ OpenAI API connected successfully")
+            genai.configure(api_key=api_key)
+            self.model = genai.GenerativeModel('gemini-pro')
+            
+            # Test the connection
+            test_response = self.model.generate_content("Hello")
+            if not hasattr(test_response, 'text'):
+                raise ValueError("API key test failed - no response from Gemini")
+                
+            print("✅ Gemini API connected successfully")
             
         except Exception as e:
-            print(f"❌ OpenAI API connection failed: {e}")
+            print(f"❌ Gemini API connection failed: {e}")
             raise e
     
     def generate(self, prompt):
@@ -25,18 +32,14 @@ class LLMClient:
             if not prompt or not prompt.strip():
                 return "Please provide a valid question."
             
-            response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a medical AI assistant specializing in intermittent fasting and metabolic health. Provide evidence-based answers."},
-                    {"role": "user", "content": prompt}
-                ],
-                max_tokens=500
-            )
+            response = self.model.generate_content(prompt)
             
-            return response.choices[0].message.content
+            if hasattr(response, 'text') and response.text:
+                return response.text
+            else:
+                return "I apologize, but I couldn't generate a proper response. The API returned an empty response."
                 
         except Exception as e:
-            error_msg = f"OpenAI API Error: {str(e)}"
+            error_msg = f"API Error: {str(e)}"
             print(f"LLM Generation Error: {error_msg}")
-            return "I'm experiencing technical difficulties. Please try again in a moment."
+            return "I'm experiencing technical difficulties with the AI service. Please check your API key and try again."
