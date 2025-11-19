@@ -46,13 +46,16 @@ class GeminiLLM:
         try:
             response = self.client.models.embed_content(
                 model=self.embedding_model,
-                content=text,
+                # --- CRITICAL FIX: Change 'content' to 'contents' (plural) ---
+                contents=text, 
+                # -----------------------------------------------------------
                 task_type="RETRIEVAL_DOCUMENT"
             )
             return response['embedding']
         except APIError as e:
             print(f"Embedding error: {e}") # <-- Likely where the API key/network error is caught
             return None # <-- This None is what causes the final error message
+
 
 
 
