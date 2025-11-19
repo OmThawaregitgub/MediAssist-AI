@@ -3,13 +3,11 @@
 import os
 from google import genai
 from google.genai.errors import APIError
-from dotenv import load_dotenv
 import streamlit as st
 import sys
 
 # Load .env variables for local development only
-if "streamlit" not in sys.modules:
-    load_dotenv()
+
 
 # --- API KEY RETRIEVAL LOGIC ---
 API_KEY = None
@@ -61,3 +59,4 @@ class GeminiLLM:
         except Exception as e:
             print(f"An unexpected embedding error occurred: {e}")
             return None
+
