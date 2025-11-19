@@ -1,0 +1,11 @@
+streamlit==1.41.1
+chromadb==0.5.5
+google-genai==1.51.0
+python-dotenv==1.0.1
+pydantic==2.11.9
+requests==2.31.0
+anyio==4.8.0
+websockets==15.0.1
+typing-extensions==4.12.2
+tenacity==9.0.0
+httpx==0.28.1
