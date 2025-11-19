@@ -1,4 +1,4 @@
-# llm.py (CORRECT for Streamlit Cloud)
+# llm.py
 import streamlit as st
 import google.generativeai as genai
 
