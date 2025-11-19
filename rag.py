@@ -9,10 +9,7 @@ class RAGPipeline:
         self.client = chromadb.Client()
         
         # Let ChromaDB handle embeddings automatically
-        self.collection = self.client.get_or_create_collection(
-            name=collection_name
-        )
-
+        self.collection = self.client.get_or_create_collection(name=collection_name)
         self.llm = GeminiLLM()
         
         # Initialize with PubMed data
@@ -23,7 +20,6 @@ class RAGPipeline:
         try:
             if self.collection.count() == 0:
                 for record in RECORDS:
-                    # Create document text from title and abstract
                     abstract_text = ""
                     if isinstance(record['abstract'], dict):
                         abstract_text = " ".join(record['abstract'].values())
@@ -32,7 +28,6 @@ class RAGPipeline:
                     
                     document_text = f"Title: {record['title']}\nAbstract: {abstract_text}"
                     
-                    # Add to ChromaDB
                     self.collection.add(
                         ids=[f"pubmed_{record['pmid']}"],
                         documents=[document_text],
@@ -41,28 +36,23 @@ class RAGPipeline:
                             "title": record['title'],
                             "journal": record['journal'], 
                             "authors": record['authors'],
-                            "publication_date": record['publication_date'],
+                            "publication_date": record['publication_date"],
                             "source": "pubmed"
                         }]
                     )
+                print(f"✅ Loaded {len(RECORDS)} PubMed articles")
         except Exception as e:
             print(f"Error loading PubMed data: {e}")
 
     def ask(self, query: str) -> str:
         try:
             # Use ChromaDB's automatic embedding
-            results = self.collection.query(
-                query_texts=[query],
-                n_results=3
-            )
-
+            results = self.collection.query(query_texts=[query], n_results=3)
             retrieved_docs = results["documents"][0] if results["documents"] else []
             retrieved_metadatas = results["metadatas"][0] if results["metadatas"] else []
 
             if retrieved_docs:
                 context = "\n\n".join(retrieved_docs)
-                
-                # Create sources information
                 sources_info = "\n\n📚 **Sources:**\n"
                 for meta in retrieved_metadatas:
                     sources_info += f"• {meta.get('title', 'Unknown')} ({meta.get('journal', 'Unknown journal')}, {meta.get('publication_date', 'Unknown year')})\n"
@@ -83,4 +73,12 @@ Provide a clear, evidence-based answer:"""
                 return self.llm.generate(f"Please answer this question: {query}")
                 
         except Exception as e:
-            return f"Error: {str(e)}"
+            return f"Error processing your question: {str(e)}"
+
+    def get_collection_info(self):
+        """Check how many documents are in the collection"""
+        try:
+            count = self.collection.count()
+            return f"Medical database has {count} research articles"
+        except Exception as e:
+            return f"Error checking collection: {e}"
