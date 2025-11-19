@@ -4,7 +4,7 @@ import os
 from google import genai
 from google.genai.errors import APIError
 from dotenv import load_dotenv
-import streamlit as st
+
 import sys
 
 # Load .env variables for local development only
@@ -17,7 +17,7 @@ SECRET_NAME = "GEMINI_API_KEY"
 
 # 1. Try Streamlit Secrets (Recommended for Streamlit Cloud)
 if SECRET_NAME in st.secrets:
-    API_KEY = st.secrets[SECRET_NAME]
+    API_KEY = secrets[SECRET_NAME]
 
 # 2. Fallback to Environment Variables (Works for Streamlit Cloud secrets too)
 if API_KEY is None:
@@ -61,3 +61,4 @@ class GeminiLLM:
         except Exception as e:
             print(f"An unexpected embedding error occurred: {e}")
             return None
+
