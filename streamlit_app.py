@@ -1,21 +1,13 @@
-# streamlit_app.py (Updated to include data loading)
+# streamlit_app.py (FINAL, CLEANED VERSION)
 
 import streamlit as st
 import json
-# Import your RAG class
-from rag import RAGPipeline 
+# --- Use the reliable Python file for raw data ---
+from rag import RAGPipeline
+from pubmed_data import RECORDS as records 
+# ------------------------------------------------
 
-st.set_page_config(page_title="RAG Chat Assistant", layout="wide")
-
-# streamlit_app.py (REVISED)
-
-import streamlit as st
-from rag import RAGPipeline 
-# --- FIX: Import data directly from a Python file instead of missing JSON ---
-from pubmed_data import RECORDS as records
-# --------------------------------------------------------------------------
-
-st.set_page_config(page_title="RAG Chat Assistant", layout="wide")
+st.set_page_config(page_title="MediAssist AI Chat Assistant", layout="wide")
 
 # --- DATA LOADING (Streamlit's cache ensures this runs ONCE) ---
 @st.cache_resource
@@ -29,7 +21,7 @@ def initialize_rag_pipeline(records_to_load):
         for rec in records_to_load:
             # Flatten the abstract structure from the fetched record
             if isinstance(rec["abstract"], dict):
-                # NOTE: Ensure the key is correct for abstract sections (like "SUMMARY" or "OBJECTIVE")
+                # Join all section values (e.g., OBJECTIVE, RESULTS, CONCLUSION)
                 abstract_text = " ".join(rec["abstract"].values())
             else:
                 abstract_text = rec["abstract"]
@@ -43,13 +35,11 @@ def initialize_rag_pipeline(records_to_load):
         return rag_pipeline
 
     except Exception as e:
-        # This will now catch any error during populating the vector store, 
-        # like a Gemini API key failure or embedding failure.
+        # Catches API key, embedding, or structure errors
         st.error(f"Error during RAG initialization or data loading: {e}")
         return None
 
-
-# ---- REMOVE TOP BLANK SPACE ----
+# ---- REMOVE TOP BLANK SPACE (CSS Styling) ----
 st.markdown("""
 <style>
 /* Remove top margin/padding */
@@ -60,91 +50,8 @@ st.markdown("""
 .block-container {
     padding-top: 0rem !important;
 }
-</style>
-""", unsafe_allow_html=True)
 
-# ---- SESSION INIT ----
-# Initialize RAG Pipeline and cache it, passing the imported data
-if "rag" not in st.session_state:
-    st.session_state.rag = initialize_rag_pipeline(records) # <-- PASS THE DATA HERE
-
-if "chat" not in st.session_state:
-    st.session_state.chat = []
-
-# Guard clause to handle loading failure
-if st.session_state.rag is None:
-    st.stop()
-
-# ... (rest of the Streamlit code is the same)
-
-# --- DATA LOADING (Streamlit's cache ensures this runs ONCE) ---
-@st.cache_resource
-def initialize_rag_pipeline(data_path="pubmed_articles.json"):
-    """Initializes RAG, loads data into in-memory ChromaDB, and returns the pipeline."""
-    try:
-        # 1. Initialize RAG (creates in-memory ChromaDB)
-        rag_pipeline = RAGPipeline()
-        
-        # 2. Load pre-fetched data (assuming you save the abstract list to JSON)
-        with open(data_path, 'r') as f:
-            records = json.load(f)
-
-        # 3. Add documents to the RAG pipeline's in-memory ChromaDB
-        for rec in records:
-            # Flatten the abstract structure from the fetched record
-            if isinstance(rec["abstract"], dict):
-                abstract_text = " ".join(rec["abstract"].values())
-            else:
-                abstract_text = rec["abstract"]
-                
-            document = f"Title: {rec['title']}\nAbstract: {abstract_text}"
-            
-            # Add to the in-memory vector store
-            rag_pipeline.add_document(rec["pmid"], document)
-            
-        print(f"Successfully loaded {len(records)} articles into in-memory ChromaDB.")
-        return rag_pipeline
-
-    except Exception as e:
-        st.error(f"Error during RAG initialization or data loading: {e}")
-        return None
-
-
-# ---- REMOVE TOP BLANK SPACE ----
-st.markdown("""
-<style>
-/* Remove top margin/padding */
-.main > div {
-    padding-top: 0px !important;
-}
-
-.block-container {
-    padding-top: 0rem !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# ---- SESSION INIT ----
-# Initialize RAG Pipeline and cache it
-if "rag" not in st.session_state:
-    st.session_state.rag = initialize_rag_pipeline()
-
-if "chat" not in st.session_state:
-    st.session_state.chat = []
-
-# Guard clause to handle loading failure
-if st.session_state.rag is None:
-    st.stop()
-
-
-# ---- TITLE ----
-st.markdown("<h2 style='text-align:center;'>💬 RAG Chat Assistant</h2>", unsafe_allow_html=True)
-
-# ... (rest of the style and chat history display remains the same) ...
-
-# ---- STYLE ----
-st.markdown("""
-<style>
+/* Chat bubble styles */
 .chat-box {
     height: 70vh;
     overflow-y: auto;
@@ -171,6 +78,24 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+
+# ---- SESSION INIT & RAG Initialization ----
+
+# Initialize RAG Pipeline and cache it, passing the imported data
+if "rag" not in st.session_state:
+    st.session_state.rag = initialize_rag_pipeline(records) # <-- Uses the imported data
+
+if "chat" not in st.session_state:
+    st.session_state.chat = []
+
+# Guard clause to handle loading failure (e.g., if API key failed)
+if st.session_state.rag is None:
+    st.stop()
+
+
+# ---- TITLE ----
+st.markdown("<h2 style='text-align:center;'>💬 RAG Chat Assistant</h2>", unsafe_allow_html=True)
+
 # ---- CHAT HISTORY AREA ----
 st.markdown("<div class='chat-box'>", unsafe_allow_html=True)
 
@@ -188,8 +113,7 @@ user_query = st.text_input("Ask your question:", key="input_text")
 if st.button("Send"):
     if user_query.strip():
         st.session_state.chat.append(("user", user_query))
-        # Use the initialized RAG instance from session state
-        answer = st.session_state.rag.ask(user_query) 
+        answer = st.session_state.rag.ask(user_query)
         st.session_state.chat.append(("bot", answer))
         st.rerun()
 
