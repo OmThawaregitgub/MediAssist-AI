@@ -1,3 +1,5 @@
+[file name]: README.md
+[file content begin]
 # 🏥 MediAssist AI
 
 ### AI-Powered Healthcare Q&A System Using RAG, ChromaDB & LLaMA
@@ -17,12 +19,9 @@ This tool helps clinicians access **reliable medical information instantly**, re
 
 Check out the live application or see the interface below!
 
+🔗 **Live Demo Link**
 
-🔗 Live Demo Link
-
-👉 Click here to test the MediAssist AI App!
-
-
+👉 [Click here to test the MediAssist AI App!](https://mediassist-ai-zasupw7hcgypimctpdtcyr.streamlit.app/)
 
 ## 📸 Screenshots
 
@@ -211,3 +210,4 @@ MediAssist-AI/
 ## 📜 License
 
 This project is open-source under the **MIT License**.
+[file content end]
