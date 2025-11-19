@@ -31,9 +31,7 @@ The initial interface showing the welcoming message and the chat layout.
 
 ### 2. RAG-Powered Answer
 A demonstration of the system successfully retrieving context and generating a grounded response.
-![RAG-Powered Answer Example]!([https://github.com/OmThawaregitgub/MediAssist-AI/blob/master/Images/Screenshot%20(419).png?raw=true](https://github.com/OmThawaregitgub/MediAssist-AI/blob/master/Images/Screenshot%20(420).png
-))
-
+![RAG-Powered Answer Example](https://github.com/OmThawaregitgub/MediAssist-AI/blob/master/Images/Screenshot%20(420).png?raw=true)
 
 ---
 
