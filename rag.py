@@ -5,13 +5,13 @@ from pubmed_data import RECORDS
 
 class RAGPipeline:
     def __init__(self, collection_name="medical_rag"):
-        # Use in-memory client for Streamlit Cloud (no disk storage)
+        # Use in-memory client for Streamlit Cloud
         self.client = chromadb.EphemeralClient()
         
-        # Let ChromaDB handle embeddings automatically with its default model
+        # Let ChromaDB handle embeddings automatically
         self.collection = self.client.get_or_create_collection(
             name=collection_name,
-            metadata={"description": "Breast cancer research database"}
+            metadata={"description": "Cancer research database"}
         )
 
         self.llm = GeminiLLM()
@@ -20,9 +20,8 @@ class RAGPipeline:
         self._initialize_pubmed_data()
 
     def _initialize_pubmed_data(self):
-        """Add PubMed breast cancer research data to ChromaDB"""
+        """Add PubMed cancer research data to ChromaDB"""
         try:
-            # Check if collection is empty
             if self.collection.count() == 0:
                 documents = []
                 metadatas = []
@@ -61,13 +60,19 @@ class RAGPipeline:
     def ask(self, query: str) -> str:
         try:
             # Handle greetings directly
-            if query.lower().strip() in ['hi', 'hello', 'hey', 'hola', 'hi!', 'hello!']:
-                return "Hello! 👋 I'm MediAssist AI, your medical research assistant. I specialize in breast cancer research and can help answer questions using our database of medical studies. What would you like to know about breast cancer?"
+            query_lower = query.lower().strip()
+            if query_lower in ['hi', 'hello', 'hey', 'hola', 'hi!', 'hello!']:
+                return "Hello! 👋 I'm MediAssist AI, your medical research assistant. I specialize in cancer research and can help answer questions using our database of medical studies. What would you like to know about cancer types, treatments, or research?"
             
-            # Use ChromaDB's built-in embeddings (automatic)
+            # Check if user wants tabular format information
+            if 'tabular' in query_lower or 'table' in query_lower or 'format' in query_lower:
+                if 'cancer' in query_lower and 'type' in query_lower:
+                    return self._generate_cancer_types_table()
+            
+            # Use ChromaDB's built-in embeddings
             results = self.collection.query(
-                query_texts=[query],  # ChromaDB handles embedding internally
-                n_results=3
+                query_texts=[query],
+                n_results=5  # Get more results for comprehensive questions
             )
 
             retrieved_docs = results["documents"][0] if results["documents"] else []
@@ -84,7 +89,27 @@ class RAGPipeline:
                     year = meta.get('publication_date', 'Unknown year')
                     sources_info += f"• {title} ({journal}, {year})\n"
 
-                final_prompt = f"""You are MediAssist AI, a medical research assistant specializing in breast cancer. 
+                # Special prompt for comprehensive cancer information
+                if 'all type' in query_lower and 'cancer' in query_lower:
+                    final_prompt = f"""You are MediAssist AI, a comprehensive cancer research assistant. 
+
+Based on the research context below AND your general medical knowledge, provide detailed information about major cancer types and their treatments in a structured tabular format.
+
+RESEARCH CONTEXT:
+{context}
+
+QUESTION: {query}
+
+Please provide a comprehensive table showing:
+1. Cancer Type
+2. Common Locations
+3. Main Treatment Approaches
+4. Recent Advances
+5. Survival Rates (if available)
+
+Format as a clear, readable table with proper headers. Include at least 10-15 major cancer types:"""
+                else:
+                    final_prompt = f"""You are MediAssist AI, a medical research assistant. 
 
 Based on the following research context, provide a clear, evidence-based answer to the question.
 
@@ -98,12 +123,47 @@ Please provide a helpful, accurate answer based on the research above:"""
                 answer = self.llm.generate(final_prompt)
                 return answer + sources_info
             else:
-                # No relevant documents found
-                return self.llm.generate(f"Please answer this question about breast cancer or medical research: {query}")
+                # No relevant documents found - use general knowledge for comprehensive requests
+                if 'all type' in query_lower and 'cancer' in query_lower:
+                    return self._generate_cancer_types_table()
+                return self.llm.generate(f"Please answer this question about cancer research: {query}")
                 
         except Exception as e:
-            # Fallback response
-            return f"Hello! I'm MediAssist AI. I can help with breast cancer research questions. Please ask me about treatments, risk factors, or recent studies."
+            # Fallback response for comprehensive cancer queries
+            if 'cancer' in query.lower() and 'type' in query.lower():
+                return self._generate_cancer_types_table()
+            return "I can help you with cancer research information. Please ask specific questions about cancer types, treatments, or recent studies."
+
+    def _generate_cancer_types_table(self):
+        """Generate a comprehensive table of cancer types and treatments"""
+        table_prompt = """Create a comprehensive table of major cancer types with their treatments. Format it as a clear, readable table with these columns:
+- Cancer Type
+- Common Locations
+- Main Treatment Approaches  
+- Recent Advances
+- 5-Year Survival Range
+
+Include these cancer types at minimum:
+1. Breast Cancer
+2. Lung Cancer
+3. Prostate Cancer
+4. Colorectal Cancer
+5. Skin Cancer (Melanoma)
+6. Bladder Cancer
+7. Non-Hodgkin Lymphoma
+8. Kidney Cancer
+9. Leukemia
+10. Pancreatic Cancer
+11. Thyroid Cancer
+12. Liver Cancer
+13. Ovarian Cancer
+14. Brain Cancer
+15. Stomach Cancer
+
+Make the table well-organized and easy to read. Include brief descriptions of treatment approaches."""
+
+        response = self.llm.generate(table_prompt)
+        return response + "\n\n💡 *Note: This is general medical information. Always consult healthcare professionals for specific medical advice.*"
 
     def get_collection_info(self):
         """Check how many documents are in the collection"""
