@@ -41,6 +41,7 @@ class GeminiLLM:
         except Exception as e:
             return f"An unexpected error occurred: {e}"
 
+# snippet from llm.py
     def embed(self, text: str):
         try:
             response = self.client.models.embed_content(
@@ -50,11 +51,8 @@ class GeminiLLM:
             )
             return response['embedding']
         except APIError as e:
-            print(f"Embedding error: {e}")
-            return None
-        except Exception as e:
-            print(f"An unexpected embedding error occurred: {e}")
-            return None
+            print(f"Embedding error: {e}") # <-- Likely where the API key/network error is caught
+            return None # <-- This None is what causes the final error message
 
 
 
