@@ -1,13 +1,11 @@
 import google.generativeai as genai
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
+import streamlit as st
 
 class LLMClient:
     def __init__(self):
         try:
-            api_key = os.getenv("API_KEY")
+            api_key = st.secrets['GEMINI_API_KEY']
             if not api_key:
                 raise ValueError("API_KEY not found in environment variables")
             
@@ -37,3 +35,4 @@ class LLMClient:
             error_msg = f"Error in LLM generation: {str(e)}"
             print(error_msg)
             return "I'm experiencing technical difficulties. Please try again in a moment."
+
