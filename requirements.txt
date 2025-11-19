@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 streamlit==1.41.1
 chromadb==0.5.5
 google-genai==1.51.0
@@ -22,4 +22,4 @@ websockets==15.0.1
 typing-extensions==4.12.2
 tenacity==9.0.0
 httpx==0.28.1
->>>>>>> abbf68633adf6a5eb2b4ee64b67260b0e101dc50
+
