@@ -5,28 +5,15 @@ from pubmed_data import RECORDS
 
 class RAGPipeline:
     def __init__(self, collection_name="knowledge_base"):
-        # Use in-memory client for Streamlit Cloud
         self.client = chromadb.EphemeralClient()
-        
-        # Let ChromaDB handle embeddings automatically
-        self.collection = self.client.get_or_create_collection(
-            name=collection_name,
-            metadata={"description": "General knowledge database"}
-        )
-
+        self.collection = self.client.get_or_create_collection(name=collection_name)
         self.llm = GeminiLLM()
-        
-        # Initialize with PubMed data
         self._initialize_pubmed_data()
 
     def _initialize_pubmed_data(self):
-        """Add PubMed data for medical questions"""
+        """Add PubMed data"""
         try:
             if self.collection.count() == 0:
-                documents = []
-                metadatas = []
-                ids = []
-                
                 for record in RECORDS:
                     abstract_text = ""
                     if isinstance(record['abstract'], dict):
@@ -36,92 +23,55 @@ class RAGPipeline:
                     
                     document_text = f"Title: {record['title']}\nAbstract: {abstract_text}"
                     
-                    documents.append(document_text)
-                    metadatas.append({
-                        "pmid": record['pmid'],
-                        "title": record['title'],
-                        "journal": record['journal'], 
-                        "authors": record['authors'],
-                        "publication_date": record['publication_date'],
-                        "source": "pubmed",
-                        "category": "medical"
-                    })
-                    ids.append(f"pubmed_{record['pmid']}")
-                
-                self.collection.add(
-                    ids=ids,
-                    documents=documents,
-                    metadatas=metadatas
-                )
+                    self.collection.add(
+                        ids=[f"pubmed_{record['pmid']}"],
+                        documents=[document_text],
+                        metadatas=[{
+                            "pmid": record['pmid'],
+                            "title": record['title"],
+                            "journal": record['journal'], 
+                            "publication_date": record['publication_date'],
+                            "source": "pubmed"
+                        }]
+                    )
         except Exception as e:
-            print(f"Note: {e}")
+            print(f"Database note: {e}")
 
     def ask(self, query: str) -> str:
         try:
-            # ALWAYS pass the query to LLM, no hardcoded responses
-            # Check if it's a medical-related question
-            is_medical = self._is_medical_question(query.lower())
-            
-            if is_medical:
-                # Use RAG for medical questions - search our database
-                results = self.collection.query(
-                    query_texts=[query],
-                    n_results=3
-                )
-
+            # ALWAYS pass query to LLM first for natural conversation
+            # Check if it might be a medical question
+            if self._is_medical_question(query.lower()):
+                # Try to find relevant research
+                results = self.collection.query(query_texts=[query], n_results=2)
                 retrieved_docs = results["documents"][0] if results["documents"] else []
                 retrieved_metadatas = results["metadatas"][0] if results["metadatas"] else []
 
                 if retrieved_docs:
                     context = "\n\n".join(retrieved_docs)
-                    
-                    # Create sources information
                     sources_info = "\n\n📚 **Research Sources:**\n"
                     for meta in retrieved_metadatas:
-                        title = meta.get('title', 'Unknown')
-                        journal = meta.get('journal', 'Unknown journal')
-                        year = meta.get('publication_date', 'Unknown year')
-                        sources_info += f"• {title} ({journal}, {year})\n"
-
-                    # Pass both the query and research context to LLM
-                    final_prompt = f"""User Question: {query}
-
-I have found some relevant medical research that might help answer this question:
-
-RESEARCH CONTEXT:
-{context}
-
-Please provide a helpful answer to the user's question. You can reference the research above if it's helpful."""
-
-                    answer = self.llm.generate(final_prompt)
+                        sources_info += f"• {meta.get('title', 'Unknown')} ({meta.get('journal', 'Unknown journal')}, {meta.get('publication_date', 'Unknown year')})\n"
+                    
+                    enhanced_prompt = f"Question: {query}\n\nRelevant Research:\n{context}\n\nPlease answer the question:"
+                    answer = self.llm.generate(enhanced_prompt)
                     return answer + sources_info
             
-            # For non-medical questions or when no relevant medical context found
-            # Directly pass the user query to LLM
+            # For non-medical or when no research found, just use LLM
             return self.llm.generate(query)
                 
         except Exception as e:
-            # If anything fails, still pass to LLM
+            # Fallback to direct LLM
             return self.llm.generate(query)
 
     def _is_medical_question(self, query: str) -> bool:
-        """Check if the question is medical-related"""
-        medical_keywords = [
-            'cancer', 'medical', 'health', 'disease', 'treatment', 'symptom',
-            'diagnosis', 'patient', 'clinical', 'therapy', 'drug', 'medicine',
-            'hospital', 'doctor', 'nurse', 'surgery', 'prescription', 'vaccine',
-            'infection', 'virus', 'bacteria', 'pain', 'fever', 'blood', 'heart',
-            'lung', 'liver', 'kidney', 'brain', 'diabetes', 'covid', 'tumor',
-            'chemotherapy', 'radiation', 'breast', 'prostate', 'lung', 'colon',
-            'leukemia', 'lymphoma', 'melanoma', 'pancreatic', 'ovarian'
-        ]
-        
+        """Check if question might be medical"""
+        medical_keywords = ['cancer', 'medical', 'health', 'disease', 'treatment', 'symptom', 'diagnosis', 'patient']
         return any(keyword in query for keyword in medical_keywords)
 
     def get_collection_info(self):
-        """Check how many documents are in the collection"""
         try:
             count = self.collection.count()
-            return f"Knowledge base loaded with {count} documents"
-        except Exception as e:
-            return "AI assistant is ready"
+            return f"Loaded {count} research articles"
+        except:
+            return "Assistant ready"
