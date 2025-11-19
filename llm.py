@@ -4,22 +4,33 @@ import os
 from google import genai
 from google.genai.errors import APIError
 from dotenv import load_dotenv
+import streamlit as st
+import sys
 
-# Load environment variables from .env file (for local testing)
-load_dotenv()
+# Load .env variables for local development only
+if "streamlit" not in sys.modules:
+    load_dotenv()
 
-# --- FIX: Change variable name to match Streamlit secret ---
-# Read the GEMINI_API_KEY environment variable
-API_KEY = os.getenv("GEMINI_API_KEY") 
-# -----------------------------------------------------------
+# --- API KEY RETRIEVAL LOGIC ---
+API_KEY = None
+SECRET_NAME = "GEMINI_API_KEY"
 
-# Check if the API key is available
+# 1. Try Streamlit Secrets (Recommended for Streamlit Cloud)
+if SECRET_NAME in st.secrets:
+    API_KEY = st.secrets[SECRET_NAME]
+
+# 2. Fallback to Environment Variables (Works for Streamlit Cloud secrets too)
+if API_KEY is None:
+    API_KEY = os.getenv(SECRET_NAME)
+
+# 3. Final Check
 if not API_KEY:
-    # Raise a more informative error message
-    raise ValueError("GEMINI_API_KEY not found in environment variables or .env file. Ensure your Streamlit Cloud secret is set as GEMINI_API_KEY.")
+    # Raise error if key is still missing
+    raise ValueError(f"{SECRET_NAME} not found. Please ensure it is set in Streamlit Cloud Secrets or your local .env file.")
 
 class GeminiLLM:
     def __init__(self, model_name="gemini-2.5-flash"):
+        # The client initialization uses the successfully retrieved API_KEY
         self.client = genai.Client(api_key=API_KEY)
         self.model_name = model_name
         self.embedding_model = "text-embedding-004" 
