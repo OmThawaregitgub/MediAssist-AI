@@ -1,49 +1,67 @@
-# rag.py
 import chromadb
-from llm import GeminiLLM
-from pubmed_data import RECORDS
+import os
+from llm import LLMClient  # Make sure you're importing your LLM client
 
 class RAGPipeline:
     def __init__(self, persist_directory="./chroma_db"):
+        # Initialize ChromaDB client
         self.client = chromadb.PersistentClient(path=persist_directory)
         
-        # Try to get existing collection, create if it doesn't exist
+        # Get or create collection
         try:
             self.collection = self.client.get_collection("medical_data")
-        except Exception as e:
-            # If collection doesn't exist, create it
+        except:
             self.collection = self.client.create_collection("medical_data")
         
-
-    def _load_data(self):
-        for record in RECORDS:
-            abstract_text = " ".join(record['abstract'].values()) if isinstance(record['abstract'], dict) else record['abstract']
-            doc_text = f"Title: {record['title']}\nAbstract: {abstract_text}"
-            
-            self.collection.add(
-                documents=[doc_text],
-                metadatas=[{"title": record['title'], "year": record['publication_date']}],
-                ids=[f"doc_{record['pmid']}"]
-            )
-
-    def ask(self, query: str) -> str:
+        # Initialize LLM client
+        self.llm = LLMClient()
+        
+        # Check if collection has documents, if not, load them
+        if self.collection.count() == 0:
+            self.load_documents()
+    
+    def load_documents(self):
+        """Load documents into the vector database"""
+        # Add your document loading logic here
+        # This should read PDFs from the data folder and add to ChromaDB
+        pass
+    
+    def ask(self, query):
+        """Main method to handle user queries"""
         try:
-            # Always try to use medical research for relevant questions
-            if any(word in query.lower() for word in ['cancer', 'medical', 'treatment']):
-                results = self.collection.query(query_texts=[query], n_results=2)
-                if results['documents']:
-                    context = "\n".join(results['documents'][0])
-                    sources = "\n\n📚 Sources:\n" + "\n".join([f"- {m['title']}" for m in results['metadatas'][0]])
-                    prompt = f"Question: {query}\nContext: {context}\nAnswer:"
-                    answer = self.llm.generate(prompt)
-                    return answer + sources
+            # 1. Retrieve relevant documents
+            results = self.collection.query(
+                query_texts=[query],
+                n_results=3
+            )
             
-            # For all other questions, use LLM directly
-            return self.llm.generate(query)
+            # 2. Prepare context from retrieved documents
+            context = ""
+            if results['documents']:
+                for doc in results['documents'][0]:
+                    context += doc + "\n\n"
             
-        except:
-            return self.llm.generate(query)
+            # 3. Generate answer using LLM with context
+            if context:
+                prompt = f"""Based on the following medical context, answer the user's question. 
+                If the context doesn't contain relevant information, say so.
 
-    def get_collection_info(self):
-        return "Medical assistant ready"
+                Context: {context}
 
+                Question: {query}
+
+                Answer:"""
+            else:
+                prompt = f"""Answer the following medical question based on your knowledge. 
+                If you're not sure, indicate that this is outside the specific research scope.
+
+                Question: {query}
+
+                Answer:"""
+            
+            # 4. Call LLM with the prompt
+            answer = self.llm.generate(prompt)
+            return answer
+            
+        except Exception as e:
+            return f"Error generating answer: {str(e)}"
