@@ -17,11 +17,12 @@ class GeminiLLM:
 
     # Create embeddings
     def embed(self, text: str):
-        response = self.client.models.embed_content(
-            model=self.embed_model,
-            content=text
-        )
-        return response["embedding"]
+    response = self.client.embeddings.embed(
+        model=self.embed_model,
+        input=text
+    )
+    return response.data[0].embedding
+
 
     # Generate answer
     def generate(self, prompt: str):
@@ -30,3 +31,4 @@ class GeminiLLM:
             contents=prompt
         )
         return response.text
+
