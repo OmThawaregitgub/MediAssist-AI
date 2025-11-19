@@ -28,7 +28,8 @@ if "rag" not in st.session_state:
     st.sidebar.success(info)
 
 # ---- TITLE ----
-st.markdown("<h2 style='text-align:center;'>🏥 MediAssist AI - Breast Cancer Research Assistant</h2>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center;'>🏥 MediAssist AI</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align:center;color:#666;'>Breast Cancer Research Assistant</h3>", unsafe_allow_html=True)
 
 # ---- SIDEBAR INFO ----
 st.sidebar.markdown("### ℹ️ About")
@@ -39,9 +40,9 @@ st.sidebar.markdown("### 💡 Sample Questions")
 sample_questions = [
     "What are the latest breast cancer treatments?",
     "Tell me about triple-negative breast cancer",
-    "What is intermittent fasting in cancer treatment?",
     "How does immunotherapy work for breast cancer?",
-    "What are the risk factors for breast cancer?"
+    "What are the risk factors for breast cancer?",
+    "Explain breast cancer screening methods"
 ]
 
 for question in sample_questions:
@@ -54,29 +55,31 @@ st.markdown("""
 .chat-box {
     height: 60vh;
     overflow-y: auto;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
-    background-color: #1e1e1e;
+    background-color: #f8f9fa;
     margin-bottom: 20px;
+    border: 1px solid #e9ecef;
 }
 .user-msg {
-    background: #0059ff;
-    padding: 10px 15px;
-    border-radius: 12px;
-    margin: 8px;
+    background: #007bff;
+    padding: 12px 16px;
+    border-radius: 18px;
+    margin: 10px;
     color: white;
-    width: fit-content;
-    max-width: 80%;
+    max-width: 70%;
     margin-left: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .bot-msg {
-    background: #2e2e2e;
-    padding: 10px 15px;
-    border-radius: 12px;
-    margin: 8px;
-    color: white;
-    width: fit-content;
+    background: #ffffff;
+    padding: 12px 16px;
+    border-radius: 18px;
+    margin: 10px;
+    color: #333;
     max-width: 80%;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 </style>
 """, unsafe_allow_html=True)
