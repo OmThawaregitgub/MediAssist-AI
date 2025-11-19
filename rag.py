@@ -6,7 +6,7 @@ from google.genai.errors import APIError
 
 # Load environment variables from .env file
 import streamlit as st
-api_key = st.secrets["my_api_key"]
+api_key = st.secrets["GEMINI_API_KEY"]
 
 # Check if the API key is available
 
@@ -43,4 +43,5 @@ class GeminiLLM:
         except Exception as e:
             print(f"An unexpected embedding error occurred: {e}")
             return None
+
 
