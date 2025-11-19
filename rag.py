@@ -4,32 +4,53 @@ import chromadb
 from llm import GeminiLLM
 
 class RAGPipeline:
-    def __init__(self, collection_name="my_rag"):
-        # ❗ Use in-memory client instead of PersistentClient
-        self.client = chromadb.Client()
+    def __init__(self, persist_dir="./chroma_db", collection_name="my_rag"):
 
-        # Chroma Cloud-safe collection creation
-        self.collection = self.client.get_or_create_collection(
-            name=collection_name,
-            metadata={"hnsw:space": "cosine"}
-        )
+        self.client = chromadb.PersistentClient(path=persist_dir)
+
+        # ALWAYS safe way to avoid corrupted collection configs
+        try:
+            self.collection = self.client.get_or_create_collection(
+                name=collection_name,
+                metadata={"hnsw:space": "cosine"}  
+            )
+        except Exception:
+            # If corrupted, delete and recreate
+            self.client.delete_collection(collection_name)
+            self.collection = self.client.get_or_create_collection(
+                name=collection_name,
+                metadata={"hnsw:space": "cosine"}
+            )
 
         self.llm = GeminiLLM()
 
-    def ask(self, query: str) -> str:
-        # Embed query using Gemini
-        emb = self.llm.embed(query)
+    # ---- Add document to vector store ----
+    def add_document(self, doc_id: str, text: str):
+        emb = self.llm.embed(text)
+        self.collection.add(
+            ids=[doc_id],
+            embeddings=[emb],
+            documents=[text],
+        )
 
-        # Retrieve from Chroma
+    # ---- RAG Query ----
+    def ask(self, query: str) -> str:
+        q_emb = self.llm.embed(query)
+
+        # Retrieve top matches
         results = self.collection.query(
-            query_embeddings=[emb],
+            query_embeddings=[q_emb],
             n_results=3
         )
 
-        context = "\n".join(results["documents"][0]) if len(results["documents"]) else ""
+        retrieved_docs = results["documents"][0]
 
-        prompt = f"""
-Use the following context to answer the question:
+        context = "\n\n".join(retrieved_docs)
+
+        final_prompt = f"""
+You are MediAssist AI, a medical RAG assistant.
+
+Use the context below to answer accurately and concisely.
 
 Context:
 {context}
@@ -37,7 +58,7 @@ Context:
 Question:
 {query}
 
-Answer clearly and concisely.
+Answer:
 """
 
-        return self.llm.generate(prompt)
+        return self.llm.generate(final_prompt)

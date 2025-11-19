@@ -1,25 +1,40 @@
 # llm.py
-import os
-from dotenv import load_dotenv
-from google.genai import Client
 
-load_dotenv()
+import os
+import google.genai as genai
+import streamlit as st
 
 class GeminiLLM:
-    def __init__(self, model_name="gemini-flash-latest"):
-        api_key = os.getenv("GEMINI_API_KEY")
+    def __init__(self):
 
-        if not api_key:
-            raise ValueError("Missing GEMINI_API_KEY in .env")
+        # Load API key from Streamlit Secrets (Cloud) or .env/local
+        if "GEMINI_API_KEY" in st.secrets:
+            self.api_key = st.secrets["GEMINI_API_KEY"]
+        else:
+            self.api_key = os.getenv("GEMINI_API_KEY")
 
-        
+        if not self.api_key:
+            raise ValueError("GEMINI_API_KEY missing in Streamlit Secrets or .env")
 
-        self.client = Client(api_key=api_key)
-        self.model_name = model_name
+        genai.configure(api_key=self.api_key)
+        self.client = genai.Client(api_key=self.api_key)
 
+        # Models
+        self.chat_model = "models/gemini-2.0-flash"
+        self.embedding_model = "models/text-embedding-004"
+
+    # ---- Generate text ----
     def generate(self, prompt: str) -> str:
         response = self.client.models.generate_content(
-            model=self.model_name,
-            contents=prompt
+            model=self.chat_model,
+            content=prompt
         )
         return response.text
+
+    # ---- Generate embeddings ----
+    def embed(self, text: str):
+        response = self.client.models.embed_content(
+            model=self.embedding_model,
+            content=text
+        )
+        return response.embedding
