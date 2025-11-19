@@ -107,19 +107,6 @@ if send_btn and user_query.strip():
     st.session_state.chat.append(("bot", answer))
     st.rerun()
 
-# Temporary debug code - add this after imports
-import google.generativeai as genai
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-
-try:
-    models = genai.list_models()
-    st.sidebar.write("Available models:")
-    for model in models:
-        if 'generateContent' in model.supported_generation_methods:
-            st.sidebar.write(f"✅ {model.name}")
-except Exception as e:
-    st.sidebar.write(f"Error: {e}")
-    
 # ---- CLEAR CHAT ----
 if st.button("Clear Chat History"):
     st.session_state.chat = []
