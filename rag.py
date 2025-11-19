@@ -32,10 +32,10 @@ class RAGPipeline:
                         ids=[f"pubmed_{record['pmid']}"],
                         documents=[document_text],
                         metadatas=[{
-                            "pmid": record['pmid"],
-                            "title": record['title"],
-                            "journal": record['journal"], 
-                            "authors": record['authors"],
+                            "pmid": record["pmid"],
+                            "title": record["title"],
+                            "journal": record["journal"], 
+                            "authors": record["authors"],
                             "publication_date": record['publication_date'],
                             "source": "pubmed"
                         }]
@@ -87,3 +87,4 @@ Answer:"""
             return f"Medical database has {count} research articles"
         except Exception as e:
             return f"Medical database loaded successfully"
+
