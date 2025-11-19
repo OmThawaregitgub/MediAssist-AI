@@ -19,7 +19,7 @@ Check out the live application or see the interface below!
 
 🔗 **Live Demo Link**
 
-👉 [Click here to test the MediAssist AI App!](YOUR_APP_DEMO_LINK_HERE)
+👉 [Click here to test the MediAssist AI App!]([YOUR_APP_DEMO_LINK_HERE](https://mediassist-ai-zasupw7hcgypimctpdtcyr.streamlit.app/))
 
 *(ACTION REQUIRED: Replace YOUR_APP_DEMO_LINK_HERE with your actual Streamlit Cloud or hosting link.)*
 
