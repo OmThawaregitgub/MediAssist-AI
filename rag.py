@@ -1,26 +1,17 @@
-# rag.py
-
 import chromadb
 from llm import GeminiLLM
 
 class RAGPipeline:
-    def __init__(self, persist_dir="./chroma_db", collection_name="my_rag"):
+    def __init__(self, collection_name="my_rag"):
 
-        self.client = chromadb.PersistentClient(path=persist_dir)
+        # ⭐ Use in-memory client for Streamlit Cloud (NO local disk)
+        self.client = chromadb.Client()
 
-        # ALWAYS safe way to avoid corrupted collection configs
-        try:
-            self.collection = self.client.get_or_create_collection(
-                name=collection_name,
-                metadata={"hnsw:space": "cosine"}  
-            )
-        except Exception:
-            # If corrupted, delete and recreate
-            self.client.delete_collection(collection_name)
-            self.collection = self.client.get_or_create_collection(
-                name=collection_name,
-                metadata={"hnsw:space": "cosine"}
-            )
+        # ⭐ Safe collection creation (no corruption possible)
+        self.collection = self.client.get_or_create_collection(
+            name=collection_name,
+            metadata={"hnsw:space": "cosine"}
+        )
 
         self.llm = GeminiLLM()
 
@@ -37,13 +28,12 @@ class RAGPipeline:
     def ask(self, query: str) -> str:
         q_emb = self.llm.embed(query)
 
-        # Retrieve top matches
         results = self.collection.query(
             query_embeddings=[q_emb],
             n_results=3
         )
 
-        retrieved_docs = results["documents"][0]
+        retrieved_docs = results["documents"][0] if results["documents"] else []
 
         context = "\n\n".join(retrieved_docs)
 
