@@ -1,7 +1,6 @@
 import streamlit as st
 from rag import RAGPipeline
 import time
-import os
 
 # Page configuration
 st.set_page_config(
@@ -13,31 +12,8 @@ st.set_page_config(
 # Initialize session state
 if "rag" not in st.session_state:
     try:
-        # Check if API key exists first
-        api_key = os.getenv("API_KEY")
-        if not api_key:
-            st.error("🔑 API Key Not Found")
-            st.info("To use MediAssist AI, you need to set up your Google Gemini API key.")
-            
-            st.write("**For Local Development:**")
-            st.code("""
-# Create a .env file in your project:
-API_KEY=your_actual_api_key_here
-            """)
-            
-            st.write("**For Streamlit Cloud:**")
-            st.code("""
-# In app settings → Secrets:
-API_KEY=your_actual_api_key_here
-            """)
-            
-            st.write("**Get your free API key from:** [Google AI Studio](https://makersuite.google.com/app/apikey)")
-            st.stop()
-        
-        # If API key exists, initialize RAG
         st.session_state.rag = RAGPipeline()
         st.session_state.messages = []
-        
     except Exception as e:
         st.error(f"Failed to initialize MediAssist AI: {e}")
         st.stop()
