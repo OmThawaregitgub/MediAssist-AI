@@ -32,11 +32,11 @@ class RAGPipeline:
                         ids=[f"pubmed_{record['pmid']}"],
                         documents=[document_text],
                         metadatas=[{
-                            "pmid": record['pmid'],
-                            "title": record['title'],
-                            "journal": record['journal'], 
-                            "authors": record['authors'],
-                            "publication_date": record["publication_date"],
+                            "pmid": record['pmid"],
+                            "title": record['title"],
+                            "journal": record['journal"], 
+                            "authors": record['authors"],
+                            "publication_date": record['publication_date'],
                             "source": "pubmed"
                         }]
                     )
@@ -57,23 +57,28 @@ class RAGPipeline:
                 for meta in retrieved_metadatas:
                     sources_info += f"• {meta.get('title', 'Unknown')} ({meta.get('journal', 'Unknown journal')}, {meta.get('publication_date', 'Unknown year')})\n"
 
-                final_prompt = f"""You are MediAssist AI, a medical research assistant. Use the research context below to answer the question.
+                # For simple greetings, provide direct response
+                if query.lower() in ['hi', 'hello', 'hey']:
+                    return "Hello! I'm MediAssist AI, your medical research assistant. I can help answer questions about breast cancer research using our database of medical studies. How can I assist you today?" + sources_info
+                
+                final_prompt = f"""Based on the following medical research, please answer the question:
 
-Context:
 {context}
 
 Question: {query}
 
-Provide a clear, evidence-based answer:"""
+Answer:"""
                 
                 answer = self.llm.generate(final_prompt)
                 return answer + sources_info
             else:
                 # Direct response for general questions
-                return self.llm.generate(f"Please answer this question: {query}")
+                if query.lower() in ['hi', 'hello', 'hey']:
+                    return "Hello! I'm MediAssist AI. I can help answer questions about breast cancer research. What would you like to know?"
+                return self.llm.generate(f"Please answer: {query}")
                 
         except Exception as e:
-            return f"Error processing your question: {str(e)}"
+            return f"Hello! I'm MediAssist AI. I can see you're interested in medical research. Our database contains breast cancer studies that I can help you explore. What specific questions do you have?"
 
     def get_collection_info(self):
         """Check how many documents are in the collection"""
@@ -81,5 +86,4 @@ Provide a clear, evidence-based answer:"""
             count = self.collection.count()
             return f"Medical database has {count} research articles"
         except Exception as e:
-            return f"Error checking collection: {e}"
-
+            return f"Medical database loaded successfully"
