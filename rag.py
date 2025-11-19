@@ -36,7 +36,7 @@ class RAGPipeline:
                             "title": record['title'],
                             "journal": record['journal'], 
                             "authors": record['authors'],
-                            "publication_date": record['publication_date"],
+                            "publication_date": record["publication_date"],
                             "source": "pubmed"
                         }]
                     )
@@ -82,3 +82,4 @@ Provide a clear, evidence-based answer:"""
             return f"Medical database has {count} research articles"
         except Exception as e:
             return f"Error checking collection: {e}"
+
