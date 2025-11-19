@@ -1,54 +1,49 @@
-import chromadb
-from llm import GeminiLLM
+# llm.py
 
-class RAGPipeline:
-    def __init__(self, collection_name="my_rag"):
+import os
+from google import genai
+from google.genai.errors import APIError
+from dotenv import load_dotenv
 
-        # ⭐ Use in-memory client for Streamlit Cloud (NO local disk)
-        self.client = chromadb.Client()
+# Load environment variables from .env file
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
 
-        # ⭐ Safe collection creation (no corruption possible)
-        self.collection = self.client.get_or_create_collection(
-            name=collection_name,
-            metadata={"hnsw:space": "cosine"}
-        )
+# Check if the API key is available
+if not API_KEY:
+    # A cleaner way to handle this on Streamlit Cloud is to prompt
+    # the user or stop the app, but for this context we raise an error.
+    raise ValueError("API_KEY not found in environment variables or .env file.")
 
-        self.llm = GeminiLLM()
+class GeminiLLM:
+    def __init__(self, model_name="gemini-2.5-flash"):
+        self.client = genai.Client(api_key=API_KEY)
+        self.model_name = model_name
+        self.embedding_model = "text-embedding-004" # Use a stable embedding model
 
-    # ---- Add document to vector store ----
-    def add_document(self, doc_id: str, text: str):
-        emb = self.llm.embed(text)
-        self.collection.add(
-            ids=[doc_id],
-            embeddings=[emb],
-            documents=[text],
-        )
+    def generate(self, prompt: str) -> str:
+        try:
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=prompt,
+            )
+            return response.text
+        except APIError as e:
+            return f"Error from LLM: Could not generate content. {e}"
+        except Exception as e:
+            return f"An unexpected error occurred: {e}"
 
-    # ---- RAG Query ----
-    def ask(self, query: str) -> str:
-        q_emb = self.llm.embed(query)
-
-        results = self.collection.query(
-            query_embeddings=[q_emb],
-            n_results=3
-        )
-
-        retrieved_docs = results["documents"][0] if results["documents"] else []
-
-        context = "\n\n".join(retrieved_docs)
-
-        final_prompt = f"""
-You are MediAssist AI, a medical RAG assistant.
-
-Use the context below to answer accurately and concisely.
-
-Context:
-{context}
-
-Question:
-{query}
-
-Answer:
-"""
-
-        return self.llm.generate(final_prompt)
+    def embed(self, text: str):
+        try:
+            response = self.client.models.embed_content(
+                model=self.embedding_model,
+                content=text,
+                task_type="RETRIEVAL_DOCUMENT"
+            )
+            return response['embedding']
+        except APIError as e:
+            print(f"Embedding error: {e}")
+            return None # Return None on failure
+        except Exception as e:
+            print(f"An unexpected embedding error occurred: {e}")
+            return None
