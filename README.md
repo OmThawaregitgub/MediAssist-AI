@@ -207,7 +207,3 @@ MediAssist-AI/
 
 ---
 
-## 📜 License
-
-This project is open-source under the **MIT License**.
-[file content end]
