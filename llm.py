@@ -4,69 +4,53 @@ import streamlit as st
 class LLMClient:
     def __init__(self):
         try:
-            api_key = st.secrets['API_KEY']
+            api_key = st.secrets.get('API_KEY')
             
             if not api_key:
                 raise ValueError("API_KEY not found in secrets")
             
-            print(f"🔑 API Key found: {api_key[:10]}...")  # Log first 10 chars
+            print(f"🔑 API Key found: {api_key[:10]}...")
             
             genai.configure(api_key=api_key)
             
-            # List ALL models to see what's available
-            print("🔍 Listing ALL available models:")
-            all_models = list(genai.list_models())
+            # Try different model names
+            model_names = ['gemini-pro', 'models/gemini-pro']
             
-            if not all_models:
-                raise Exception("No models returned from API - check API key validity")
-            
-            available_models = []
-            for model in all_models:
-                print(f"📋 Model: {model.name}")
-                print(f"   Supported methods: {model.supported_generation_methods}")
-                if 'generateContent' in model.supported_generation_methods:
-                    available_models.append(model.name)
-                    print(f"   ✅ Can use for generateContent")
-            
-            print(f"🎯 Available generateContent models: {available_models}")
-            
-            if not available_models:
-                raise Exception("No generateContent models available")
-            
-            # Try each available model
-            for model_name in available_models:
+            for model_name in model_names:
                 try:
-                    print(f"🔄 Testing model: {model_name}")
+                    print(f"🔄 Trying model: {model_name}")
                     self.model = genai.GenerativeModel(model_name)
                     
                     # Simple test
-                    test_response = self.model.generate_content("Say hello in one word")
+                    test_response = self.model.generate_content("Hello")
                     if hasattr(test_response, 'text') and test_response.text:
                         print(f"🎉 Model {model_name} works!")
-                        self.model_name = model_name
                         break
                     else:
                         print(f"❌ Model {model_name} returned empty response")
                         continue
                         
                 except Exception as model_error:
-                    print(f"❌ Model {model_name} failed: {model_error}")
+                    print(f"❌ Model {model_name} failed: {str(model_error)}")
                     continue
             else:
-                raise Exception(f"No working models found from: {available_models}")
+                raise Exception("No working models found")
             
-            print(f"✅ Successfully initialized with model: {self.model_name}")
+            print("✅ LLM initialized successfully")
             
         except Exception as e:
-            print(f"❌ Gemini API connection failed: {e}")
+            print(f"❌ LLM initialization failed: {str(e)}")
             raise e
     
     def generate(self, prompt):
         try:
+            print(f"📝 Generating response for prompt (first 200 chars): {prompt[:200]}...")
+            
             if not prompt or not prompt.strip():
                 return "Please provide a valid question."
             
             response = self.model.generate_content(prompt)
+            print(f"✅ Response received: {response.text[:100] if hasattr(response, 'text') else 'No text attribute'}")
             
             if hasattr(response, 'text') and response.text:
                 return response.text
@@ -74,5 +58,6 @@ class LLMClient:
                 return "I apologize, but I couldn't generate a proper response."
                 
         except Exception as e:
-            print(f"LLM Generation Error: {str(e)}")
-            return f"I'm experiencing technical difficulties: {str(e)}"
+            error_msg = f"LLM Generation Error: {str(e)}"
+            print(f"❌ {error_msg}")
+            return f"I'm experiencing technical difficulties. Please try again later. Error: {str(e)}"
