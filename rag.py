@@ -17,7 +17,7 @@ class RAGPipeline:
                 self.collection = self.client.create_collection("medical_data")
                 print("Created new collection")
             
-            # Initialize LLM client - THIS IS THE CRITICAL FIX
+            # Initialize LLM client
             self.llm = LLMClient()
             print("LLM client initialized successfully")
             
@@ -60,6 +60,29 @@ class RAGPipeline:
         except Exception as e:
             print(f"Error loading documents: {e}")
     
+    def is_simple_query(self, query):
+        """Check if query is simple/greeting that doesn't need RAG"""
+        simple_queries = [
+            "hi", "hello", "hey", "good morning", "good afternoon", 
+            "good evening", "how are you", "what's up", "hey there",
+            "hi there", "hello there", "greetings"
+        ]
+        
+        query_lower = query.lower().strip()
+        return any(simple in query_lower for simple in simple_queries)
+    
+    def is_medical_query(self, query):
+        """Check if query is related to medical topics"""
+        medical_keywords = [
+            "fasting", "diet", "weight", "diabetes", "metabolic", "insulin",
+            "health", "medical", "treatment", "therapy", "symptom", "disease",
+            "cancer", "blood", "cholesterol", "pressure", "fast", "obesity",
+            "metabolism", "clinical", "study", "research", "patient"
+        ]
+        
+        query_lower = query.lower()
+        return any(keyword in query_lower for keyword in medical_keywords)
+    
     def ask(self, query):
         """Main method to handle user queries"""
         try:
@@ -69,13 +92,32 @@ class RAGPipeline:
             if not hasattr(self, 'llm') or self.llm is None:
                 return "Error: AI model not properly initialized. Please refresh the page."
             
-            # 2. Retrieve relevant documents from ChromaDB
+            # 2. Handle simple greetings directly with LLM
+            if self.is_simple_query(query):
+                print("Detected simple query - using LLM directly")
+                prompt = f"""The user said: "{query}"
+                
+                Respond in a friendly, welcoming manner as a medical AI assistant. Keep it brief and warm."""
+                return self.llm.generate(prompt)
+            
+            # 3. Handle non-medical queries directly with LLM
+            if not self.is_medical_query(query):
+                print("Detected non-medical query - using LLM directly")
+                prompt = f"""The user asked: "{query}"
+                
+                Respond as a helpful medical AI assistant. If this is outside your medical scope, politely mention that you specialize in intermittent fasting and metabolic health."""
+                return self.llm.generate(prompt)
+            
+            # 4. For medical queries: Retrieve + Generate with RAG
+            print("Detected medical query - using RAG pipeline")
+            
+            # Retrieve relevant documents from ChromaDB
             results = self.collection.query(
                 query_texts=[query],
                 n_results=3
             )
             
-            # 3. Safely extract context from retrieved documents
+            # Extract context from retrieved documents
             context = ""
             if results and 'documents' in results and results['documents']:
                 documents_list = results['documents']
@@ -88,38 +130,39 @@ class RAGPipeline:
             
             print(f"Retrieved context length: {len(context)}")
             
-            # 4. Create prompt with context
+            # Create prompt with context
             if context and context.strip():
-                prompt = f"""Based on the following medical research about intermittent fasting, provide a helpful and evidence-based answer to the user's question.
+                prompt = f"""You are a medical AI assistant specializing in intermittent fasting and metabolic health.
+
+Based on the following medical research, provide a clear, helpful answer to the user's question. Format the answer in a professional but easy-to-understand way.
 
 Medical Research Context:
 {context}
 
 User Question: {query}
 
-Please provide a clear, accurate answer based on the research context. If the context doesn't fully address the question, acknowledge this and provide the most relevant information available."""
+Please provide an evidence-based answer. If the context doesn't fully address the question, acknowledge this and provide the most relevant information available."""
             else:
                 # No relevant documents found
-                prompt = f"""You are a medical AI assistant specializing in intermittent fasting and metabolic health. 
+                prompt = f"""You are a medical AI assistant specializing in intermittent fasting and metabolic health.
 
 User Question: {query}
 
-Please provide a helpful, evidence-based answer about intermittent fasting. If you cannot provide specific medical advice, suggest consulting a healthcare professional."""
+Please provide a helpful, evidence-based answer about intermittent fasting and metabolic health. If you cannot provide specific medical advice, suggest consulting a healthcare professional."""
 
-            # 5. Generate answer using LLM
+            # Generate answer using LLM
             print("Generating response with LLM...")
             answer = self.llm.generate(prompt)
             return answer
             
         except Exception as e:
             print(f"Error in ask method: {e}")
-            return f"I apologize, but I encountered an error while processing your question: {str(e)}. Please try again or rephrase your question."
-
-def get_collection_info(self):
+            return f"I apologize, but I encountered an error while processing your question. Please try again or rephrase your question."
+    
+    def get_collection_info(self):
         """Get information about the collection for the UI"""
         try:
             count = self.collection.count()
             return f"📊 Database loaded with {count} medical documents about intermittent fasting"
         except Exception as e:
             return f"📊 Medical database loaded (count unavailable: {e})"
-
