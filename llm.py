@@ -1,129 +1,53 @@
+import google.generativeai as genai
 import streamlit as st
-from datetime import datetime
 
 class LLMClient:
     def __init__(self):
         try:
-            print(f"✅ Medical Assistant Initialized at {datetime.now()}")
-            self.call_count = 0
+            api_key = st.secrets['API_KEY']
+            
+            
+            if not api_key:
+                raise ValueError("API_KEY not found in secrets")
+            
+            print(f"🔑 API Key found: {api_key[:15]}...")
+            
+            # Configure with the same settings as your working module
+            genai.configure(api_key=api_key)
+            
+            # Try the exact same approach as your working module
+            # Most common working configuration:
+            self.model = genai.GenerativeModel('gemini-pro')
+            print("✅ Using gemini-pro model")
+            
+            # Test the connection
+            print("🔄 Testing API connection...")
+            test_response = self.model.generate_content("Hello")
+            
+            if hasattr(test_response, 'text') and test_response.text:
+                print(f"✅ API Test Successful: {test_response.text}")
+            else:
+                raise Exception("API test failed - no response text")
+            
+            print("✅ LLM initialized successfully")
+            
         except Exception as e:
-            print(f"❌ Initialization failed: {e}")
+            print(f"❌ LLM initialization failed: {e}")
             raise e
     
     def generate(self, prompt):
         try:
-            self.call_count += 1
-            print(f"📞 Call #{self.call_count}: {prompt[:50]}...")
+            print(f"📞 API Call: {prompt[:100]}...")
             
-            prompt_lower = prompt.lower().strip()
+            response = self.model.generate_content(prompt)
             
-            # Greetings
-            if any(word in prompt_lower for word in ["hi", "hello", "hey", "how are you"]):
-                return "Hello! 👋 I'm MediAssist AI. I can provide detailed medical information about cancer types, intermittent fasting, diabetes, and general health topics. What would you like to know?"
-            
-            # Cancer questions
-            elif "cancer" in prompt_lower:
-                return self._get_cancer_info()
-            
-            # Fasting questions
-            elif any(word in prompt_lower for word in ["fasting", "diet", "weight", "16:8", "5:2"]):
-                return self._get_fasting_info()
-            
-            # Diabetes questions
-            elif "diabet" in prompt_lower:
-                return self._get_diabetes_info()
-            
-            # Heart health
-            elif any(word in prompt_lower for word in ["heart", "blood pressure", "cholesterol"]):
-                return self._get_heart_info()
-            
-            # General medical
+            if hasattr(response, 'text') and response.text:
+                print(f"✅ Response received: {len(response.text)} chars")
+                return response.text
             else:
-                return f"""I understand you're asking about: "{prompt}"
-
-As a medical AI assistant, I can provide information on:
-
-🏥 **Cancer Types & Treatments**
-⏰ **Intermittent Fasting Methods**
-🩺 **Diabetes Management** 
-❤️ **Heart Health**
-💊 **General Medical Topics**
-
-Please ask me about any specific health topic, and I'll provide comprehensive, organized information.
-
-**Note:** For personal medical advice, always consult healthcare professionals."""
-
+                return "I apologize, but I couldn't generate a proper response."
+                
         except Exception as e:
-            return f"Error: {str(e)}"
-    
-    def _get_cancer_info(self):
-        return """**COMPREHENSIVE CANCER GUIDE**
-
-**MAJOR CATEGORIES:**
-1. **Carcinomas** (85-90% of cancers)
-   - Breast, Lung, Prostate, Colorectal, Skin
-   
-2. **Sarcomas** (Bone & Soft Tissue)
-   - Osteosarcoma, Liposarcoma
-   
-3. **Leukemias** (Blood Cancers)
-   - ALL, AML, CLL, CML
-   
-4. **Lymphomas** 
-   - Hodgkin, Non-Hodgkin
-   
-5. **Central Nervous System**
-   - Brain tumors, Spinal tumors
-
-**TREATMENT OPTIONS:**
-• Surgery • Radiation • Chemotherapy
-• Immunotherapy • Targeted Therapy
-• Hormone Therapy • Stem Cell Transplant
-
-**Note:** Treatment depends on cancer type, stage, and individual factors."""
-
-    def _get_fasting_info(self):
-        return """**INTERMITTENT FASTING METHODS**
-
-**Popular Approaches:**
-⏰ **16:8 Method** - Fast 16h, Eat 8h
-📅 **5:2 Diet** - Normal 5 days, 500cal 2 days
-🔄 **Alternate-Day** - Switch normal/fast days
-🌅 **Eat-Stop-Eat** - 24h fasts 1-2x/week
-
-**Benefits:**
-• Weight loss (3-8% in 3-24 weeks)
-• Improved insulin sensitivity  
-• Reduced inflammation
-• Cellular repair (autophagy)
-
-**Safety:** Consult doctor if diabetic, pregnant, or have health conditions."""
-
-    def _get_diabetes_info(self):
-        return """**DIABETES MANAGEMENT**
-
-**Types:**
-• Type 1 - Autoimmune, insulin-dependent
-• Type 2 - Insulin resistance, most common
-• Gestational - During pregnancy
-• Prediabetes - Early warning stage
-
-**Management:**
-Medication, Diet, Exercise, Monitoring
-
-Consult endocrinologist for personalized care."""
-
-    def _get_heart_info(self):
-        return """**HEART HEALTH**
-
-**Key Factors:**
-• Blood Pressure control
-• Cholesterol management
-• Regular exercise
-• Healthy diet
-• Stress management
-
-**Common Conditions:**
-Hypertension, Coronary Artery Disease, Heart Failure
-
-Regular check-ups with cardiologist recommended."""
+            error_msg = str(e)
+            print(f"❌ API Call Error: {error_msg}")
+            return f"API Error: {error_msg}"
