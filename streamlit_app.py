@@ -1,53 +1,129 @@
+# streamlit_app.py
+
 import streamlit as st
 from rag import RAGPipeline
-import traceback
 
-# Page configuration
-st.set_page_config(
-    page_title="MediAssist AI",
-    page_icon="🏥",
-    layout="centered"
-)
+st.set_page_config(page_title="MediAssist AI - Healthcare Q&A", layout="wide")
 
-# Initialize session state
+# ---- REMOVE TOP BLANK SPACE ----
+st.markdown("""
+<style>
+.main > div {
+    padding-top: 0px !important;
+}
+.block-container {
+    padding-top: 0rem !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ---- SESSION INIT ----
+if "chat" not in st.session_state:
+    st.session_state.chat = []
+
 if "rag" not in st.session_state:
     try:
         st.session_state.rag = RAGPipeline()
-        st.session_state.messages = []
+        # Check if data is loaded
+        if hasattr(st.session_state.rag, 'get_collection_info'):
+            info = st.session_state.rag.get_collection_info()
+            st.sidebar.info(info)
     except Exception as e:
         st.error(f"Failed to initialize MediAssist AI: {e}")
         st.stop()
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+# ---- TITLE ----
+st.markdown("<h2 style='text-align:center;'>🏥 MediAssist AI - Medical Research Assistant</h2>", unsafe_allow_html=True)
 
-# Header
-st.title("🏥 MediAssist AI")
-st.markdown("### AI-Powered Healthcare Q&A System")
-st.markdown("Ask questions about Intermittent Fasting and metabolic disorders")
+# ---- SIDEBAR INFO ----
+st.sidebar.markdown("### ℹ️ About")
+st.sidebar.info("This AI assistant answers medical questions using research articles about intermittent fasting and metabolic disorders.")
 
-# Display chat messages
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+# Sample questions
+st.sidebar.markdown("### 💡 Sample Questions")
+sample_questions = [
+    "What is intermittent fasting?",
+    "Benefits of 16:8 fasting method",
+    "Is intermittent fasting safe for diabetics?",
+    "How does fasting affect metabolism?"
+]
 
-# Chat input
-if user_query := st.chat_input("Ask a medical question..."):
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": user_query})
-    with st.chat_message("user"):
-        st.markdown(user_query)
+for question in sample_questions:
+    if st.sidebar.button(question, key=question):
+        st.session_state.input_text = question
+        st.rerun()
 
-    # Generate assistant response
-    with st.chat_message("assistant"):
-        with st.spinner("Searching medical research..."):
-            try:
-                answer = st.session_state.rag.ask(user_query)
-                st.markdown(answer)
-                st.session_state.messages.append({"role": "assistant", "content": answer})
-            except Exception as e:
-                error_msg = f"Sorry, I encountered an error while processing your question. Please try again."
-                st.markdown(error_msg)
-                st.session_state.messages.append({"role": "assistant", "content": error_msg})
-                # Print full error for debugging
-                st.error(f"Debug: {str(e)}")
+# ---- STYLE ----
+st.markdown("""
+<style>
+.chat-box {
+    height: 60vh;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #1e1e1e;
+    margin-bottom: 20px;
+    border: 1px solid #444;
+}
+.user-msg {
+    background: #0059ff;
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin: 8px;
+    color: white;
+    width: fit-content;
+    max-width: 80%;
+    margin-left: auto;
+}
+.bot-msg {
+    background: #2e2e2e;
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin: 8px;
+    color: white;
+    width: fit-content;
+    max-width: 80%;
+    border: 1px solid #444;
+}
+.stButton button {
+    width: 100%;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ---- CHAT HISTORY AREA ----
+st.markdown("<div class='chat-box'>", unsafe_allow_html=True)
+
+if not st.session_state.chat:
+    st.markdown("<div class='bot-msg'><b>Assistant:</b> Hello! I'm MediAssist AI. I can help answer your questions about intermittent fasting and metabolic health. What would you like to know?</div>", unsafe_allow_html=True)
+else:
+    for role, msg in st.session_state.chat:
+        if role == "user":
+            st.markdown(f"<div class='user-msg'><b>You:</b> {msg}</div>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<div class='bot-msg'><b>Assistant:</b> {msg}</div>", unsafe_allow_html=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# ---- INPUT AT BOTTOM ----
+col1, col2 = st.columns([4, 1])
+with col1:
+    user_query = st.text_input("Ask your medical question:", key="input_text", placeholder="e.g., What are the benefits of intermittent fasting?")
+with col2:
+    send_btn = st.button("Send", use_container_width=True)
+
+if send_btn and user_query.strip():
+    st.session_state.chat.append(("user", user_query))
+    with st.spinner("🔍 Searching medical research..."):
+        try:
+            answer = st.session_state.rag.ask(user_query)
+            st.session_state.chat.append(("bot", answer))
+        except Exception as e:
+            error_msg = f"Sorry, I encountered an error: {str(e)}"
+            st.session_state.chat.append(("bot", error_msg))
+    st.rerun()
+
+# ---- CLEAR CHAT ----
+if st.button("Clear Chat"):
+    st.session_state.chat = []
+    st.rerun()
