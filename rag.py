@@ -100,69 +100,67 @@ class RAGPipeline:
                 Respond in a friendly, welcoming manner as a medical AI assistant. Keep it brief and warm."""
                 return self.llm.generate(prompt)
             
-            # 3. Handle non-medical queries directly with LLM
-            if not self.is_medical_query(query):
-                print("Detected non-medical query - using LLM directly")
-                prompt = f"""The user asked: "{query}"
+            # 3. For ALL medical queries, use LLM with general knowledge
+            if self.is_medical_query(query):
+                print("Detected medical query - using LLM with general medical knowledge")
                 
-                Respond as a helpful medical AI assistant. If this is outside your medical scope, politely mention that you specialize in intermittent fasting and metabolic health."""
-                return self.llm.generate(prompt)
-            
-            # 4. For medical queries: Retrieve + Generate with RAG
-            print("Detected medical query - using RAG pipeline")
-            
-            # Retrieve relevant documents from ChromaDB
-            results = self.collection.query(
-                query_texts=[query],
-                n_results=3
-            )
-            
-            # Extract context from retrieved documents
-            context = ""
-            if results and 'documents' in results and results['documents']:
-                documents_list = results['documents']
-                if documents_list and len(documents_list) > 0:
-                    retrieved_docs = documents_list[0]
-                    if retrieved_docs and len(retrieved_docs) > 0:
-                        for doc in retrieved_docs:
-                            if doc and str(doc).strip():
-                                context += str(doc) + "\n\n"
-            
-            print(f"Retrieved context length: {len(context)}")
-            
-            # Create prompt with context
-            if context and context.strip():
-                prompt = f"""You are a medical AI assistant specializing in intermittent fasting and metabolic health.
+                # Try to get some context first, but don't rely on it
+                context = ""
+                try:
+                    results = self.collection.query(
+                        query_texts=[query],
+                        n_results=2
+                    )
+                    
+                    if results and 'documents' in results and results['documents']:
+                        documents_list = results['documents']
+                        if documents_list and len(documents_list) > 0:
+                            retrieved_docs = documents_list[0]
+                            if retrieved_docs and len(retrieved_docs) > 0:
+                                for doc in retrieved_docs:
+                                    if doc and str(doc).strip():
+                                        context += str(doc) + "\n\n"
+                except Exception as e:
+                    print(f"Error retrieving documents: {e}")
+                    context = ""
+                
+                # Create prompt that works with or without context
+                if context and context.strip():
+                    prompt = f"""You are a medical AI assistant. The user asked: "{query}"
 
-Based on the following medical research, provide a clear, helpful answer to the user's question. Format the answer in a professional but easy-to-understand way.
-
-Medical Research Context:
+Some potentially relevant medical information:
 {context}
 
+Please provide a comprehensive, evidence-based answer. If the context above is not directly relevant to the question, rely on your general medical knowledge to provide a helpful response.
+
+Format your answer in a clear, organized way that's easy to understand."""
+                else:
+                    # No relevant context found, use LLM's general knowledge
+                    prompt = f"""You are a medical AI assistant specializing in healthcare information.
+
 User Question: {query}
 
-Please provide an evidence-based answer. If the context doesn't fully address the question, acknowledge this and provide the most relevant information available."""
-            else:
-                # No relevant documents found
-                prompt = f"""You are a medical AI assistant specializing in intermittent fasting and metabolic health.
+Please provide a comprehensive, evidence-based answer using your medical knowledge. Format the response in a clear, organized way that's easy for the user to understand.
 
-User Question: {query}
-
-Please provide a helpful, evidence-based answer about intermittent fasting and metabolic health. If you cannot provide specific medical advice, suggest consulting a healthcare professional."""
-
-            # Generate answer using LLM
-            print("Generating response with LLM...")
-            answer = self.llm.generate(prompt)
-            return answer
+If discussing treatments, mention that users should consult healthcare professionals for personalized medical advice."""
+                
+                return self.llm.generate(prompt)
+            
+            # 4. For non-medical queries
+            print("Detected non-medical query - using LLM directly")
+            prompt = f"""The user asked: "{query}"
+            
+            Respond as a helpful AI assistant. If this is outside your medical scope, politely mention that you specialize in healthcare information."""
+            return self.llm.generate(prompt)
             
         except Exception as e:
             print(f"Error in ask method: {e}")
-            return f"I apologize, but I encountered an error while processing your question. Please try again or rephrase your question."
+            return f"I apologize, but I encountered an error: {str(e)}. Please try again."
     
     def get_collection_info(self):
         """Get information about the collection for the UI"""
         try:
             count = self.collection.count()
-            return f"📊 Database loaded with {count} medical documents about intermittent fasting"
+            return f"📊 Database loaded with {count} medical documents"
         except Exception as e:
-            return f"📊 Medical database loaded (count unavailable: {e})"
+            return f"📊 Medical database loaded"
