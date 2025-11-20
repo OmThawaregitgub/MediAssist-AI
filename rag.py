@@ -1,47 +1,64 @@
 import chromadb
+import os
+import shutil
 from llm import LLMClient
 
 class RAGPipeline:
     def __init__(self, persist_directory="./chroma_db"):
         try:
+            # COMPLETELY remove old database to fix schema issues
+            if os.path.exists(persist_directory):
+                print("🔄 Removing old database due to schema conflict...")
+                shutil.rmtree(persist_directory)
+                print("✅ Old database removed")
+            
+            # Create fresh database
             self.client = chromadb.PersistentClient(path=persist_directory)
+            self.collection = self.client.create_collection("medical_data")
+            print("✅ New collection created")
             
-            try:
-                self.collection = self.client.get_collection("medical_data")
-                print("✅ Loaded existing collection")
-            except:
-                self.collection = self.client.create_collection("medical_data")
-                print("✅ Created new collection")
-            
+            # Initialize LLM
             self.llm = LLMClient()
-            print("✅ Medical Assistant Ready")
+            print("✅ LLM initialized")
+            
+            # Load some basic documents
+            self.load_documents()
                 
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"❌ Error initializing RAGPipeline: {e}")
             raise e
     
-    def ask(self, query):
-        """Handle queries with smart prompting"""
+    def load_documents(self):
+        """Load basic medical documents"""
         try:
-            query_lower = query.lower().strip()
+            documents = [
+                "Intermittent fasting cycles between eating and fasting periods.",
+                "Common fasting methods: 16:8, 5:2, alternate-day fasting.",
+                "Fasting may improve insulin sensitivity and aid weight loss."
+            ]
             
-            # For simple greetings - VERY SIMPLE PROMPT
-            if any(word in query_lower for word in ["hi", "hello", "hey", "how are you"]):
-                prompt = f"Say hello back to this greeting in a friendly way: '{query}'"
-                
-            # For medical questions - SIMPLE MEDICAL PROMPT  
-            elif any(word in query_lower for word in ["cancer", "fasting", "diabet", "treatment", "health"]):
-                prompt = f"Answer this medical question clearly and helpfully: '{query}'"
-                
-            # For everything else - SIMPLE GENERAL PROMPT
-            else:
-                prompt = f"Respond to this in a helpful way: '{query}'"
+            self.collection.add(
+                documents=documents,
+                metadatas=[{"type": "medical"} for _ in documents],
+                ids=[f"id_{i}" for i in range(len(documents))]
+            )
+            print("✅ Documents loaded")
+        except Exception as e:
+            print(f"⚠️ Could not load documents: {e}")
+    
+    def ask(self, query):
+        """Handle user queries"""
+        try:
+            # Simple prompt that works
+            if query.lower().strip() in ["hi", "hello", "hey"]:
+                return "Hello! 👋 I'm MediAssist AI. How can I help you today?"
             
-            response = self.llm.generate(prompt)
-            return response
+            # For other questions, use simple prompt
+            prompt = f"Please answer this question: {query}"
+            return self.llm.generate(prompt)
             
         except Exception as e:
-            return f"Error: {str(e)}"
+            return f"Sorry, I encountered an error: {str(e)}"
     
     def get_collection_info(self):
-        return "🩺 Medical AI Assistant - Ready to help"
+        return "🩺 Medical AI Assistant - Ready"
