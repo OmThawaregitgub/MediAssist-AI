@@ -5,17 +5,7 @@ from rag import RAGPipeline
 
 st.set_page_config(page_title="MediAssist AI - Healthcare Q&A", layout="wide")
 
-# ---- REMOVE TOP BLANK SPACE ----
-st.markdown("""
-<style>
-.main > div {
-    padding-top: 0px !important;
-}
-.block-container {
-    padding-top: 0rem !important;
-}
-</style>
-""", unsafe_allow_html=True)
+
 
 # ---- SESSION INIT ----
 if "chat" not in st.session_state:
