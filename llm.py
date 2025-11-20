@@ -11,16 +11,38 @@ class LLMClient:
             
             genai.configure(api_key=api_key)
             
-            # Use gemini-flash-latest model
-            self.model = genai.GenerativeModel('gemini-1.5-flash-latest')
-            print("✅ Using model: gemini-1.5-flash-latest")
+            # List all available models and use the first one that supports generateContent
+            print("🔍 Searching for available models...")
+            available_models = []
             
-            # Test the connection with a simple prompt
-            test_response = self.model.generate_content("Hello")
-            if hasattr(test_response, 'text') and test_response.text:
-                print("✅ Model test successful")
+            for model in genai.list_models():
+                if 'generateContent' in model.supported_generation_methods:
+                    available_models.append(model.name)
+                    print(f"✅ Found available model: {model.name}")
+            
+            if not available_models:
+                raise Exception("No models with generateContent support found")
+            
+            # Try each available model until one works
+            for model_name in available_models:
+                try:
+                    print(f"🔄 Trying model: {model_name}")
+                    self.model = genai.GenerativeModel(model_name)
+                    
+                    # Test the model
+                    test_response = self.model.generate_content("Hello")
+                    if hasattr(test_response, 'text') and test_response.text:
+                        print(f"🎉 Successfully loaded and tested model: {model_name}")
+                        break
+                    else:
+                        print(f"❌ Model {model_name} test failed")
+                        continue
+                        
+                except Exception as model_error:
+                    print(f"❌ Failed to load {model_name}: {model_error}")
+                    continue
             else:
-                raise Exception("Model test failed - no response")
+                raise Exception("All available models failed to load")
             
             print("✅ Gemini API connected successfully")
             
@@ -33,15 +55,12 @@ class LLMClient:
             if not prompt or not prompt.strip():
                 return "Please provide a valid question."
             
-            print(f"Generating response for prompt: {prompt[:100]}...")
             response = self.model.generate_content(prompt)
             
             if hasattr(response, 'text') and response.text:
-                print("✅ Response generated successfully")
                 return response.text
             else:
-                print("❌ Empty response from model")
-                return "I apologize, but I couldn't generate a proper response. Please try again."
+                return "I apologize, but I couldn't generate a proper response."
                 
         except Exception as e:
             print(f"LLM Generation Error: {str(e)}")
