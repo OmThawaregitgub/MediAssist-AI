@@ -13,10 +13,18 @@ st.markdown("""
     }
     .block-container {
         padding-top: 1rem;
-        padding-bottom: 1rem;
+        padding-bottom: 0rem;
     }
     .stTextInput > div > div > input {
         border-radius: 20px;
+    }
+    /* Remove space after title */
+    h2 {
+        margin-bottom: 0.5rem !important;
+    }
+    /* Bring chat box closer to title */
+    .chat-box {
+        margin-top: 0.5rem !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -37,7 +45,7 @@ if "rag" not in st.session_state:
         st.stop()
 
 # ---- TITLE ----
-st.markdown("<h2 style='text-align:center; margin-bottom: 0px;'>🏥 MediAssist AI - Medical Research Assistant</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center; margin-bottom: 0.5rem;'>🏥 MediAssist AI - Medical Research Assistant</h2>", unsafe_allow_html=True)
 
 # ---- SIDEBAR INFO ----
 st.sidebar.markdown("### ℹ️ About")
@@ -68,6 +76,7 @@ st.markdown("""
     background-color: #1e1e1e;
     margin-bottom: 20px;
     border: 1px solid #444;
+    margin-top: 0.5rem !important;
 }
 .user-msg {
     background: #0059ff;
