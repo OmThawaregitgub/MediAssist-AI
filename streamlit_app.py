@@ -5,7 +5,21 @@ from rag import RAGPipeline
 
 st.set_page_config(page_title="MediAssist AI - Healthcare Q&A", layout="wide")
 
-
+# Remove top blank space
+st.markdown("""
+<style>
+    .main > div {
+        padding-top: 0px;
+    }
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .stTextInput > div > div > input {
+        border-radius: 20px;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # ---- SESSION INIT ----
 if "chat" not in st.session_state:
@@ -23,7 +37,7 @@ if "rag" not in st.session_state:
         st.stop()
 
 # ---- TITLE ----
-st.markdown("<h2 style='text-align:center;'>🏥 MediAssist AI - Medical Research Assistant</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center; margin-bottom: 0px;'>🏥 MediAssist AI - Medical Research Assistant</h2>", unsafe_allow_html=True)
 
 # ---- SIDEBAR INFO ----
 st.sidebar.markdown("### ℹ️ About")
@@ -96,13 +110,21 @@ else:
 st.markdown("</div>", unsafe_allow_html=True)
 
 # ---- INPUT AT BOTTOM ----
-col1, col2 = st.columns([4, 1])
-with col1:
-    user_query = st.text_input("Ask your medical question:", key="input_text", placeholder="e.g., What are the benefits of intermittent fasting?")
-with col2:
-    send_btn = st.button("Send", use_container_width=True)
+# Create a form to handle Enter key submission
+with st.form(key="chat_form", clear_on_submit=True):
+    col1, col2 = st.columns([4, 1])
+    with col1:
+        user_query = st.text_input(
+            "Ask your medical question:",
+            key="input_text", 
+            placeholder="e.g., What are the benefits of intermittent fasting?",
+            label_visibility="collapsed"
+        )
+    with col2:
+        submit_btn = st.form_submit_button("Send", use_container_width=True)
 
-if send_btn and user_query.strip():
+# Handle form submission (both button click and Enter key)
+if submit_btn and user_query.strip():
     st.session_state.chat.append(("user", user_query))
     with st.spinner("🔍 Searching medical research..."):
         try:
