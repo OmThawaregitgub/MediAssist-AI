@@ -9,37 +9,53 @@ class LLMClient:
             if not api_key:
                 raise ValueError("API_KEY not found in secrets")
             
+            print(f"🔑 API Key found: {api_key[:10]}...")  # Log first 10 chars
+            
             genai.configure(api_key=api_key)
             
-            # Common working model names (in order of preference)
-            model_names = [
-                'gemini-1.0-pro',
-                'models/gemini-1.0-pro',
-                'gemini-pro',
-                'models/gemini-pro'
-            ]
+            # List ALL models to see what's available
+            print("🔍 Listing ALL available models:")
+            all_models = list(genai.list_models())
             
-            for model_name in model_names:
+            if not all_models:
+                raise Exception("No models returned from API - check API key validity")
+            
+            available_models = []
+            for model in all_models:
+                print(f"📋 Model: {model.name}")
+                print(f"   Supported methods: {model.supported_generation_methods}")
+                if 'generateContent' in model.supported_generation_methods:
+                    available_models.append(model.name)
+                    print(f"   ✅ Can use for generateContent")
+            
+            print(f"🎯 Available generateContent models: {available_models}")
+            
+            if not available_models:
+                raise Exception("No generateContent models available")
+            
+            # Try each available model
+            for model_name in available_models:
                 try:
-                    print(f"🔄 Trying model: {model_name}")
+                    print(f"🔄 Testing model: {model_name}")
                     self.model = genai.GenerativeModel(model_name)
                     
-                    # Test the model
-                    test_response = self.model.generate_content("Hello")
+                    # Simple test
+                    test_response = self.model.generate_content("Say hello in one word")
                     if hasattr(test_response, 'text') and test_response.text:
-                        print(f"🎉 Successfully loaded: {model_name}")
+                        print(f"🎉 Model {model_name} works!")
+                        self.model_name = model_name
                         break
                     else:
-                        print(f"❌ Model {model_name} test failed")
+                        print(f"❌ Model {model_name} returned empty response")
                         continue
                         
                 except Exception as model_error:
-                    print(f"❌ Failed to load {model_name}: {model_error}")
+                    print(f"❌ Model {model_name} failed: {model_error}")
                     continue
             else:
-                raise Exception("No common models worked. Please check your API key and region.")
+                raise Exception(f"No working models found from: {available_models}")
             
-            print("✅ Gemini API connected successfully")
+            print(f"✅ Successfully initialized with model: {self.model_name}")
             
         except Exception as e:
             print(f"❌ Gemini API connection failed: {e}")
