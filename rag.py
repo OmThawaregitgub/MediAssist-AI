@@ -114,3 +114,12 @@ Please provide a helpful, evidence-based answer about intermittent fasting. If y
         except Exception as e:
             print(f"Error in ask method: {e}")
             return f"I apologize, but I encountered an error while processing your question: {str(e)}. Please try again or rephrase your question."
+
+def get_collection_info(self):
+        """Get information about the collection for the UI"""
+        try:
+            count = self.collection.count()
+            return f"📊 Database loaded with {count} medical documents about intermittent fasting"
+        except Exception as e:
+            return f"📊 Medical database loaded (count unavailable: {e})"
+
