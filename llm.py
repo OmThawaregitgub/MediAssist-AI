@@ -1,9 +1,7 @@
 import google.generativeai as genai
 import streamlit as st
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
 
 class LLMClient:
     """
@@ -13,7 +11,7 @@ class LLMClient:
     def __init__(self) -> None:
         try:
             # Get API key from environment variable
-            api_key = os.getenv("GOOGLE_API_KEY")
+            api_key = st.secrets["GEMINI_API_KEY"]
             if not api_key:
                 # Try to get from Streamlit secrets if running in Streamlit
                 try:
@@ -66,4 +64,5 @@ class LLMClient:
             return response.text if response.text else "I couldn't generate a response."
         except Exception as e:
             return f"Error: {str(e)}"
+
         
