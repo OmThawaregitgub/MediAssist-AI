@@ -37,7 +37,7 @@ Check out the live application or see the interface below\!
 
 🔗 **Live Demo Link**
 
-> 👉 [Click here to test the MediAssist AI App\!](https://mediassist-ai-zasupw7hcgypimctpdtcyr.streamlit.app/)
+> 👉 [Click here to test the MediAssist AI App\!]([https://mediassist-ai-zasupw7hcgypimctpdtcyr.streamlit.app/](https://mediassist-ai-v6q9djfkdz73epitt6rrh9.streamlit.app/))
 
 ## 📸 Screenshots
 
