@@ -27,7 +27,7 @@ key_value = st.secrets['GEMINI_API_KEY']
 if not API_KEY:
     print("⚠️ Using provided API key")
     API_KEY = "YOUR_GEMINI_API_KEY"
-
+print(API_KEY)
 # ============================================
 # PAGE CONFIGURATION
 # ============================================
