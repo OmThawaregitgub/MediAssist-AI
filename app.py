@@ -601,7 +601,7 @@ def initialize_llm():
             
             # Try other models as fallback
             models_to_try = [
-                'gemini-1.5-flash-latest',
+                'gemini-2.5-flash',
                 'gemini-1.5-flash',
                 'gemini-1.5-pro-latest',
                 'gemini-pro'
