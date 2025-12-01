@@ -15,7 +15,7 @@ class LLMClient:
             if not api_key:
                 # Try to get from Streamlit secrets if running in Streamlit
                 try:
-                    api_key = st.secrets["GOOGLE_API_KEY"]
+                    api_key = st.secrets["GEMINI_API_KEY"]
                 except:
                     raise ValueError("GOOGLE_API_KEY not found in environment variables or Streamlit secrets")
             
@@ -66,3 +66,4 @@ class LLMClient:
             return f"Error: {str(e)}"
 
         
+
