@@ -9,30 +9,21 @@ from chromadb.config import Settings
 import google.generativeai as genai
 from sentence_transformers import SentenceTransformer
 import PyPDF2
-from dotenv import load_dotenv
 import time
 
 # ============================================
 # LOAD ENVIRONMENT VARIABLES
 # ============================================
 
-# Try to load from .env file
-current_dir = os.path.dirname(os.path.abspath(__file__))
-env_path = os.path.join(current_dir, '.env')
 
-if os.path.exists(env_path):
-    load_dotenv(env_path)
-    print(f"✅ Loaded .env from: {env_path}")
-else:
-    print(f"⚠️ .env file not found at: {env_path}")
-    load_dotenv()
+
 
 # Get API key - try multiple names
 API_KEY = None
 possible_keys = ['GEMINI_API_KEY', 'GOOGLE_API_KEY', 'API_KEY']
 
 for key_name in possible_keys:
-    key_value = os.getenv(key_name)
+    key_value = st.secrets[key_name]
     if key_value and len(key_value) > 30:
         API_KEY = key_value
         print(f"✅ Found API key: {key_name}")
