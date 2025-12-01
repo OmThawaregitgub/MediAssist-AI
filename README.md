@@ -2,8 +2,11 @@
 
 ### AI-Powered Healthcare Q\&A System Using RAG, ChromaDB & Gemini AI
 
-[https://www.python.org/](https://www.python.org/)[[https://streamlit.io/](https://streamlit.io/)
-[https://www.trychroma.com/](https://www.trychroma.com/) [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT) |
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-6F4E37?style=for-the-badge&logo=databricks&logoColor=white)](https://www.trychroma.com/)
+[![Google Gemini AI](https://img.shields.io/badge/Google_Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 MediAssist AI is an intelligent **Healthcare Question-Answering system** designed for doctors, clinicians, and medical researchers. It provides **quick, evidence-based summaries** on *Intermittent Fasting (IF)* and related metabolic disorders using **Retrieval-Augmented Generation (RAG)**.
 
@@ -34,8 +37,8 @@ Check out the live application or see the interface below\!
 
 🔗 **Live Demo Link**
 
-> 👉 [Click here to test the MediAssist AI App\!(https://mediassist-ai-v6q9djfkdz73epitt6rrh9.streamlit.app/)]
-
+> 👉 [Click here to test the MediAssist AI App!](https://mediassist-ai-v6q9djfkdz73epitt6rrh9.streamlit.app/)
+> 
 ## 📸 Screenshots
 
 ### 1\. Authentication Page
