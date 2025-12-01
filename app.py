@@ -20,15 +20,9 @@ import time
 
 # Get API key - try multiple names
 API_KEY = None
-possible_keys = ['GEMINI_API_KEY', 'GOOGLE_API_KEY', 'API_KEY']
 
-for key_name in possible_keys:
-    key_value = st.secrets[key_name]
-    if key_value and len(key_value) > 30:
-        API_KEY = key_value
-        print(f"✅ Found API key: {key_name}")
-        break
-
+key_value = st.secrets['GEMINI_API_KEY']
+    
 # Fallback to your key if not found
 if not API_KEY:
     print("⚠️ Using provided API key")
