@@ -35,7 +35,7 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author='Om Thaware',
-    author_email='omthaware@example.com',
+    author_email='othaware175@gmail.com',
     url='https://github.com/OmThawaregitgub/MediAssist-AI', 
     license='MIT',
     

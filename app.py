@@ -41,7 +41,7 @@ for key_name in possible_keys:
 # Fallback to your key if not found
 if not API_KEY:
     print("⚠️ Using provided API key")
-    API_KEY = "AIzaSyDg9894NJHZEmcwiLuj5Nt0CttuUuFdKX0"
+    API_KEY = "YOUR_GEMINI_API_KEY"
 
 # ============================================
 # PAGE CONFIGURATION
