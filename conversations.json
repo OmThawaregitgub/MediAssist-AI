@@ -1,0 +1,271 @@
+{
+  "admin": {
+    "conv_1764598894.178461": {
+      "id": "conv_1764598894.178461",
+      "title": "hi",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi",
+          "timestamp": "19:51"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your medical research assistant. I can help answer questions about intermittent fasting, metabolic health, diabetes, and general medical topics. How can I assist you today?",
+          "sources": [],
+          "used_rag": false,
+          "timestamp": "19:51"
+        },
+        {
+          "role": "user",
+          "content": "Sumerize that pdf"
+        },
+        {
+          "role": "assistant",
+          "content": "That is a fantastic request! I would be happy to provide a thorough summary for you.\n\nAs MediAssist AI, I can generate clear and concise summaries, but I need access to the document's content first, as I cannot browse or access files stored on your local device or computer.\n\n**To get started, please share the PDF content in one of the following ways:**\n\n1.  **Upload the File:** If your current chat interface allows file attachments, please upload the PDF directly.\n2.  **Copy and Paste:** If the PDF is text-selectable, please copy the text and paste it into our chat window.\n3.  **Provide Key Sections:** If the PDF is very long, you can paste the most crucial sections or figures you need summarized.\n\nOnce you provide the information, I will analyze the document and deliver a clear, informative summary for you right away!",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-01T19:51:39.084281",
+      "updated_at": "2025-12-01T20:43:12.732630",
+      "message_count": 4
+    },
+    "conv_20251201_195851": {
+      "id": "conv_20251201_195851",
+      "title": "ow are you",
+      "messages": [
+        {
+          "role": "user",
+          "content": "ow are you",
+          "timestamp": "19:59"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I encountered an error processing your question. Please try again.",
+          "sources": [],
+          "used_rag": false,
+          "timestamp": "19:59"
+        },
+        {
+          "role": "user",
+          "content": "ok",
+          "timestamp": "19:59"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I encountered an error processing your question. Please try again.",
+          "sources": [],
+          "used_rag": false,
+          "timestamp": "19:59"
+        }
+      ],
+      "created_at": "2025-12-01T19:59:19.228999",
+      "updated_at": "2025-12-01T20:35:01.638296",
+      "message_count": 4
+    },
+    "conv_20251201_202600": {
+      "id": "conv_20251201_202600",
+      "title": "hi",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your intelligent medical research assistant. I can help answer questions about intermittent fasting, metabolic health, diabetes, nutrition, and general medical topics. What would you like to know today?",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "How are you"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your intelligent medical research assistant. I can help answer questions about intermittent fasting, metabolic health, diabetes, nutrition, and general medical topics. What would you like to know today?",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Ok Can you tell me cancer types in tabular format"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello there! I'm MediAssist AI, and I'd be happy to provide you with an overview of common cancer types in an easy-to-read tabular format.\n\nIt's important to remember that the term \"cancer\" is a broad umbrella covering hundreds of distinct diseases. These diseases are usually categorized based on the type of cell or tissue where the cancer originates.\n\nHere is a table outlining some of the most common and major types of cancer:\n\n***\n\n## Overview of Major Cancer Types\n\n| Major Category | Specific Cancer Type | Primary Origin/Location | Key Characteristic |\n| :--- | :--- | :--- | :--- |\n| **Carcinomas** | *(Most common type, arising from epithelial cells)* | Skin, lungs, breast, pancreas, and other organs. | Usually involves the tissues that line organs or cover the body. |\n| | **Breast Cancer** | Mammary tissue | Highly heterogeneous; classified based on receptor status (e.g., hormone receptors, HER2). |\n| | **Lung Cancer** | Lungs/Bronchi | Divided into Non-Small Cell Lung Cancer (NSCLC) and Small Cell Lung Cancer (SCLC). |\n| | **Colorectal Cancer** | Colon or Rectum | Often develops slowly from polyps (adenomas). |\n| | **Prostate Cancer** | Prostate gland (males) | Typically slow-growing, though some forms are aggressive. |\n| | **Basal/Squamous Cell** | Outer layers of the skin | The most common, generally treatable forms of skin cancer. |\n| **Sarcomas** | *(Arise from connective or supportive tissues)* | Bone, muscle, fat, cartilage, blood vessels. | Less common than carcinomas; examples include Osteosarcoma (bone) and Liposarcoma (fat). |\n| | **Osteosarcoma** | Bone | Most frequently occurs in children and young adults. |\n| **Leukemias** | *(Cancers of the blood and bone marrow)* | Bone marrow, Blood | Involves the overproduction of abnormal white blood cells, hindering the production of healthy blood cells. |\n| | **Acute Lymphoblastic Leukemia (ALL)** | Lymphoid progenitor cells | Rapidly progressing; common in children. |\n| | **Chronic Myeloid Leukemia (CML)** | Myeloid cells | Slower progressing; often linked to the Philadelphia chromosome. |\n| **Lymphomas** | *(Cancers of the lymphatic system)* | Lymph nodes, spleen, thymus, bone marrow. | Affects lymphocytes (a type of white blood cell essential for immune function). |\n| | **Hodgkin Lymphoma (HL)** | Lymphoid tissue | Characterized by the presence of Reed-Sternberg cells. |\n| | **Non-Hodgkin Lymphoma (NHL)** | Lymphoid tissue | A diverse group of cancers; much more common than HL. |\n| **Melanoma** | *(A type of skin cancer)* | Melanocytes (pigment-producing cells) | Less common than Basal/Squamous cell cancers but often more aggressive. |\n| **Central Nervous System (CNS)** | **Brain/Spinal Tumors** | Brain, Spinal Cord | Cancers arising from various cell types within the CNS (e.g., gliomas, meningiomas). |\n\n***\n\n### Important Context\n\nPlease keep in mind that this table provides general categories. The specific diagnosis for a patient is highly detailed, often including:\n\n1.  **Grade:** How aggressive the cancer cells look under a microscope (1-4).\n2.  **Stage:** How much the cancer has spread (e.g., Stage I, II, III, IV).\n3.  **Biomarkers:** Specific genetic mutations or protein expressions that determine which targeted therapies will be effective (especially critical in breast, lung, and colorectal cancers).\n\nIf you or a loved one are concerned about specific symptoms or a diagnosis, it is always best to consult directly with an oncologist or healthcare professional for accurate, personalized medical advice. We are here to help you navigate this information!",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-01T20:26:44.741458",
+      "updated_at": "2025-12-01T20:35:02.748058",
+      "message_count": 6
+    },
+    "conv_20251201_203444_43cd1f": {
+      "id": "conv_20251201_203444_43cd1f",
+      "title": "New Conversation",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hi"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your intelligent medical research assistant. I can help answer questions about intermittent fasting, metabolic health, diabetes, nutrition, and general medical topics. What would you like to know today?",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-01T20:34:44.773178",
+      "updated_at": "2025-12-01T20:34:59.102326",
+      "message_count": 2
+    },
+    "conv_20251201_204214_98798e": {
+      "id": "conv_20251201_204214_98798e",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-01T20:42:14.076808",
+      "updated_at": "2025-12-01T20:42:14.076808",
+      "message_count": 0
+    },
+    "conv_20251201_205129_2d984d": {
+      "id": "conv_20251201_205129_2d984d",
+      "title": "Can you tell what ment in document",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Can you tell what ment in document"
+        },
+        {
+          "role": "assistant",
+          "content": "That's a great question! I'm MediAssist AI, and I'd be happy to help you understand how to figure out what is meant by content in a document.\n\nWhen you're trying to figure out the **meaning** or **intent** behind something in a document (like a medical claim, policy summary, or explanation of benefits), we usually look at a few key things:\n\n### 1. **Context is Key**\nThe meaning of a word, phrase, or sentence often depends entirely on the surrounding information:\n\n*   **Who wrote the document?** (e.g., your insurance provider, a hospital, a government agency).\n*   **What is the document about?** (e.g., billing, eligibility, pre-authorization, or a policy exclusion).\n*   **Where does the phrase appear?** (e.g., Is it in the \"Definitions\" section, the \"Coverage\" section, or the \"Fine Print\"?).\n\n### 2. **Look for Definitions**\nMost official documents, especially insurance policies and legal paperwork, will have a dedicated section (often at the beginning) that defines important terms (like \"deductible,\" \"co-payment,\" \"medically necessary,\" or \"out-of-pocket maximum\"). If the word or phrase is defined there, that is the official meaning for that document.\n\n### 3. **Identify the Purpose**\nEvery section serves a purpose. Ask yourself: \"Is this section meant to **inform** me, **require** me to do something, **explain** a benefit, or **exclude** a service?\" Knowing the goal of the paragraph helps clarify the meaning of the words used.\n\n***\n\n### **How MediAssist AI Can Help You Specifically**\n\nIf you are looking at a document related to your healthcare or insurance coverage, here\u2019s how I can assist you:\n\n1.  **Tell me the specific document:** (e.g., \"It's an Explanation of Benefits for a recent surgery.\")\n2.  **Quote the exact word or phrase:** (e.g., \"What does 'non-covered charge' mean here?\")\n\nOnce you provide me with those details, I can use my knowledge of common healthcare terminology and insurance practices to give you a much clearer, informed, and precise explanation!\n\nI'm here to make complex healthcare information easier to understand. Just let me know what you're looking at!",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Can you provide summery of topic cover in document"
+        },
+        {
+          "role": "assistant",
+          "content": "You can upload medical PDF documents using the 'Upload Medical PDF' section in the sidebar. Once uploaded, I can analyze the content and help you with questions about it. Please use the sidebar uploader to add your document.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "I already upload pdf tell me on basis of that"
+        },
+        {
+          "role": "assistant",
+          "content": "You can upload medical PDF documents using the 'Upload Medical PDF' section in the sidebar. Once uploaded, I can analyze the content and help you with questions about it. Please use the sidebar uploader to add your document.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-01T20:51:29.225764",
+      "updated_at": "2025-12-01T21:09:50.245420",
+      "message_count": 6
+    },
+    "conv_20251201_210650_999f9a": {
+      "id": "conv_20251201_210650_999f9a",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-01T21:06:50.541762",
+      "updated_at": "2025-12-01T21:06:50.541762",
+      "message_count": 0
+    },
+    "conv_20251201_211230_94fef1": {
+      "id": "conv_20251201_211230_94fef1",
+      "title": "Tell key point from that document i uploaded",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Tell key point from that document i uploaded"
+        },
+        {
+          "role": "assistant",
+          "content": "The key points from the document \"UNDERSTANDING CANCER: What is Cancer and Types of Cancer\" are summarized below:\n\n**1. Definition and Nature of Cancer**\n\n*   **Definition:** Cancer is a collection of related diseases characterized by cells dividing without stopping and spreading into surrounding tissues.\n*   **Tumors:** Extra cells form growths called tumors.\n    *   **Malignant/Cancerous Tumors:** Can invade nearby tissues and spread (metastasize) to distant parts of the body through the blood or lymph system.\n    *   **Benign Tumors:** Do not spread into nearby tissues and usually do not grow back when removed.\n*   **Types of Tumors:** Solid tumors (masses of tissue) and liquid tumors (cancers of the blood and bone marrow, such as leukemias).\n\n**2. Differences between Cancer Cells and Normal Cells**\n\nCancer cells differ from normal cells in that they:\n\n*   Are less specialized, allowing them to divide continuously.\n*   Ignore signals that would stop division or begin programmed cell death (apoptosis).\n*   Influence the surrounding microenvironment, often inducing the formation of blood vessels to supply the tumor.\n*   Evade or co-opt the immune system.\n\n**3. Causes and Genetic Basis**\n\n*   **Genetic Disease:** Cancer is caused by changes (mutations) to genes that control cell growth and division.\n*   **Origin of Changes:** Changes can be inherited, arise from errors during cell division, or be caused by DNA damage from environmental factors (like tobacco smoke or UV radiation). Epigenetic alterations can also switch genes on or off.\n*   **\"Drivers\" of Cancer:** Genetic changes typically affect two main gene types:\n    *   **Oncogenes:** Altered to allow cells to grow and survive inappropriately.\n    *   **Tumour Suppressor Genes:** Altered, enabling cells to divide uncontrollably.\n\n**4. Metastasis (Cancer Spread)**\n\n*   **Process:** Metastasis occurs when cancer cells break away from the primary site, travel through the body, and form new tumors (metastatic tumors).\n*   **Classification:** A metastatic tumor retains the molecular features of the original cancer (e.g., breast cancer that spreads to the lung is still classified as metastatic breast cancer).\n*   **Lethality:** Most people who die of cancer die of metastatic disease.\n\n**5. Tissue Changes that May Lead to Cancer**\n\nNot all abnormal tissue changes are cancer, but some can progress toward it:\n\n*   **Hyperplasia:** Cells divide faster than normal and build up, but the cells and tissue organization appear normal under a microscope.\n*   **Dysplasia:** A buildup of extra cells that look abnormal, with changes in tissue organization. The more abnormal the cells, the greater the chance cancer will form.\n*   **Carcinoma in situ:** A serious condition where abnormal cells are present but have not spread beyond the original tissue (not invasive cancer). It is usually treated because it may become invasive.",
+          "sources": [
+            {
+              "text": " \n \n \n1 \n \nPIP \nDigest  \nUNDERSTANDING CANCER: What is Cancer and Types of \nCancer  \nThis PIP Digest provides key concepts about cancer, explains how it develops and \nspreads, and describes the major types of cancer.  \nKey Concepts  \n\u2022 Cancer initiation \n\u2022 Cancer progression  \n\u2022 Cancer types  \nRelated PIP Digests  \n\u2022 Understanding Cancer: Tumour Grading and Cancer Staging  \n\u2022 Understanding Cancer: Hallmarks of Cancer  \n \nWhat is Cancer?1 \nCancer is a collection of related diseases where some cells divide without stopping and spread into surrounding \ntissues. Cancer can start almost anywhere in the body.  \nNormally, our cells grow and divide to form new cells as our body needs them. When cells  grow old or become \ndamaged, they die, and new cells take their place. When cancer develops, however, this orderly process breaks down. Cells become more and more abnormal. Old or damaged cells survive when they should die, and new cells form when \nthey are  not needed. These extra cells can form growths called tumours.  \nCancerous tumours are malignant, which means they can invade nearby tissues. In addition, as these tumours grow, \nsome cancer cells can break off and travel to distant places in the body throug h the blood or the lymph system and \nform new tumours far from the original.  \nSolid tumours are masses of tissue named for the type of cells they formed from. Liquid tumours, such as leukemias, \nare cancers of the blood and bone marrow.  \nUnlike malignant tumours, benign tumours do not spread into nearby tissues and often don\u2019t grow back when they are \nremoved. Benign tumours can sometimes be quite large and, in the case of benign brain tumours, can be life \nthreatening.  \n \n1Adapted from: https://www.cancer.gov/about -cancer/understanding/what -is-cancer    \n\n \n \n \n2 \n \nPIP \nDigest  \nDifferences between Cancer Cells and Norma l Cells  \nCancer cells differ from normal cells in many ways that allow them to grow out of control and become invasive:  \n\u2022 Unlike normal cells that mature into very distinct types with specific functions, cancer cells are less specialized, \nwhich helps them di vide without stopping.  \n\u2022 Cancer cells ignore signals that would otherwise stop them dividing or that begin the process known as \n\u201cprogrammed cell death,\u201d or \u201capoptosis.\u201d  \n\u2022 Cancer cells influence surrounding normal cells, molecules, and blood vessels \u2014 an area known as the \nmicroenvironment. For instance, cancer cells can induce nearby normal cells to form blood vessels that supply \ntumours with oxygen and nutrients and remove waste products.  \n\u2022 Cancer cells often evade or hide from the immune system that would norma lly remove them. They can even \nco-opt the immune system to help them grow and stay alive.  \nHow Cancer Arises  \nCancer is a genetic disease \u2014that is, it is caused by changes to genes that control the way our cells function, especially \nhow they grow and divide.  \nCancer:  \n\u2022 can be inherited \n\u2022 can arise because of errors that occur as cells divide  \n\u2022 can be caused when DNA is damaged by exposure to environmental factors including chemicals in tobacco smoke and ultraviolet radiation from the sun.  \n\u2022 can be caused by epigenetic  alterations, which affect the behaviour of genes without affecting the genetic \nstructure itself. Epigenetic \"marks\" switch genes on or off in response to diet, stress, prenatal nutrition and a \nwide range of other environmental influences. Some epigenetic changes can be passed from one generation to \nthe next.  \nEach person\u2019s cancer involves a unique combination of genetic changes. As a cancer continues to grow, additional changes occur. A single tumour may contain many different genetic variations. In general , cancer cells exhibit more \ngenetic changes than normal cells. Some changes may be the result of the cancer rather than its cause.  \n\"Drivers\" of Cancer  \nThe genetic origins of cancer tend to arise in two main types of genes \u2014oncogenes and tumour suppressor genes. \nThese mutations are sometimes called \u201cdrivers\u201d of cancer.  \nAltered oncogenes stop regulating cell division, allowing cells to grow and survive when they should not. Tumour suppressor genes, which would normally stop cancer, are altered and enable cells to divide uncontrollably.  \nWhen Cancer Spreads  \nIn metastasis, c ancer cells break away from where they first formed (primary cancer), travel through the blood or lymph \nsystem, and form new tumours (metastatic tumours) in other parts of the body. Under a microscope, metastatic cancer \n\n \n \n \n3 \n \nPIP \nDigest  \ncells generally share molecular feat ures with the original cancer, including specific chromosome changes. For this \nreason, the original and metastatic tumours are considered the same type of cancer. For instance, breast cancer that \nmetastasizes in the lung is metastatic breast cancer, not lung cancer.  \nMetastatic tumours can severely damage how the body functions. Most people who die of cancer die of metastatic disease. Most treatments for metastatic cancers are designed to relieve symptoms and control the size of tumours and their further spread. But reducing cancer deaths requires curing metastatic disease outright.  \nTissue Changes that Are Not Cancer  \nNot every change in the body\u2019s tissues is cancer, though many may develop into cancer if they are not treated. The diagram on the next page shows the progression of cellular changes that may lead to cancer.  \nHyperplasia occurs when cells within a tissue divide faster than normal and build up or proliferate. The cells and the \nway the tissue is organized look normal under a microscope. Hyperplasi a can be caused by chronic irritation or several \nother factors.  \nDysplasia is more serious than hyperplasia. Dysplasia also involves a buildup of extra cells, but the cells look abnormal and there are changes in how the tissue is organized. In general, the more abnormal the cells and tissue look, the \ngreater the chance that cancer will form. \nSome types of dysplasia may need to be monitored or treated. For example, an abnormal skin mole called a dysplastic \nmay turn into melanoma.  \nAn even more serious condition is carcinoma in situ . Carcinoma in situ is not invasive cancer because the abnormal \ncells do not spread beyond the original tissue. But, because some carcinomas in situ become invasive, they are usually treated.  \n \nCancer Progression  \nSource: https://upload.wikimedia.org/wikipedia/commons/f/f6/Cancer_progression_from_NIH.png  \n \n",
+              "metadata": {
+                "source": "Understanding-Cancer-What-is-Cancer-and-Types-of-Cancer_rev.pdf",
+                "type": "pdf",
+                "pages": 6,
+                "uploaded_at": "2025-12-01T21:08:20.316907"
+              },
+              "similarity": 0.04936498403549194,
+              "rank": 1
+            },
+            {
+              "text": " \n \n \n1 \n \nPIP \nDigest  \nUNDERSTANDING CANCER: What is Cancer and Types of \nCancer  \nThis PIP Digest provides key concepts about cancer, explains how it develops and \nspreads, and describes the major types of cancer.  \nKey Concepts  \n\u2022 Cancer initiation \n\u2022 Cancer progression  \n\u2022 Cancer types  \nRelated PIP Digests  \n\u2022 Understanding Cancer: Tumour Grading and Cancer Staging  \n\u2022 Understanding Cancer: Hallmarks of Cancer  \n \nWhat is Cancer?1 \nCancer is a collection of related diseases where some cells divide without stopping and spread into surrounding \ntissues. Cancer can start almost anywhere in the body.  \nNormally, our cells grow and divide to form new cells as our body needs them. When cells  grow old or become \ndamaged, they die, and new cells take their place. When cancer develops, however, this orderly process breaks down. Cells become more and more abnormal. Old or damaged cells survive when they should die, and new cells form when \nthey are  not needed. These extra cells can form growths called tumours.  \nCancerous tumours are malignant, which means they can invade nearby tissues. In addition, as these tumours grow, \nsome cancer cells can break off and travel to distant places in the body throug h the blood or the lymph system and \nform new tumours far from the original.  \nSolid tumours are masses of tissue named for the type of cells they formed from. Liquid tumours, such as leukemias, \nare cancers of the blood and bone marrow.  \nUnlike malignant tumours, benign tumours do not spread into nearby tissues and often don\u2019t grow back when they are \nremoved. Benign tumours can sometimes be quite large and, in the case of benign brain tumours, can be life \nthreatening.  \n \n1Adapted from: https://www.cancer.gov/about -cancer/understanding/what -is-cancer    \n\n \n \n \n2 \n \nPIP \nDigest  \nDifferences between Cancer Cells and Norma l Cells  \nCancer cells differ from normal cells in many ways that allow them to grow out of control and become invasive:  \n\u2022 Unlike normal cells that mature into very distinct types with specific functions, cancer cells are less specialized, \nwhich helps them di vide without stopping.  \n\u2022 Cancer cells ignore signals that would otherwise stop them dividing or that begin the process known as \n\u201cprogrammed cell death,\u201d or \u201capoptosis.\u201d  \n\u2022 Cancer cells influence surrounding normal cells, molecules, and blood vessels \u2014 an area known as the \nmicroenvironment. For instance, cancer cells can induce nearby normal cells to form blood vessels that supply \ntumours with oxygen and nutrients and remove waste products.  \n\u2022 Cancer cells often evade or hide from the immune system that would norma lly remove them. They can even \nco-opt the immune system to help them grow and stay alive.  \nHow Cancer Arises  \nCancer is a genetic disease \u2014that is, it is caused by changes to genes that control the way our cells function, especially \nhow they grow and divide.  \nCancer:  \n\u2022 can be inherited \n\u2022 can arise because of errors that occur as cells divide  \n\u2022 can be caused when DNA is damaged by exposure to environmental factors including chemicals in tobacco smoke and ultraviolet radiation from the sun.  \n\u2022 can be caused by epigenetic  alterations, which affect the behaviour of genes without affecting the genetic \nstructure itself. Epigenetic \"marks\" switch genes on or off in response to diet, stress, prenatal nutrition and a \nwide range of other environmental influences. Some epigenetic changes can be passed from one generation to \nthe next.  \nEach person\u2019s cancer involves a unique combination of genetic changes. As a cancer continues to grow, additional changes occur. A single tumour may contain many different genetic variations. In general , cancer cells exhibit more \ngenetic changes than normal cells. Some changes may be the result of the cancer rather than its cause.  \n\"Drivers\" of Cancer  \nThe genetic origins of cancer tend to arise in two main types of genes \u2014oncogenes and tumour suppressor genes. \nThese mutations are sometimes called \u201cdrivers\u201d of cancer.  \nAltered oncogenes stop regulating cell division, allowing cells to grow and survive when they should not. Tumour suppressor genes, which would normally stop cancer, are altered and enable cells to divide uncontrollably.  \nWhen Cancer Spreads  \nIn metastasis, c ancer cells break away from where they first formed (primary cancer), travel through the blood or lymph \nsystem, and form new tumours (metastatic tumours) in other parts of the body. Under a microscope, metastatic cancer \n\n \n \n \n3 \n \nPIP \nDigest  \ncells generally share molecular feat ures with the original cancer, including specific chromosome changes. For this \nreason, the original and metastatic tumours are considered the same type of cancer. For instance, breast cancer that \nmetastasizes in the lung is metastatic breast cancer, not lung cancer.  \nMetastatic tumours can severely damage how the body functions. Most people who die of cancer die of metastatic disease. Most treatments for metastatic cancers are designed to relieve symptoms and control the size of tumours and their further spread. But reducing cancer deaths requires curing metastatic disease outright.  \nTissue Changes that Are Not Cancer  \nNot every change in the body\u2019s tissues is cancer, though many may develop into cancer if they are not treated. The diagram on the next page shows the progression of cellular changes that may lead to cancer.  \nHyperplasia occurs when cells within a tissue divide faster than normal and build up or proliferate. The cells and the \nway the tissue is organized look normal under a microscope. Hyperplasi a can be caused by chronic irritation or several \nother factors.  \nDysplasia is more serious than hyperplasia. Dysplasia also involves a buildup of extra cells, but the cells look abnormal and there are changes in how the tissue is organized. In general, the more abnormal the cells and tissue look, the \ngreater the chance that cancer will form. \nSome types of dysplasia may need to be monitored or treated. For example, an abnormal skin mole called a dysplastic \nmay turn into melanoma.  \nAn even more serious condition is carcinoma in situ . Carcinoma in situ is not invasive cancer because the abnormal \ncells do not spread beyond the original tissue. But, because some carcinomas in situ become invasive, they are usually treated.  \n \nCancer Progression  \nSource: https://upload.wikimedia.org/wikipedia/commons/f/f6/Cancer_progression_from_NIH.png  \n \n",
+              "metadata": {
+                "uploaded_at": "2025-12-01T21:09:45.425798",
+                "pages": 6,
+                "source": "Understanding-Cancer-What-is-Cancer-and-Types-of-Cancer_rev.pdf",
+                "type": "pdf"
+              },
+              "similarity": 0.04936498403549194,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "ok now give summery in 3 line"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! I would be happy to give you a clear, three-line summary.\n\nTo make sure I capture the key information you need, could you please remind me of the topic or document you would like summarized?\n\nOnce you provide the context, I will promptly deliver the essential takeaways!</blockquote>",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "on document overall i am telling"
+        },
+        {
+          "role": "assistant",
+          "content": "The provided document is a PIP Digest titled **\"UNDERSTANDING CANCER: What is Cancer and Types of Cancer.\"**\n\nThe digest offers a foundational overview of cancer, focusing on its definition, the differences between cancerous and normal cells, and the basic causes of the disease.\n\nHere are the key points covered in the document:\n\n### 1. Definition of Cancer\n*   **What it is:** Cancer is a collection of related diseases where cells divide without stopping and spread into surrounding tissues, disrupting the normal processes of cell growth, division, and death.\n*   **Tumors:** These extra cells form growths called tumors.\n    *   **Malignant (Cancerous):** These tumors can invade nearby tissues. Cells can break off and travel through the blood or lymph system to form new tumors far from the original site.\n    *   **Benign (Non-Cancerous):** These do not spread into nearby tissues and often don't grow back when removed, although they can sometimes be large or life-threatening (e.g., benign brain tumors).\n*   **Structural Types:** The document distinguishes between **Solid tumors** (masses of tissue) and **Liquid tumors** (cancers of the blood and bone marrow, such as leukemias).\n\n### 2. Differences between Cancer Cells and Normal Cells\nCancer cells possess several traits that allow them to grow uncontrollably and become invasive:\n*   They are **less specialized** than normal cells, which aids continuous division.\n*   They **ignore signals** that would normally stop division or initiate programmed cell death (apoptosis).\n*   They influence the **microenvironment**, often inducing nearby normal cells to form blood vessels that supply the tumor with oxygen and nutrients.\n*   They **evade or co-opt the immune system** to help them grow and survive.\n\n### 3. How Cancer Arises\n*   Cancer is fundamentally a **genetic disease**, caused by changes (mutations) in genes that control how cells grow and divide.\n*   These changes can either be **inherited** or can arise from **errors that occur as cells divide**.\n\n### 4. Key Concepts and Related Topics\nThe digest outlines that it will cover Cancer initiation, Cancer progression, and Cancer types. It also references related PIP Digests covering \"Tumour Grading and Cancer Staging\" and \"Hallmarks of Cancer.\"",
+          "sources": [
+            {
+              "text": " \n \n \n1 \n \nPIP \nDigest  \nUNDERSTANDING CANCER: What is Cancer and Types of \nCancer  \nThis PIP Digest provides key concepts about cancer, explains how it develops and \nspreads, and describes the major types of cancer.  \nKey Concepts  \n\u2022 Cancer initiation \n\u2022 Cancer progression  \n\u2022 Cancer types  \nRelat...",
+              "metadata": {
+                "pages": 6,
+                "type": "pdf",
+                "source": "Understanding-Cancer-What-is-Cancer-and-Types-of-Cancer_rev.pdf",
+                "uploaded_at": "2025-12-01T20:43:01.143761"
+              },
+              "similarity": 0.8,
+              "rank": 1
+            },
+            {
+              "text": " \n \n \n1 \n \nPIP \nDigest  \nUNDERSTANDING CANCER: What is Cancer and Types of \nCancer  \nThis PIP Digest provides key concepts about cancer, explains how it develops and \nspreads, and describes the major types of cancer.  \nKey Concepts  \n\u2022 Cancer initiation \n\u2022 Cancer progression  \n\u2022 Cancer types  \nRelat...",
+              "metadata": {
+                "pages": 6,
+                "source": "Understanding-Cancer-What-is-Cancer-and-Types-of-Cancer_rev.pdf",
+                "type": "pdf",
+                "uploaded_at": "2025-12-01T20:43:08.960303"
+              },
+              "similarity": 0.8,
+              "rank": 2
+            }
+          ]
+        }
+      ],
+      "created_at": "2025-12-01T21:12:30.757063",
+      "updated_at": "2025-12-01T21:14:25.789110",
+      "message_count": 6
+    },
+    "conv_20251201_211901_ee858a": {
+      "id": "conv_20251201_211901_ee858a",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-01T21:19:01.185988",
+      "updated_at": "2025-12-01T21:19:01.185988",
+      "message_count": 0
+    },
+    "conv_20251201_211932_0b94c6": {
+      "id": "conv_20251201_211932_0b94c6",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-01T21:19:32.349613",
+      "updated_at": "2025-12-01T21:19:32.349613",
+      "message_count": 0
+    }
+  }
+}
