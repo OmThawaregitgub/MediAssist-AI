@@ -1,7 +1,3 @@
-That's a very detailed and well-structured `README.md`\! I will format it using Markdown headings, lists, tables, and blockquotes for excellent readability, maintaining the original content and structure.
-
------
-
 # 🏥 MediAssist AI
 
 ### AI-Powered Healthcare Q\&A System Using RAG, ChromaDB & Gemini AI
