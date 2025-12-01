@@ -2,7 +2,7 @@
 
 ### AI-Powered Healthcare Q\&A System Using RAG, ChromaDB & Gemini AI
 
-[(https://www.python.org/)]
+https://www.python.org/
 [(https://streamlit.io/)]
 [(https://www.trychroma.com/)]
 [(https://ai.google.dev/)]
