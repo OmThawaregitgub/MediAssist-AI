@@ -19,7 +19,7 @@ import time
 
 
 # Get API key - try multiple names
-API_KEY = None
+API_KEY = st.secrets['GEMINI_API_KEY']
 
 key_value = st.secrets['GEMINI_API_KEY']
     
