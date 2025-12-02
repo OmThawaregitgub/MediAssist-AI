@@ -607,19 +607,19 @@ def initialize_llm():
                 'gemini-pro'
             ]
             
-            for model_name in models_to_try:
-                try:
-                    print(f"Trying model: {model_name}")
-                    model = genai.GenerativeModel(model_name)
-                    response = model.generate_content("Test")
-                    if response.text:
-                        st.session_state.llm_model = model
-                        st.session_state.llm_initialized = True
-                        st.success(f"✅ Connected to {model_name}")
-                        return model
-                except Exception as e2:
-                    print(f"Failed with {model_name}: {e2}")
-                    continue
+            # for model_name in models_to_try:
+            #     try:
+            #         print(f"Trying model: {model_name}")
+            #         model = genai.GenerativeModel(model_name)
+            #         response = model.generate_content("Test")
+            #         if response.text:
+            #             st.session_state.llm_model = model
+            #             st.session_state.llm_initialized = True
+            #             st.success(f"✅ Connected to {model_name}")
+            return 'gemini-2.5-flash'
+            #     except Exception as e2:
+            #         print(f"Failed with {model_name}: {e2}")
+            #         continue
         
         st.error("❌ Could not connect to any Gemini model")
         return None
