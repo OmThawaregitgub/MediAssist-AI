@@ -1,12 +1,10 @@
 import google.generativeai as genai
 import os
-<<<<<<< HEAD
+
 from dotenv import load_dotenv
 from typer import prompt
 from model_list import model_list
-=======
->>>>>>> ec4d3b6f0f4ebb36ef9d2ceb008ee0f9a3c85a31
-
+# =======
 
 class LLMClient:
     
@@ -23,11 +21,10 @@ class LLMClient:
         print(f"   - Current self.model: {'Exists' if self.model else 'None'}")
         
         try:
-<<<<<<< HEAD
             # Get API key
             if not api_key:
                 api_key = os.getenv("GEMINI_API_KEY")
-=======
+
             # Get API key from environment variable
             api_key = st.secrets["GEMINI_API_KEY"]
             if not api_key:
@@ -131,7 +128,7 @@ class LLMClient:
                 return self._get_demo_response(prompt)
             
         except Exception as e:
-<<<<<<< HEAD
+<
             print(f"   ❌ Generation error: {e}")
             import traceback
             traceback.print_exc()
@@ -243,9 +240,8 @@ Answer this question: {query}
 Provide a clear, accurate response."""
         
         return self.generate(prompt)
-=======
+
             return f"Error: {str(e)}"
 
         
 
->>>>>>> ec4d3b6f0f4ebb36ef9d2ceb008ee0f9a3c85a31
