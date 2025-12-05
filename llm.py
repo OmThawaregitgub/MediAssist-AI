@@ -33,7 +33,7 @@ class LLMClient:
                     api_key = st.secrets["GEMINI_API_KEY"]
                 except:
                     raise ValueError("GOOGLE_API_KEY not found in environment variables or Streamlit secrets")
->>>>>>> ec4d3b6f0f4ebb36ef9d2ceb008ee0f9a3c85a31
+
             
             print(f"🔑 API Key check: {'Present' if api_key else 'Missing'}")
             
@@ -128,7 +128,6 @@ class LLMClient:
                 return self._get_demo_response(prompt)
             
         except Exception as e:
-<
             print(f"   ❌ Generation error: {e}")
             import traceback
             traceback.print_exc()
