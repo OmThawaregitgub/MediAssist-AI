@@ -618,8 +618,8 @@ This project is licensed under the MIT License - see the [LICENSE](https://www.g
 For issues, questions, or contributions:
 
   * **GitHub Issues**: [Create an issue](https://github.com/OmThawaregitgub/MediAssist-AI/issues)
-  * **Email**: omthaware@example.com
-  * **Documentation**: [Read the docs](https://github.com/OmThawaregitgub/MediAssist-AI/wiki)
+  * **Email**: othaware175@gmail.com
+  * **Documentation**: [Read the docs](https://github.com/OmThawaregitgub/MediAssist-AI)
 
 -----
 
