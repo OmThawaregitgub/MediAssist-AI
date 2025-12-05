@@ -247,7 +247,7 @@ def initialize_systems():
             #     except Exception as e2:
             #         print(f"Failed with {model_name}: {e2}")
             #         continue
->>>>>>> ec4d3b6f0f4ebb36ef9d2ceb008ee0f9a3c85a31
+
         
         # Initialize RAG
         if not st.session_state.rag_initialized:
