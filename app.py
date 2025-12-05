@@ -17,7 +17,7 @@ from rag import RAGPipeline
 # LOAD ENVIRONMENT VARIABLES
 # ============================================
 
-<<<<<<< HEAD
+
 # load_dotenv()
 
 # Get API key
@@ -29,9 +29,7 @@ if API_KEY:
 
 # # Initialize global instances
 # llm_client = LLMClient()
-# rag_pipeline = None
-
-=======
+# rag_pipeline
 
 
 
@@ -213,21 +211,20 @@ def initialize_systems():
                 
                 # Force set to True
                 st.session_state.llm_initialized = True
-<<<<<<< HEAD
+
                 print(f"✅ LLM marked as initialized")
                 
             except Exception as e:
                 print(f"❌ LLM initialization error: {e}")
                 st.session_state.llm_initialized = True
                 print("⚠️ Marked as initialized despite error")
-=======
+
                 st.success("✅ Connected to Gemini Flash Latest")
                 return model
             else:
                 st.error("❌ No response from model")
                 return None
-        except Exception as e:
-            print(f"gemini-flash-latest failed: {e}")
+
             
             # Try other models as fallback
             models_to_try = [
