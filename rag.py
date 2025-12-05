@@ -1,83 +1,118 @@
 import chromadb
-from llm import LLMClient
+from chromadb.config import Settings
+from sentence_transformers import SentenceTransformer
+import os
 
 class RAGPipeline:
-    def __init__(self) -> None:
+    def __init__(self, collection_name: str = "medical_documents") -> None:
         """
-        Initialize the RAGPipeline components.
-
-        This method performs the following:
-        1. Creates an in-memory ChromaDB client.
-        2. Generates a unique collection name to avoid conflicts across instances.
-        3. Initializes the LLM client used for generating responses.
-        4. Wraps initialization in a try/except block to catch and surface errors.
-
-        Returns:
-            None
-        Raises:
-            Exception: If any component fails during initialization.
+        Initialize the RAGPipeline with persistent storage
         """
         try:
-            # Use in-memory client with unique collection name
-            self.client = chromadb.Client()
+            # Initialize embedding model
+            self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
             
-            # Create unique collection name to avoid conflicts
-            collection_name = f"medical_data_{id(self)}"
-            self.collection = self.client.create_collection(collection_name)
+            # Setup persistent ChromaDB
+            chroma_path = "chroma_db"
+            if not os.path.exists(chroma_path):
+                os.makedirs(chroma_path, exist_ok=True)
             
-            # Initialize LLM
-            self.llm = LLMClient()
+            self.client = chromadb.PersistentClient(
+                path=chroma_path,
+                settings=Settings(anonymized_telemetry=False)
+            )
             
-            print("✅ MediAssist AI Initialized Successfully")
+            # Get or create collection
+            self.collection = self.client.get_or_create_collection(
+                name=collection_name,
+                metadata={"hnsw:space": "cosine"}
+            )
+            
+            print("✅ RAG Pipeline Initialized")
                 
         except Exception as e:
             print(f"❌ Error initializing RAGPipeline: {e}")
             raise e
     
-    def ask(self, query: str) -> str:
-        """
-        Process and respond to user queries.
-
-        Parameters:
-            query (str): The user's input question or message.
-
-        Returns:
-            str: A generated response from the LLM or a predefined greeting.
-
-        Behavior:
-            - Detects greetings and returns friendly preset responses.
-            - Identifies medical-related keywords to generate more focused prompts.
-            - Uses general prompts for non-medical questions.
-            - Handles unexpected errors gracefully by returning a user-friendly message.
-        """
-        
+    def add_documents(self, documents: list, metadatas: list = None, ids: list = None):
+        """Add documents to the vector database"""
         try:
-            query_lower = query.lower().strip()
+            # Generate embeddings
+            embeddings = self.embedding_model.encode(documents).tolist()
             
-            # Handle greetings
-            if any(word in query_lower for word in ["hi", "hello", "hey"]):
-                return "Hello! 👋 I'm MediAssist AI. How can I help you with medical questions today?"
+            # Prepare metadata
+            if metadatas is None:
+                metadatas = [{"type": "general"}] * len(documents)
             
-            if "how are you" in query_lower:
-                return "I'm doing well, thank you! Ready to assist you with medical information."
+            # Generate IDs if not provided
+            if ids is None:
+                import uuid
+                ids = [str(uuid.uuid4()) for _ in documents]
             
-            # Handle medical questions
-            if any(word in query_lower for word in ["cancer", "fasting", "diabetes", "treatment", "medical", "health"]):
-                prompt = f"Please provide clear, helpful information about: {query}"
-            else:
-                prompt = f"Please answer this question: {query}"
+            # Add to collection
+            self.collection.add(
+                documents=documents,
+                embeddings=embeddings,
+                metadatas=metadatas,
+                ids=ids
+            )
             
-            return self.llm.generate(prompt)
+            print(f"✅ Added {len(documents)} documents to collection")
             
         except Exception as e:
-            return f"I apologize, but I encountered an error: {str(e)}"
+            print(f"❌ Error adding documents: {e}")
+            raise e
     
-    def get_collection_info(self) -> str:
-        """
-        Return basic information about the medical AI assistant.
-
-        Returns:
-            str: A friendly description of the assistant's role.
-        """
-        return "🩺 Medical AI Assistant - Ready to Help"
-
+    def search(self, query: str, top_k: int = 3):
+        """Search for similar documents"""
+        try:
+            # Generate query embedding
+            query_embedding = self.embedding_model.encode(query).tolist()
+            
+            # Search in collection
+            results = self.collection.query(
+                query_embeddings=[query_embedding],
+                n_results=top_k,
+                include=["documents", "metadatas", "distances"]
+            )
+            
+            # Format results
+            formatted_results = []
+            if results['documents'] and results['documents'][0]:
+                for i, (doc, meta, dist) in enumerate(zip(
+                    results['documents'][0],
+                    results['metadatas'][0],
+                    results['distances'][0]
+                )):
+                    formatted_results.append({
+                        'text': doc,
+                        'metadata': meta or {},
+                        'similarity': float(1 - dist),
+                        'rank': i + 1
+                    })
+            
+            return formatted_results
+            
+        except Exception as e:
+            print(f"❌ Search error: {e}")
+            return []
+    
+    def count_documents(self):
+        """Return the number of documents in the collection"""
+        try:
+            return self.collection.count()
+        except Exception as e:
+            print(f"❌ Error counting documents: {e}")
+            return 0
+    
+    def get_collection_info(self):
+        """Get information about the collection"""
+        try:
+            count = self.collection.count()
+            return {
+                "document_count": count,
+                "collection_name": self.collection.name
+            }
+        except Exception as e:
+            print(f"❌ Error getting collection info: {e}")
+            return {"document_count": 0, "collection_name": "unknown"}

@@ -266,6 +266,1199 @@
       "created_at": "2025-12-01T21:19:32.349613",
       "updated_at": "2025-12-01T21:19:32.349613",
       "message_count": 0
+    },
+    "conv_20251202_144409_bdff84": {
+      "id": "conv_20251202_144409_bdff84",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-02T14:44:09.355144",
+      "updated_at": "2025-12-02T14:44:09.355144",
+      "message_count": 0
+    },
+    "conv_20251202_150430_900b75": {
+      "id": "conv_20251202_150430_900b75",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-02T15:04:30.715415",
+      "updated_at": "2025-12-02T15:04:30.715415",
+      "message_count": 0
+    },
+    "conv_20251202_150545_02897f": {
+      "id": "conv_20251202_150545_02897f",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-02T15:05:45.836472",
+      "updated_at": "2025-12-02T15:05:45.836472",
+      "message_count": 0
+    },
+    "conv_20251202_200336_e48d7d": {
+      "id": "conv_20251202_200336_e48d7d",
+      "title": "how are you",
+      "messages": [
+        {
+          "role": "user",
+          "content": "how are you"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your intelligent medical research assistant. I can help answer questions about intermittent fasting, metabolic health, diabetes, nutrition, and general medical topics. What would you like to know today?",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your intelligent medical research assistant. I can help answer questions about intermittent fasting, metabolic health, diabetes, nutrition, and general medical topics. What would you like to know today?",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-02T20:03:36.804795",
+      "updated_at": "2025-12-02T20:04:21.401277",
+      "message_count": 8
+    },
+    "conv_20251202_200502_093bc4": {
+      "id": "conv_20251202_200502_093bc4",
+      "title": "cancer types",
+      "messages": [
+        {
+          "role": "user",
+          "content": "cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-02T20:05:02.929947",
+      "updated_at": "2025-12-02T20:05:11.440468",
+      "message_count": 2
+    },
+    "conv_20251202_201425_f0a787": {
+      "id": "conv_20251202_201425_f0a787",
+      "title": "cancer types",
+      "messages": [
+        {
+          "role": "user",
+          "content": "cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-02T20:14:25.720292",
+      "updated_at": "2025-12-02T20:14:39.015089",
+      "message_count": 2
+    },
+    "conv_20251202_222908_19d48c": {
+      "id": "conv_20251202_222908_19d48c",
+      "title": "cancer types",
+      "messages": [
+        {
+          "role": "user",
+          "content": "cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-02T22:29:08.015812",
+      "updated_at": "2025-12-02T22:29:17.774302",
+      "message_count": 2
+    },
+    "conv_20251202_223013_e9a926": {
+      "id": "conv_20251202_223013_e9a926",
+      "title": "cancer types",
+      "messages": [
+        {
+          "role": "user",
+          "content": "cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-02T22:30:13.558626",
+      "updated_at": "2025-12-02T22:30:20.284088",
+      "message_count": 2
+    },
+    "conv_20251202_223228_4eb146": {
+      "id": "conv_20251202_223228_4eb146",
+      "title": "Cancer types",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-02T22:32:28.364604",
+      "updated_at": "2025-12-02T22:32:37.209304",
+      "message_count": 2
+    },
+    "conv_20251202_223323_eb5294": {
+      "id": "conv_20251202_223323_eb5294",
+      "title": "Cancer types",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-02T22:33:23.473697",
+      "updated_at": "2025-12-02T22:33:30.805902",
+      "message_count": 2
+    },
+    "conv_20251202_223734_d4c42b": {
+      "id": "conv_20251202_223734_d4c42b",
+      "title": "cancer types",
+      "messages": [
+        {
+          "role": "user",
+          "content": "cancer types"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-02T22:37:34.848916",
+      "updated_at": "2025-12-02T22:37:45.682811",
+      "message_count": 2
+    },
+    "conv_20251203_202136_3dadaf": {
+      "id": "conv_20251203_202136_3dadaf",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-03T20:21:36.463829",
+      "updated_at": "2025-12-03T20:21:36.464909",
+      "message_count": 0
+    },
+    "conv_20251203_202604_731f53": {
+      "id": "conv_20251203_202604_731f53",
+      "title": "New Conversation",
+      "messages": [
+        {
+          "role": "user",
+          "content": "g"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-03T20:26:04.679834",
+      "updated_at": "2025-12-03T20:26:20.717225",
+      "message_count": 2
+    },
+    "conv_20251203_223022_4092db": {
+      "id": "conv_20251203_223022_4092db",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-03T22:30:22.086789",
+      "updated_at": "2025-12-03T22:30:22.086789",
+      "message_count": 0
+    },
+    "conv_20251203_223938_13d715": {
+      "id": "conv_20251203_223938_13d715",
+      "title": "New Conversation",
+      "messages": [
+        {
+          "role": "user",
+          "content": "c"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-03T22:39:38.855391",
+      "updated_at": "2025-12-03T22:39:45.103806",
+      "message_count": 2
+    },
+    "conv_20251203_224118_5dc6c6": {
+      "id": "conv_20251203_224118_5dc6c6",
+      "title": "New Conversation",
+      "messages": [
+        {
+          "role": "user",
+          "content": "c"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I'm having trouble generating a response right now. This could be due to a temporary issue. Please try rephrasing your question or try again in a moment. For medical emergencies, please consult a healthcare professional immediately.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-03T22:41:18.215564",
+      "updated_at": "2025-12-03T22:41:25.698175",
+      "message_count": 2
+    },
+    "conv_20251203_224800_d04139": {
+      "id": "conv_20251203_224800_d04139",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-03T22:48:00.920213",
+      "updated_at": "2025-12-03T22:48:00.920213",
+      "message_count": 0
+    },
+    "conv_20251203_225122_aae0f8": {
+      "id": "conv_20251203_225122_aae0f8",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-03T22:51:22.756303",
+      "updated_at": "2025-12-03T22:51:22.756303",
+      "message_count": 0
+    },
+    "conv_20251203_232231_510e6b": {
+      "id": "conv_20251203_232231_510e6b",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-03T23:22:31.787399",
+      "updated_at": "2025-12-03T23:22:31.787399",
+      "message_count": 0
+    },
+    "conv_20251203_233009_f41d8e": {
+      "id": "conv_20251203_233009_f41d8e",
+      "title": "cancer",
+      "messages": [
+        {
+          "role": "user",
+          "content": "cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I encountered an error. Please try again.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-03T23:30:09.304692",
+      "updated_at": "2025-12-03T23:30:20.770684",
+      "message_count": 2
+    },
+    "conv_20251203_234640_f12d51": {
+      "id": "conv_20251203_234640_f12d51",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-03T23:46:40.038331",
+      "updated_at": "2025-12-03T23:46:40.038331",
+      "message_count": 0
+    },
+    "conv_20251203_234917_cf25ab": {
+      "id": "conv_20251203_234917_cf25ab",
+      "title": "cancer",
+      "messages": [
+        {
+          "role": "user",
+          "content": "cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "I apologize, but I encountered an error. Please try again.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-03T23:49:17.769065",
+      "updated_at": "2025-12-03T23:49:23.297781",
+      "message_count": 2
+    },
+    "conv_20251203_235438_7e5183": {
+      "id": "conv_20251203_235438_7e5183",
+      "title": "cnacer",
+      "messages": [
+        {
+          "role": "user",
+          "content": "cnacer"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "What is cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-03T23:54:38.591614",
+      "updated_at": "2025-12-03T23:55:39.138061",
+      "message_count": 4
+    },
+    "conv_20251203_235721_6b12e3": {
+      "id": "conv_20251203_235721_6b12e3",
+      "title": "What is cancer",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-03T23:57:21.147819",
+      "updated_at": "2025-12-03T23:57:30.764518",
+      "message_count": 2
+    },
+    "conv_20251204_000044_d29475": {
+      "id": "conv_20251204_000044_d29475",
+      "title": "What is cancer",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-04T00:00:44.263861",
+      "updated_at": "2025-12-04T00:00:56.821703",
+      "message_count": 2
+    },
+    "conv_20251205_182600_653957": {
+      "id": "conv_20251205_182600_653957",
+      "title": "New Conversation",
+      "messages": [
+        {
+          "role": "user",
+          "content": "om"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T18:26:00.628456",
+      "updated_at": "2025-12-05T18:26:08.774744",
+      "message_count": 2
+    },
+    "conv_20251205_183751_8561f3": {
+      "id": "conv_20251205_183751_8561f3",
+      "title": "New Conversation",
+      "messages": [
+        {
+          "role": "user",
+          "content": "om"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T18:37:51.084355",
+      "updated_at": "2025-12-05T18:37:57.090817",
+      "message_count": 2
+    },
+    "conv_20251205_184324_5ac7f6": {
+      "id": "conv_20251205_184324_5ac7f6",
+      "title": "Who is om thaware",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Who is om thaware"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T18:43:24.857557",
+      "updated_at": "2025-12-05T18:47:33.989721",
+      "message_count": 2
+    },
+    "conv_20251205_184932_a34c17": {
+      "id": "conv_20251205_184932_a34c17",
+      "title": "Who is animesh kewale",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Who is animesh kewale"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"Who is animesh kewale\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Tell me types of cancer and treatment in tabluar format"
+        },
+        {
+          "role": "assistant",
+          "content": "**Understanding Cancer** \ud83c\udf97\ufe0f\n\nCancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body.\n\n**Common Types:**\n- **Breast Cancer** - Most common in women\n- **Lung Cancer** - Often linked to smoking\n- **Prostate Cancer** - Common in older men\n- **Colorectal Cancer** - Affects colon or rectum\n- **Skin Cancer** - Often caused by UV exposure\n\n**Key Points:**\n- Early detection improves outcomes\n- Treatment options include surgery, chemotherapy, radiation\n- Lifestyle factors can reduce risk\n- Regular screenings are important\n\n**\u26a0\ufe0f Important:** This is general information. Always consult healthcare professionals for personalized medical advice.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "How many people are recaver from cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "**Understanding Cancer** \ud83c\udf97\ufe0f\n\nCancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body.\n\n**Common Types:**\n- **Breast Cancer** - Most common in women\n- **Lung Cancer** - Often linked to smoking\n- **Prostate Cancer** - Common in older men\n- **Colorectal Cancer** - Affects colon or rectum\n- **Skin Cancer** - Often caused by UV exposure\n\n**Key Points:**\n- Early detection improves outcomes\n- Treatment options include surgery, chemotherapy, radiation\n- Lifestyle factors can reduce risk\n- Regular screenings are important\n\n**\u26a0\ufe0f Important:** This is general information. Always consult healthcare professionals for personalized medical advice.",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T18:49:32.497644",
+      "updated_at": "2025-12-05T18:51:46.599891",
+      "message_count": 6
+    },
+    "conv_20251205_185501_69e5fd": {
+      "id": "conv_20251205_185501_69e5fd",
+      "title": "Hi my name is om",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hi my name is om"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "ok"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Done"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"Done\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Tell me about cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "**Understanding Cancer** \ud83c\udf97\ufe0f\n\nCancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body.\n\n**Common Types:**\n- **Breast Cancer** - Most common in women\n- **Lung Cancer** - Often linked to smoking\n- **Prostate Cancer** - Common in older men\n- **Colorectal Cancer** - Affects colon or rectum\n- **Skin Cancer** - Often caused by UV exposure\n\n**Key Points:**\n- Early detection improves outcomes\n- Treatment options include surgery, chemotherapy, radiation\n- Lifestyle factors can reduce risk\n- Regular screenings are important\n\n**\u26a0\ufe0f Important:** This is general information. Always consult healthcare professionals for personalized medical advice.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "ok can you tell me above information in tabular format"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"ok can you tell me above information in tabular format\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Nice"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"Nice\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Ok can you tall me defination of cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "**Understanding Cancer** \ud83c\udf97\ufe0f\n\nCancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body.\n\n**Common Types:**\n- **Breast Cancer** - Most common in women\n- **Lung Cancer** - Often linked to smoking\n- **Prostate Cancer** - Common in older men\n- **Colorectal Cancer** - Affects colon or rectum\n- **Skin Cancer** - Often caused by UV exposure\n\n**Key Points:**\n- Early detection improves outcomes\n- Treatment options include surgery, chemotherapy, radiation\n- Lifestyle factors can reduce risk\n- Regular screenings are important\n\n**\u26a0\ufe0f Important:** This is general information. Always consult healthcare professionals for personalized medical advice.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "o"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"o\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "OMG"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"OMG\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "ui"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"ui\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T18:55:01.272015",
+      "updated_at": "2025-12-05T19:21:04.649110",
+      "message_count": 20
+    },
+    "conv_20251205_190451_1de4ac": {
+      "id": "conv_20251205_190451_1de4ac",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-05T19:04:51.029538",
+      "updated_at": "2025-12-05T19:04:51.029538",
+      "message_count": 0
+    },
+    "conv_20251205_191541_79cbc9": {
+      "id": "conv_20251205_191541_79cbc9",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-05T19:15:41.868917",
+      "updated_at": "2025-12-05T19:15:41.868917",
+      "message_count": 0
+    },
+    "conv_20251205_192051_08bad9": {
+      "id": "conv_20251205_192051_08bad9",
+      "title": "New Conversation",
+      "messages": [
+        {
+          "role": "user",
+          "content": "ui"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"ui\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T19:20:51.488572",
+      "updated_at": "2025-12-05T19:23:40.067570",
+      "message_count": 2
+    },
+    "conv_20251205_192330_a7e768": {
+      "id": "conv_20251205_192330_a7e768",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-05T19:23:30.663523",
+      "updated_at": "2025-12-05T19:23:30.663523",
+      "message_count": 0
+    },
+    "conv_20251205_192459_171721": {
+      "id": "conv_20251205_192459_171721",
+      "title": "my name is on",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your medical research assistant. How can I help you today?",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "my name is on"
+        },
+        {
+          "role": "assistant",
+          "content": "I received your question: **\"my name is on\"**\n\n**MediAssist AI Demo Mode:**\n- I can provide general medical information\n- For specific conditions: ask about cancer, diabetes, or fasting\n- For accurate advice: consult healthcare professionals\n- For full AI: add a Gemini API key to your .env file\n\n**Try asking:**\n- \"Tell me about cancer\"\n- \"What is intermittent fasting?\"\n- \"Explain diabetes types\" ",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your medical research assistant. How can I help you today?",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "How are you"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! \ud83d\udc4b I'm MediAssist AI, your medical research assistant. How can I help you today?",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "what do you eat"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "what do you eat\n\n"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T19:24:59.351527",
+      "updated_at": "2025-12-05T19:39:46.777270",
+      "message_count": 12
+    },
+    "conv_20251205_194024_dc7318": {
+      "id": "conv_20251205_194024_dc7318",
+      "title": "What do you eat",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What do you eat"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T19:40:24.373042",
+      "updated_at": "2025-12-05T19:40:36.229813",
+      "message_count": 2
+    },
+    "conv_20251205_194325_0d48a0": {
+      "id": "conv_20251205_194325_0d48a0",
+      "title": "Ka mante",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Ka mante"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T19:43:25.655253",
+      "updated_at": "2025-12-05T19:43:34.577133",
+      "message_count": 2
+    },
+    "conv_20251205_194703_3a8308": {
+      "id": "conv_20251205_194703_3a8308",
+      "title": "I am on",
+      "messages": [
+        {
+          "role": "user",
+          "content": "I am on"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "I am om"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": []
+        }
+      ],
+      "created_at": "2025-12-05T19:47:03.826871",
+      "updated_at": "2025-12-05T19:48:17.756111",
+      "message_count": 4
+    },
+    "conv_20251205_194839_f58fea": {
+      "id": "conv_20251205_194839_f58fea",
+      "title": ": I provide educational information only.",
+      "messages": [
+        {
+          "role": "user",
+          "content": ": I provide educational information only."
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "The 16:8 method involves fasting for 16 hours each day and restricting your daily eating window to 8 hours. For example, you might eat between 12 pm and 8 pm, then fast until 12 pm the next day.",
+              "metadata": {
+                "topic": "Fasting Methods",
+                "source": "Nutrition Research Journal",
+                "type": "method"
+              },
+              "similarity": 0.04361140727996826,
+              "rank": 1
+            },
+            {
+              "text": "The 16:8 method involves fasting for 16 hours each day and restricting your daily eating window to 8 hours. For example, you might eat between 12 pm and 8 pm, then fast until 12 pm the next day.",
+              "metadata": {
+                "topic": "Fasting Methods",
+                "source": "Nutrition Research Journal",
+                "type": "method"
+              },
+              "similarity": 0.04361140727996826,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Can you provide me defination of cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "source": "National Cancer Institute",
+                "type": "research",
+                "topic": "Cancer Basics"
+              },
+              "similarity": 0.7311192154884338,
+              "rank": 1
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute",
+                "type": "research"
+              },
+              "similarity": 0.7311192154884338,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Ok give me cancer in tabular format"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute",
+                "type": "research"
+              },
+              "similarity": 0.47180259227752686,
+              "rank": 1
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "type": "research",
+                "source": "National Cancer Institute",
+                "topic": "Cancer Basics"
+              },
+              "similarity": 0.47180259227752686,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Meaning of health"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "What defination of diabetes"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "jk"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "What cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "What cancer\n\n"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "What cancer\n\n"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute",
+                "type": "research"
+              },
+              "similarity": 0.7805484533309937,
+              "rank": 1
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute",
+                "type": "research"
+              },
+              "similarity": 0.7805484533309937,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "What diabetes"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "type": "research",
+                "source": "Diabetes Care Journal",
+                "topic": "Diabetes"
+              },
+              "similarity": 0.4265288710594177,
+              "rank": 1
+            },
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "topic": "Diabetes",
+                "type": "research",
+                "source": "Diabetes Care Journal"
+              },
+              "similarity": 0.4265288710594177,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "om"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "The 16:8 method involves fasting for 16 hours each day and restricting your daily eating window to 8 hours. For example, you might eat between 12 pm and 8 pm, then fast until 12 pm the next day.",
+              "metadata": {
+                "topic": "Fasting Methods",
+                "source": "Nutrition Research Journal",
+                "type": "method"
+              },
+              "similarity": 0.10864657163619995,
+              "rank": 1
+            },
+            {
+              "text": "The 16:8 method involves fasting for 16 hours each day and restricting your daily eating window to 8 hours. For example, you might eat between 12 pm and 8 pm, then fast until 12 pm the next day.",
+              "metadata": {
+                "topic": "Fasting Methods",
+                "source": "Nutrition Research Journal",
+                "type": "method"
+              },
+              "similarity": 0.10864657163619995,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "om\n\n"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Tell me somehing about diabetes"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting.",
+          "sources": []
+        },
+        {
+          "role": "user",
+          "content": "Tell me somehing about diabetes\n\n"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "topic": "Diabetes",
+                "source": "Diabetes Care Journal",
+                "type": "research"
+              },
+              "similarity": 0.42781031131744385,
+              "rank": 1
+            },
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "topic": "Diabetes",
+                "source": "Diabetes Care Journal",
+                "type": "research"
+              },
+              "similarity": 0.42781031131744385,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "What medicine we take"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "Common cancer treatments include surgery, chemotherapy, radiation therapy, immunotherapy, and targeted therapy. Treatment depends on the cancer type and stage.",
+              "metadata": {
+                "source": "American Cancer Society",
+                "topic": "Cancer Treatment",
+                "type": "medical"
+              },
+              "similarity": 0.2817860245704651,
+              "rank": 1
+            },
+            {
+              "text": "Common cancer treatments include surgery, chemotherapy, radiation therapy, immunotherapy, and targeted therapy. Treatment depends on the cancer type and stage.",
+              "metadata": {
+                "source": "American Cancer Society",
+                "topic": "Cancer Treatment",
+                "type": "medical"
+              },
+              "similarity": 0.2817860245704651,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Tell me breif about cancer about 5 to 9 line"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "source": "National Cancer Institute",
+                "topic": "Cancer Basics",
+                "type": "research"
+              },
+              "similarity": 0.583046555519104,
+              "rank": 1
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute",
+                "type": "research"
+              },
+              "similarity": 0.583046555519104,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Ok If I have cancer so how many chance is their that I dead"
+        },
+        {
+          "role": "assistant",
+          "content": "System is initializing. Please wait...",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute",
+                "type": "research"
+              },
+              "similarity": 0.4241276979446411,
+              "rank": 1
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "source": "National Cancer Institute",
+                "topic": "Cancer Basics",
+                "type": "research"
+              },
+              "similarity": 0.4241276979446411,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Ok If I have cancer so how many chance is their that I dead"
+        },
+        {
+          "role": "assistant",
+          "content": "**Understanding Cancer** \ud83c\udf97\ufe0f\n\nCancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body.\n\n**Common Types:**\n- **Breast Cancer** - Most common in women\n- **Lung Cancer** - Often linked to smoking\n- **Prostate Cancer** - Common in older men\n- **Colorectal Cancer** - Affects colon or rectum\n- **Skin Cancer** - Often caused by UV exposure\n\n**Key Points:**\n- Early detection improves outcomes\n- Treatment options include surgery, chemotherapy, radiation\n- Lifestyle factors can reduce risk\n- Regular screenings are important\n\n**\u26a0\ufe0f Important:** This is general information. Always consult healthcare professionals for personalized medical advice.",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "source": "National Cancer Institute",
+                "topic": "Cancer Basics",
+                "type": "research"
+              },
+              "similarity": 0.4241276979446411,
+              "rank": 1
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "type": "research",
+                "source": "National Cancer Institute",
+                "topic": "Cancer Basics"
+              },
+              "similarity": 0.4241276979446411,
+              "rank": 2
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Ok If I have cancer so how many chance is their that I dead"
+        },
+        {
+          "role": "assistant",
+          "content": "**Understanding Cancer** \ud83c\udf97\ufe0f\n\nCancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body.\n\n**Common Types:**\n- **Breast Cancer** - Most common in women\n- **Lung Cancer** - Often linked to smoking\n- **Prostate Cancer** - Common in older men\n- **Colorectal Cancer** - Affects colon or rectum\n- **Skin Cancer** - Often caused by UV exposure\n\n**Key Points:**\n- Early detection improves outcomes\n- Treatment options include surgery, chemotherapy, radiation\n- Lifestyle factors can reduce risk\n- Regular screenings are important\n\n**\u26a0\ufe0f Important:** This is general information. Always consult healthcare professionals for personalized medical advice.",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "source": "National Cancer Institute",
+                "type": "research",
+                "topic": "Cancer Basics"
+              },
+              "similarity": 0.4241276979446411,
+              "rank": 1
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "source": "National Cancer Institute",
+                "topic": "Cancer Basics",
+                "type": "research"
+              },
+              "similarity": 0.4241276979446411,
+              "rank": 2
+            }
+          ]
+        }
+      ],
+      "created_at": "2025-12-05T19:48:39.436812",
+      "updated_at": "2025-12-05T20:33:50.761637",
+      "message_count": 38
+    },
+    "conv_20251205_200002_e1d6ad": {
+      "id": "conv_20251205_200002_e1d6ad",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-05T20:00:02.481398",
+      "updated_at": "2025-12-05T20:00:02.481398",
+      "message_count": 0
     }
   }
 }
