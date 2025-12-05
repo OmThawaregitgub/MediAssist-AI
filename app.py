@@ -43,7 +43,7 @@ if not API_KEY:
     print("⚠️ Using provided API key")
     API_KEY = "YOUR_GEMINI_API_KEY"
 print("API_KEY OF GOOGLE = ",API_KEY)
->>>>>>> ec4d3b6f0f4ebb36ef9d2ceb008ee0f9a3c85a31
+
 # ============================================
 # PAGE CONFIGURATION
 # ============================================
