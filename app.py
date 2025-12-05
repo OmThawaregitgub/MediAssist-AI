@@ -17,6 +17,7 @@ from rag import RAGPipeline
 # LOAD ENVIRONMENT VARIABLES
 # ============================================
 
+<<<<<<< HEAD
 # load_dotenv()
 
 # Get API key
@@ -30,6 +31,21 @@ if API_KEY:
 # llm_client = LLMClient()
 # rag_pipeline = None
 
+=======
+
+
+
+# Get API key - try multiple names
+API_KEY = st.secrets['GEMINI_API_KEY']
+
+key_value = st.secrets['GEMINI_API_KEY']
+    
+# Fallback to your key if not found
+if not API_KEY:
+    print("⚠️ Using provided API key")
+    API_KEY = "YOUR_GEMINI_API_KEY"
+print("API_KEY OF GOOGLE = ",API_KEY)
+>>>>>>> ec4d3b6f0f4ebb36ef9d2ceb008ee0f9a3c85a31
 # ============================================
 # PAGE CONFIGURATION
 # ============================================
@@ -197,12 +213,44 @@ def initialize_systems():
                 
                 # Force set to True
                 st.session_state.llm_initialized = True
+<<<<<<< HEAD
                 print(f"✅ LLM marked as initialized")
                 
             except Exception as e:
                 print(f"❌ LLM initialization error: {e}")
                 st.session_state.llm_initialized = True
                 print("⚠️ Marked as initialized despite error")
+=======
+                st.success("✅ Connected to Gemini Flash Latest")
+                return model
+            else:
+                st.error("❌ No response from model")
+                return None
+        except Exception as e:
+            print(f"gemini-flash-latest failed: {e}")
+            
+            # Try other models as fallback
+            models_to_try = [
+                'gemini-2.5-flash',
+                'gemini-1.5-flash',
+                'gemini-1.5-pro-latest',
+                'gemini-pro'
+            ]
+            
+            # for model_name in models_to_try:
+            #     try:
+            #         print(f"Trying model: {model_name}")
+            #         model = genai.GenerativeModel(model_name)
+            #         response = model.generate_content("Test")
+            #         if response.text:
+            #             st.session_state.llm_model = model
+            #             st.session_state.llm_initialized = True
+            #             st.success(f"✅ Connected to {model_name}")
+            return 'gemini-2.5-flash'
+            #     except Exception as e2:
+            #         print(f"Failed with {model_name}: {e2}")
+            #         continue
+>>>>>>> ec4d3b6f0f4ebb36ef9d2ceb008ee0f9a3c85a31
         
         # Initialize RAG
         if not st.session_state.rag_initialized:

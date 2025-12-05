@@ -1,16 +1,12 @@
-That's a very detailed and well-structured `README.md`\! I will format it using Markdown headings, lists, tables, and blockquotes for excellent readability, maintaining the original content and structure.
-
------
-
 # 🏥 MediAssist AI
 
 ### AI-Powered Healthcare Q\&A System Using RAG, ChromaDB & Gemini AI
 
-[](https://www.python.org/)
-[](https://streamlit.io/)
-[](https://www.trychroma.com/)
-[](https://ai.google.dev/)
-[](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-6F4E37?style=for-the-badge&logo=databricks&logoColor=white)](https://www.trychroma.com/)
+[![Google Gemini AI](https://img.shields.io/badge/Google_Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 MediAssist AI is an intelligent **Healthcare Question-Answering system** designed for doctors, clinicians, and medical researchers. It provides **quick, evidence-based summaries** on *Intermittent Fasting (IF)* and related metabolic disorders using **Retrieval-Augmented Generation (RAG)**.
 
@@ -41,8 +37,8 @@ Check out the live application or see the interface below\!
 
 🔗 **Live Demo Link**
 
-> 👉 [Click here to test the MediAssist AI App\!](https://mediassist-ai-zasupw7hcgypimctpdtcyr.streamlit.app/)
-
+> 👉 [Click here to test the MediAssist AI App!](https://mediassist-ai-v6q9djfkdz73epitt6rrh9.streamlit.app/)
+> 
 ## 📸 Screenshots
 
 ### 1\. Authentication Page
@@ -622,8 +618,8 @@ This project is licensed under the MIT License - see the [LICENSE](https://www.g
 For issues, questions, or contributions:
 
   * **GitHub Issues**: [Create an issue](https://github.com/OmThawaregitgub/MediAssist-AI/issues)
-  * **Email**: omthaware@example.com
-  * **Documentation**: [Read the docs](https://github.com/OmThawaregitgub/MediAssist-AI/wiki)
+  * **Email**: othaware175@gmail.com
+  * **Documentation**: [Read the docs](https://github.com/OmThawaregitgub/MediAssist-AI)
 
 -----
 
