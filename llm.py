@@ -240,7 +240,7 @@ Provide a clear, accurate response."""
         
         return self.generate(prompt)
 
-            return f"Error: {str(e)}"
+           
 
         
 
