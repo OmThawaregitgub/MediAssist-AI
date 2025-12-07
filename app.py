@@ -49,7 +49,7 @@ print(f"API Key loaded: {'Yes' if API_KEY and API_KEY != 'demo_key' else 'No (De
 # Fallback to your key if not found
 if not API_KEY:
     print("⚠️ Using provided API key")
-    API_KEY = "AIzaSyCrkKQGMluSyoE8Hs-SCPgnFZrO895NF6I"
+    API_KEY = "API_KEY"
 print("API_KEY OF GOOGLE = ",API_KEY)
 
 # ============================================
