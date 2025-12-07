@@ -1459,6 +1459,542 @@
       "created_at": "2025-12-05T20:00:02.481398",
       "updated_at": "2025-12-05T20:00:02.481398",
       "message_count": 0
+    },
+    "conv_20251206_234402_9d8be9": {
+      "id": "conv_20251206_234402_9d8be9",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-06T23:44:02.672707",
+      "updated_at": "2025-12-06T23:44:02.672707",
+      "message_count": 0
+    },
+    "conv_20251206_234613_2d4c6d": {
+      "id": "conv_20251206_234613_2d4c6d",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-06T23:46:13.825714",
+      "updated_at": "2025-12-06T23:46:13.825714",
+      "message_count": 0
+    },
+    "conv_20251206_234925_9d0e57": {
+      "id": "conv_20251206_234925_9d0e57",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-06T23:49:25.546198",
+      "updated_at": "2025-12-06T23:49:25.546198",
+      "message_count": 0
+    },
+    "conv_20251206_235203_a7ccef": {
+      "id": "conv_20251206_235203_a7ccef",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-06T23:52:03.913556",
+      "updated_at": "2025-12-06T23:52:03.913556",
+      "message_count": 0
+    },
+    "conv_20251207_110139_139984": {
+      "id": "conv_20251207_110139_139984",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-07T11:01:39.089000",
+      "updated_at": "2025-12-07T11:01:39.089993",
+      "message_count": 0
+    },
+    "conv_20251207_111930_2e7dd8": {
+      "id": "conv_20251207_111930_2e7dd8",
+      "title": "New Conversation",
+      "messages": [],
+      "created_at": "2025-12-07T11:19:30.565976",
+      "updated_at": "2025-12-07T11:19:30.565976",
+      "message_count": 0
+    },
+    "conv_20251207_112401_ce3c85": {
+      "id": "conv_20251207_112401_ce3c85",
+      "title": "ka mante",
+      "messages": [
+        {
+          "role": "user",
+          "content": "ka mante"
+        },
+        {
+          "role": "assistant",
+          "content": "**Understanding Cancer** \ud83c\udf97\ufe0f\n\nCancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body.\n\n**Common Types:**\n- **Breast Cancer** - Most common in women\n- **Lung Cancer** - Often linked to smoking\n- **Prostate Cancer** - Common in older men\n- **Colorectal Cancer** - Affects colon or rectum\n- **Skin Cancer** - Often caused by UV exposure\n\n**Key Points:**\n- Early detection improves outcomes\n- Treatment options include surgery, chemotherapy, radiation\n- Lifestyle factors can reduce risk\n- Regular screenings are important\n\n**\u26a0\ufe0f Important:** This is general information. Always consult healthcare professionals for personalized medical advice.",
+          "sources": [
+            {
+              "text": "Segmentation Techniques in Mammography: Their Value in Breast Cancer Diagnosis.\nComputer-aided diagnosis (CAD) significantly enhances the accurate and early detection of breast cancer. The segmentation step, which is crucial in CAD methods, employs different algorithms for image segmentation as documented in the literature. Segmentation in detecting breast lesions using CAD may affect the features extracted from the images and, accordingly, the classification results. These segmentation methods have advantages and limitations when compared to each other. No study in the literature has yet explored feature matrices obtained by different segmentation methods using different performance criteria. This study aims to investigate the effects of different segmentation methods used in image processing on mammography images for breast cancer detection. In the preprocessing step, images are enhanced using median filtering, Contrast Limited Adaptive Histogram Equalization (CLAHE), and unsharp masking. Texture features are extracted from the regions of interest (ROI) using texture analysis techniques, coupled with an elastic network technique for feature reduction. The performance of five different segmentation algorithms was compared using various performance measures such as accuracy, sensitivity, and specificity, alongside different classification methods. The k-means algorithm showed higher performance compared to other segmentation methods. It exhibited high efficacy, achieving an accuracy of 1.00 and 0.989 with Support Vector Machine (SVM) and Random Forest (RF) classifiers, respectively. Segmentation methods used in image processing were found to have an impact on classification results. These computer-aided systems can be instrumental in patient classification.",
+              "metadata": {
+                "pmid": "41257170",
+                "publication_date": "2024",
+                "authors": "Hanife Avc\u0131, Jale Karakaya",
+                "journal": "Journal of clinical practice and research",
+                "title": "Segmentation Techniques in Mammography: Their Value in Breast Cancer Diagnosis."
+              },
+              "similarity": 0.08403712511062622,
+              "rank": 1,
+              "source": "pubmed"
+            },
+            {
+              "text": "Agnostic Biomarkers in Molecular Pathology.\nAdvances in molecular techniques have revealed that different molecular mechanisms are responsible for the behavior of cancer cells. Molecular alterations play a critical role in both the differential diagnosis of cancer and in the development of targeted therapies. Studies have identified the same potentially targetable mutations across various tumor types, supporting the emergence of tumor-agnostic therapies. To date, five biomarkers have been approved for tumor-agnostic therapy: microsatellite instability (MSI), neurotrophic tyrosine receptor kinase (",
+              "metadata": {
+                "pmid": "41255652",
+                "title": "Agnostic Biomarkers in Molecular Pathology.",
+                "journal": "Journal of clinical practice and research",
+                "publication_date": "2025",
+                "authors": "Zeynep Sagnak Yilmaz, Yasemin Cakir, Sibel Demir Kececi, Kemal Kursat Bozkurt, Onur Ertunc, Rafet Gunes Ozturk, Ayca Tan"
+              },
+              "similarity": 0.06430739164352417,
+              "rank": 2,
+              "source": "pubmed"
+            },
+            {
+              "text": "Efficacy and Safety of Anlotinib-Based Regimens in Metastatic Breast Cancer: A Multicenter Real-World Study.\nAnlotinib, a multi-target small-molecule receptor tyrosine kinase inhibitor, can inhibit tumor angiogenesis proliferation and remains underexplored in metastatic breast cancer (MBC). Therefore, we aimed to analyze the efficacy and safety of anlotinib for MBC treatment in a real-world study. In this multicenter, retrospective study, patients with MBC who received anlotinib at four Chinese centers between January 2021 and December 2022 were enrolled (data cut-off date: February 1, 2025). The primary end point was progression-free survival (PFS); secondary endpoints included overall survival (OS), objective response rate, and adverse events (AEs). Statistical significance was defined at p\u00a0<\u00a00.05. In total, 153 patients were included in this study (median age, 51 years). Median follow-up time was 30.0 months. A total of 86 (56.2%) patients were hormone receptor-positive/human epidermal growth factor receptor 2-negative, whereas the others were human epidermal growth factor receptor 2-positive (9.8%) or triple-negative breast cancer (34.0%). The median PFS and OS were 6.0 months (95% confidence interval [CI] 4.5-7.5) and 28.5 months (95% CI 20.3-36.7). The number of metastatic sites and Eastern Cooperative Oncology Group performance status were significant in Cox multivariate analysis (p\u00a0=\u00a00.012 and p\u00a0=\u00a00.030, respectively) and were significantly associated with PFS of anlotinib. Most AEs were clinically manageable, whereas Grade III/IV AEs included neutropenia (29.4%) and fatigue (6.5%). Anlotinib exhibits effective and safe anti-tumor activity in the treatment of MBC.",
+              "metadata": {
+                "pmid": "41253736",
+                "publication_date": "2025",
+                "title": "Efficacy and Safety of Anlotinib-Based Regimens in Metastatic Breast Cancer: A Multicenter Real-World Study.",
+                "journal": "Journal of evidence-based medicine",
+                "authors": "Xiang Li, Ying Han, Yi Zhang, Lei Wang, Huihui Li, Tao Sun, Meng Li, Xu Sun, Yangyang Gao, Lin Jia, Lijun Di, Zheng Lv"
+              },
+              "similarity": 0.05553317070007324,
+              "rank": 3,
+              "source": "pubmed"
+            }
+          ]
+        }
+      ],
+      "created_at": "2025-12-07T11:24:01.417422",
+      "updated_at": "2025-12-07T11:24:15.116480",
+      "message_count": 2
+    },
+    "conv_20251207_123359_8ab80b": {
+      "id": "conv_20251207_123359_8ab80b",
+      "title": "What cancer",
+      "messages": [
+        {
+          "role": "user",
+          "content": "ko"
+        },
+        {
+          "role": "assistant",
+          "content": "**Research-Based Answer (Demo Mode)**\n            \nI found relevant medical research for your question about \"ko\" in our PubMed database.\n\n**What I would provide with a valid Groq API key:**\n1. Evidence-based analysis of the research findings\n2. Citations from PubMed articles\n3. Clinical implications and recommendations\n4. Summary of current medical consensus\n\n**Current Status:** Running in demo mode. To get actual research-based answers, please configure a valid Groq API key.\n\n**To use the full version:**\n1. Get a free API key from https://console.groq.com\n2. Add it to your .env file as GROQ_API_KEY=your_key_here\n3. Restart the application\n\n**Try these questions in demo mode:**\n- \"What are the common cancer treatments?\"\n- \"Explain how intermittent fasting affects metabolism\"\n- \"What are the symptoms of diabetes?\"\n",
+          "sources": [
+            {
+              "text": "Efficacy and Safety of Anlotinib-Based Regimens in Metastatic Breast Cancer: A Multicenter Real-World Study.\nAnlotinib, a multi-target small-molecule receptor tyrosine kinase inhibitor, can inhibit tumor angiogenesis proliferation and remains underexplored in metastatic breast cancer (MBC). Therefore, we aimed to analyze the efficacy and safety of anlotinib for MBC treatment in a real-world study. In this multicenter, retrospective study, patients with MBC who received anlotinib at four Chinese centers between January 2021 and December 2022 were enrolled (data cut-off date: February 1, 2025). The primary end point was progression-free survival (PFS); secondary endpoints included overall survival (OS), objective response rate, and adverse events (AEs). Statistical significance was defined at p\u00a0<\u00a00.05. In total, 153 patients were included in this study (median age, 51 years). Median follow-up time was 30.0 months. A total of 86 (56.2%) patients were hormone receptor-positive/human epidermal growth factor receptor 2-negative, whereas the others were human epidermal growth factor receptor 2-positive (9.8%) or triple-negative breast cancer (34.0%). The median PFS and OS were 6.0 months (95% confidence interval [CI] 4.5-7.5) and 28.5 months (95% CI 20.3-36.7). The number of metastatic sites and Eastern Cooperative Oncology Group performance status were significant in Cox multivariate analysis (p\u00a0=\u00a00.012 and p\u00a0=\u00a00.030, respectively) and were significantly associated with PFS of anlotinib. Most AEs were clinically manageable, whereas Grade III/IV AEs included neutropenia (29.4%) and fatigue (6.5%). Anlotinib exhibits effective and safe anti-tumor activity in the treatment of MBC.",
+              "metadata": {
+                "authors": "Xiang Li, Ying Han, Yi Zhang, Lei Wang, Huihui Li, Tao Sun, Meng Li, Xu Sun, Yangyang Gao, Lin Jia, Lijun Di, Zheng Lv",
+                "pmid": "41253736",
+                "title": "Efficacy and Safety of Anlotinib-Based Regimens in Metastatic Breast Cancer: A Multicenter Real-World Study.",
+                "journal": "Journal of evidence-based medicine",
+                "publication_date": "2025"
+              },
+              "similarity": 0.10101616382598877,
+              "rank": 1,
+              "source": "pubmed"
+            },
+            {
+              "text": "The Impact of Promotora Community Education and Text Messaging on Lowering Exposure to Environmental Toxins to Reduce Breast Cancer Risks and Reproductive Harm.\nIntroduction Promotoras, lay health educators, are effective facilitators in improving health outcomes for Latinas in under-resourced communities. The Iris Cantor-UCLA Women's Health Education and Research Center, in collaboration with Worksite Wellness Los Angeles, a non-profit organization, developed a training program in which Promotoras educated their family, friends, and community members on lowering the risk of breast cancer and reproductive harm by reducing exposures to toxins. Promotoras participated in four 90-minute weekly Zoom training sessions focused on the hidden hazards of environmental toxins related to reproductive health and breast cancer. Participants educated by Promotoras attended two educational sessions. The study aimed to determine if augmenting the educational training conducted by Promotoras with a digital text messaging component for the participants assigned to an intervention group resulted in higher knowledge, self-efficacy gains, and advocacy engagement than participants in a control group. Methods\u00a0 Promotoras and participants completed surveys that evaluated knowledge gains, behavior changes, self-efficacy, and advocacy engagement related to lowering exposures to toxins to reduce risks of breast cancer and reproductive harm. After completing the training, each of the 21 Promotoras recruited and educated 8-10 participants, who included family, friends, and/or community members. Once educated, participants were randomized into two groups: a control group and an intervention group. The intervention group received text messages to reinforce behavior change and provide ongoing education. The control group did not receive text messages or other reinforcements. Both Promotoras and participants were incentivized with gift cards. Results A total of 239 participants were educated by the Promotoras through 42 group sessions. Although results were not statistically significant, the 129 participants in the intervention group demonstrated more promising overall behavior changes related to reducing exposure to toxins as compared to the 114 participants in the control group. Participants in both groups demonstrated an increase in knowledge of 67% to 84% in filtered tap water being safer than bottled water, and 65% to 88% in knowledge of exposure to plastic and cleaning products with fragrances linked to problems during pregnancy.\u00a0 The 24 Promotoras recruited were of primarily Mexican origin (54%, 13), with 42% (10) having completed high school and 42% (10) in the lowest income bracket of $0 to $10,350. Once trained, 13 Promotoras' knowledge of toxins related to household toxins increased\u00a0by 185%.\u00a0There were 10 Promotoras whose confidence in their ability to reduce exposures increased by 249%. In terms of educating, confidence of seven Promotoras\u00a0increased by 63%. Advocacy engagement grew exponentially, with petition signing increasing from 8.3% to 63% (2-15), and the percentage of Promotoras who had or intended to contact elected officials rose from 8.3% to 54% (2-13). Conclusions The Promotoras and participants deepened their knowledge, adopted healthier and safer behaviors in reducing exposures to toxins, and strengthened their commitment to advocacy. The foundation of this model is based on peer support combined with an evidence-based curriculum following best practices. The findings highlight the effectiveness of culturally and linguistically tailored health education led by trusted community members.",
+              "metadata": {
+                "authors": "Luisa R Blanco, Ashley Ramirez, Bianca Ojeda, Rebecca Martinez, Julie A Friedman, Estefania Ramires-Sanchez, Alexandra Klomhaus, Sophie A Viray, Gabrielle A Pascua, Janet Pregler",
+                "journal": "Cureus",
+                "pmid": "41257147",
+                "publication_date": "2025",
+                "title": "The Impact of Promotora Community Education and Text Messaging on Lowering Exposure to Environmental Toxins to Reduce Breast Cancer Risks and Reproductive Harm."
+              },
+              "similarity": 0.0960385799407959,
+              "rank": 2,
+              "source": "pubmed"
+            },
+            {
+              "text": "Synthesis and Evaluation of [\n[",
+              "metadata": {
+                "journal": "ACS medicinal chemistry letters",
+                "pmid": "41256994",
+                "title": "Synthesis and Evaluation of [",
+                "publication_date": "2025",
+                "authors": "Soumi Kolay, V Kusum Vats, Rohit Sharma, Mohini Guleria, Jeyachitra Amirdhanayagam, Naveen Kumar, Manoj Kumbhakar, Archana Mukherjee, Tapas Das"
+              },
+              "similarity": 0.09218764305114746,
+              "rank": 3,
+              "source": "pubmed"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "What cancer"
+        },
+        {
+          "role": "assistant",
+          "content": "**Research-Based Answer (Demo Mode)**\n            \nI found relevant medical research for your question about \"What cancer\" in our PubMed database.\n\n**What I would provide with a valid Groq API key:**\n1. Evidence-based analysis of the research findings\n2. Citations from PubMed articles\n3. Clinical implications and recommendations\n4. Summary of current medical consensus\n\n**Current Status:** Running in demo mode. To get actual research-based answers, please configure a valid Groq API key.\n\n**To use the full version:**\n1. Get a free API key from https://console.groq.com\n2. Add it to your .env file as GROQ_API_KEY=your_key_here\n3. Restart the application\n\n**Try these questions in demo mode:**\n- \"What are the common cancer treatments?\"\n- \"Explain how intermittent fasting affects metabolism\"\n- \"What are the symptoms of diabetes?\"\n",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "type": "research",
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute"
+              },
+              "similarity": 0.7805484533309937,
+              "rank": 1,
+              "source": "user_docs"
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "source": "National Cancer Institute",
+                "topic": "Cancer Basics",
+                "type": "research"
+              },
+              "similarity": 0.7805484533309937,
+              "rank": 2,
+              "source": "user_docs"
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "type": "research",
+                "source": "National Cancer Institute"
+              },
+              "similarity": 0.7805484533309937,
+              "rank": 3,
+              "source": "user_docs"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Meaning of treatmeent cause"
+        },
+        {
+          "role": "assistant",
+          "content": "**Research-Based Answer (Demo Mode)**\n            \nI found relevant medical research for your question about \"Meaning of treatmeent cause\" in our PubMed database.\n\n**What I would provide with a valid Groq API key:**\n1. Evidence-based analysis of the research findings\n2. Citations from PubMed articles\n3. Clinical implications and recommendations\n4. Summary of current medical consensus\n\n**Current Status:** Running in demo mode. To get actual research-based answers, please configure a valid Groq API key.\n\n**To use the full version:**\n1. Get a free API key from https://console.groq.com\n2. Add it to your .env file as GROQ_API_KEY=your_key_here\n3. Restart the application\n\n**Try these questions in demo mode:**\n- \"What are the common cancer treatments?\"\n- \"Explain how intermittent fasting affects metabolism\"\n- \"What are the symptoms of diabetes?\"\n",
+          "sources": [
+            {
+              "text": "The Impact of Promotora Community Education and Text Messaging on Lowering Exposure to Environmental Toxins to Reduce Breast Cancer Risks and Reproductive Harm.\nIntroduction Promotoras, lay health educators, are effective facilitators in improving health outcomes for Latinas in under-resourced communities. The Iris Cantor-UCLA Women's Health Education and Research Center, in collaboration with Worksite Wellness Los Angeles, a non-profit organization, developed a training program in which Promotoras educated their family, friends, and community members on lowering the risk of breast cancer and reproductive harm by reducing exposures to toxins. Promotoras participated in four 90-minute weekly Zoom training sessions focused on the hidden hazards of environmental toxins related to reproductive health and breast cancer. Participants educated by Promotoras attended two educational sessions. The study aimed to determine if augmenting the educational training conducted by Promotoras with a digital text messaging component for the participants assigned to an intervention group resulted in higher knowledge, self-efficacy gains, and advocacy engagement than participants in a control group. Methods\u00a0 Promotoras and participants completed surveys that evaluated knowledge gains, behavior changes, self-efficacy, and advocacy engagement related to lowering exposures to toxins to reduce risks of breast cancer and reproductive harm. After completing the training, each of the 21 Promotoras recruited and educated 8-10 participants, who included family, friends, and/or community members. Once educated, participants were randomized into two groups: a control group and an intervention group. The intervention group received text messages to reinforce behavior change and provide ongoing education. The control group did not receive text messages or other reinforcements. Both Promotoras and participants were incentivized with gift cards. Results A total of 239 participants were educated by the Promotoras through 42 group sessions. Although results were not statistically significant, the 129 participants in the intervention group demonstrated more promising overall behavior changes related to reducing exposure to toxins as compared to the 114 participants in the control group. Participants in both groups demonstrated an increase in knowledge of 67% to 84% in filtered tap water being safer than bottled water, and 65% to 88% in knowledge of exposure to plastic and cleaning products with fragrances linked to problems during pregnancy.\u00a0 The 24 Promotoras recruited were of primarily Mexican origin (54%, 13), with 42% (10) having completed high school and 42% (10) in the lowest income bracket of $0 to $10,350. Once trained, 13 Promotoras' knowledge of toxins related to household toxins increased\u00a0by 185%.\u00a0There were 10 Promotoras whose confidence in their ability to reduce exposures increased by 249%. In terms of educating, confidence of seven Promotoras\u00a0increased by 63%. Advocacy engagement grew exponentially, with petition signing increasing from 8.3% to 63% (2-15), and the percentage of Promotoras who had or intended to contact elected officials rose from 8.3% to 54% (2-13). Conclusions The Promotoras and participants deepened their knowledge, adopted healthier and safer behaviors in reducing exposures to toxins, and strengthened their commitment to advocacy. The foundation of this model is based on peer support combined with an evidence-based curriculum following best practices. The findings highlight the effectiveness of culturally and linguistically tailored health education led by trusted community members.",
+              "metadata": {
+                "publication_date": "2025",
+                "journal": "Cureus",
+                "pmid": "41257147",
+                "title": "The Impact of Promotora Community Education and Text Messaging on Lowering Exposure to Environmental Toxins to Reduce Breast Cancer Risks and Reproductive Harm.",
+                "authors": "Luisa R Blanco, Ashley Ramirez, Bianca Ojeda, Rebecca Martinez, Julie A Friedman, Estefania Ramires-Sanchez, Alexandra Klomhaus, Sophie A Viray, Gabrielle A Pascua, Janet Pregler"
+              },
+              "similarity": 0.25167179107666016,
+              "rank": 1,
+              "source": "pubmed"
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "source": "National Cancer Institute",
+                "type": "research",
+                "topic": "Cancer Basics"
+              },
+              "similarity": 0.24614715576171875,
+              "rank": 1,
+              "source": "user_docs"
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "type": "research",
+                "source": "National Cancer Institute"
+              },
+              "similarity": 0.24614715576171875,
+              "rank": 2,
+              "source": "user_docs"
+            }
+          ]
+        }
+      ],
+      "created_at": "2025-12-07T12:33:59.499399",
+      "updated_at": "2025-12-07T12:35:07.716167",
+      "message_count": 6
+    },
+    "conv_20251207_124835_16504f": {
+      "id": "conv_20251207_124835_16504f",
+      "title": "Can you tell me about types of cancer in table for...",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hi"
+        },
+        {
+          "role": "assistant",
+          "content": "**Based on 3 PubMed research articles:**\n\n**Hi**\n\n\n**Key Findings from Research:**\n\n1. Case Report: Sneaky DCIS-like invasive ductal carcinoma of the breast in the setting of extensive DCIS.\n\n2. In most cases, invasive ductal carcinoma (IDC) of the breast is identifiable when it presents with classic infiltrative growth patterns. However, a subset of IDC can present in a very sneaky way, significantly mimicking the appearance of ductal carcinoma\n\n3. The Impact of Promotora Community Education and Text Messaging on Lowering Exposure to Environmental Toxins to Reduce Breast Cancer Risks and Reproductive Harm.\n\n4. Introduction Promotoras, lay health educators, are effective facilitators in improving health outcomes for Latinas in under-resourced communities. The Iris Cantor-UCLA Women's Health Education and Research Center, in collaboration with Worksite Wellness Los Angeles, a non-profit organization, develo...\n\n5. Tall cell carcinoma with reversed polarity of breast cancer: a rare case report and review of the literature.\n\n**\u26a0\ufe0f Medical Disclaimer:** I can provide information about cancer, diabetes, and other medical topics. Always consult healthcare professionals for personalized medical advice.",
+          "sources": [
+            {
+              "text": "Case Report: Sneaky DCIS-like invasive ductal carcinoma of the breast in the setting of extensive DCIS.\nIn most cases, invasive ductal carcinoma (IDC) of the breast is identifiable when it presents with classic infiltrative growth patterns. However, a subset of IDC can present in a very sneaky way, significantly mimicking the appearance of ductal carcinoma ",
+              "metadata": {
+                "journal": "Frontiers in medicine",
+                "publication_date": "2025",
+                "title": "Case Report: Sneaky DCIS-like invasive ductal carcinoma of the breast in the setting of extensive DCIS.",
+                "authors": "Chong Chen, Yateng Tie, Xinjuan Zhang, Niuniu Hou, Yun Song, Dong Ren",
+                "pmid": "41255621"
+              },
+              "similarity": 0.1210140585899353,
+              "rank": 1,
+              "source": "pubmed"
+            },
+            {
+              "text": "The Impact of Promotora Community Education and Text Messaging on Lowering Exposure to Environmental Toxins to Reduce Breast Cancer Risks and Reproductive Harm.\nIntroduction Promotoras, lay health educators, are effective facilitators in improving health outcomes for Latinas in under-resourced communities. The Iris Cantor-UCLA Women's Health Education and Research Center, in collaboration with Worksite Wellness Los Angeles, a non-profit organization, developed a training program in which Promotoras educated their family, friends, and community members on lowering the risk of breast cancer and reproductive harm by reducing exposures to toxins. Promotoras participated in four 90-minute weekly Zoom training sessions focused on the hidden hazards of environmental toxins related to reproductive health and breast cancer. Participants educated by Promotoras attended two educational sessions. The study aimed to determine if augmenting the educational training conducted by Promotoras with a digital text messaging component for the participants assigned to an intervention group resulted in higher knowledge, self-efficacy gains, and advocacy engagement than participants in a control group. Methods\u00a0 Promotoras and participants completed surveys that evaluated knowledge gains, behavior changes, self-efficacy, and advocacy engagement related to lowering exposures to toxins to reduce risks of breast cancer and reproductive harm. After completing the training, each of the 21 Promotoras recruited and educated 8-10 participants, who included family, friends, and/or community members. Once educated, participants were randomized into two groups: a control group and an intervention group. The intervention group received text messages to reinforce behavior change and provide ongoing education. The control group did not receive text messages or other reinforcements. Both Promotoras and participants were incentivized with gift cards. Results A total of 239 participants were educated by the Promotoras through 42 group sessions. Although results were not statistically significant, the 129 participants in the intervention group demonstrated more promising overall behavior changes related to reducing exposure to toxins as compared to the 114 participants in the control group. Participants in both groups demonstrated an increase in knowledge of 67% to 84% in filtered tap water being safer than bottled water, and 65% to 88% in knowledge of exposure to plastic and cleaning products with fragrances linked to problems during pregnancy.\u00a0 The 24 Promotoras recruited were of primarily Mexican origin (54%, 13), with 42% (10) having completed high school and 42% (10) in the lowest income bracket of $0 to $10,350. Once trained, 13 Promotoras' knowledge of toxins related to household toxins increased\u00a0by 185%.\u00a0There were 10 Promotoras whose confidence in their ability to reduce exposures increased by 249%. In terms of educating, confidence of seven Promotoras\u00a0increased by 63%. Advocacy engagement grew exponentially, with petition signing increasing from 8.3% to 63% (2-15), and the percentage of Promotoras who had or intended to contact elected officials rose from 8.3% to 54% (2-13). Conclusions The Promotoras and participants deepened their knowledge, adopted healthier and safer behaviors in reducing exposures to toxins, and strengthened their commitment to advocacy. The foundation of this model is based on peer support combined with an evidence-based curriculum following best practices. The findings highlight the effectiveness of culturally and linguistically tailored health education led by trusted community members.",
+              "metadata": {
+                "publication_date": "2025",
+                "pmid": "41257147",
+                "title": "The Impact of Promotora Community Education and Text Messaging on Lowering Exposure to Environmental Toxins to Reduce Breast Cancer Risks and Reproductive Harm.",
+                "authors": "Luisa R Blanco, Ashley Ramirez, Bianca Ojeda, Rebecca Martinez, Julie A Friedman, Estefania Ramires-Sanchez, Alexandra Klomhaus, Sophie A Viray, Gabrielle A Pascua, Janet Pregler",
+                "journal": "Cureus"
+              },
+              "similarity": 0.1123431921005249,
+              "rank": 2,
+              "source": "pubmed"
+            },
+            {
+              "text": "Tall cell carcinoma with reversed polarity of breast cancer: a rare case report and review of the literature.\nTall cell carcinoma with reversed polarity (TCCRP) is a primary invasive breast cancer that is clinicopathologically characterized by reversed polarity of the nucleus of the tumor cells near the cell edge. This pathologic feature is so rare that only 82 cases of TCCRP have been reported worldwide since it was first reported in 2003. Herein, we present the 83rd case of TCCRP. Going one step further than the previous reports, our case includes genetic testing. We sought to explore whether there are new mutation sites, with a view to identifying more therapeutic options for patients in future, to find PIK3CA p.H1047R mutation and IDH2 R172T mutation.We have found the macrophase makers CD68/CD163 double positive in this patient, which may indicate a poor prognosis in the early time. Therefore, the patient was treated with postoperative radiotherapy. The patient continues to be followed up for prognostic evaluation, and no recurrence or metastasis occurred until now. The case has represented a full view to gaining an improved understanding of TCCRP.",
+              "metadata": {
+                "publication_date": "2025",
+                "journal": "Frontiers in oncology",
+                "authors": "Wenqi Duan, Longmei Zhang, Jinqi Gao, Zhe Wang, Mengjie Ren, Huajian Wu, Ya Deng, Chunlong Guo, Jianing Jiang",
+                "title": "Tall cell carcinoma with reversed polarity of breast cancer: a rare case report and review of the literature.",
+                "pmid": "41256322"
+              },
+              "similarity": 0.048791706562042236,
+              "rank": 3,
+              "source": "pubmed"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Can you tell me about types of cancer in table format"
+        },
+        {
+          "role": "assistant",
+          "content": "**Based on 3 PubMed research articles:**\n\n**Can you tell me about types of cancer in table format**\n\n\n**Key Findings from Research:**\n\n1. Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.\n\n2. Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.\n\n3. Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.\n\n4. 1. A clear, concise answer based on the provided research\n\n5. 2. If the information is incomplete, mention what additional research might be needed\n\n**\u26a0\ufe0f Medical Disclaimer:** I can provide information about cancer, diabetes, and other medical topics. Always consult healthcare professionals for personalized medical advice.",
+          "sources": [
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute",
+                "type": "research"
+              },
+              "similarity": 0.6300058364868164,
+              "rank": 1,
+              "source": "user_docs"
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "type": "research",
+                "source": "National Cancer Institute"
+              },
+              "similarity": 0.6300058364868164,
+              "rank": 2,
+              "source": "user_docs"
+            },
+            {
+              "text": "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body. There are more than 100 types of cancer.",
+              "metadata": {
+                "topic": "Cancer Basics",
+                "source": "National Cancer Institute",
+                "type": "research"
+              },
+              "similarity": 0.6300058364868164,
+              "rank": 3,
+              "source": "user_docs"
+            }
+          ]
+        }
+      ],
+      "created_at": "2025-12-07T12:48:35.208766",
+      "updated_at": "2025-12-07T12:49:21.636087",
+      "message_count": 4
+    },
+    "conv_20251207_162520_a8fe78": {
+      "id": "conv_20251207_162520_a8fe78",
+      "title": "How does fasting affect insulin sensitivity?",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How does fasting affect insulin sensitivity?"
+        },
+        {
+          "role": "assistant",
+          "content": "**Based on 3 PubMed research articles:**\n\n**How does fasting affect insulin sensitivity?**\n\n\n**Key Findings from Research:**\n\n1. Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.\n\n2. Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.\n\n3. Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.\n\n4. 1. A clear, concise answer based on the provided research\n\n5. 2. If the information is incomplete, mention what additional research might be needed\n\n**\u26a0\ufe0f Medical Disclaimer:** I can provide information about cancer, diabetes, and other medical topics. Always consult healthcare professionals for personalized medical advice.",
+          "sources": [
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "topic": "Diabetes",
+                "type": "research",
+                "source": "Diabetes Care Journal"
+              },
+              "similarity": 0.7534769773483276,
+              "rank": 1,
+              "source": "user_docs"
+            },
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "source": "Diabetes Care Journal",
+                "topic": "Diabetes",
+                "type": "research"
+              },
+              "similarity": 0.7534769773483276,
+              "rank": 2,
+              "source": "user_docs"
+            },
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "source": "Diabetes Care Journal",
+                "type": "research",
+                "topic": "Diabetes"
+              },
+              "similarity": 0.7534769773483276,
+              "rank": 3,
+              "source": "user_docs"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Ok what level of diabetes is good"
+        },
+        {
+          "role": "assistant",
+          "content": "**Based on 3 PubMed research articles:**\n\n**Ok what level of diabetes is good**\n\n\n**Key Findings from Research:**\n\n1. Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.\n\n2. Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.\n\n3. Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.\n\n4. 1. A clear, concise answer based on the provided research\n\n5. 2. If the information is incomplete, mention what additional research might be needed\n\n**\u26a0\ufe0f Medical Disclaimer:** I can provide information about cancer, diabetes, and other medical topics. Always consult healthcare professionals for personalized medical advice.",
+          "sources": [
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "topic": "Diabetes",
+                "source": "Diabetes Care Journal",
+                "type": "research"
+              },
+              "similarity": 0.364986777305603,
+              "rank": 1,
+              "source": "user_docs"
+            },
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "source": "Diabetes Care Journal",
+                "type": "research",
+                "topic": "Diabetes"
+              },
+              "similarity": 0.364986777305603,
+              "rank": 2,
+              "source": "user_docs"
+            },
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "type": "research",
+                "topic": "Diabetes",
+                "source": "Diabetes Care Journal"
+              },
+              "similarity": 0.364986777305603,
+              "rank": 3,
+              "source": "user_docs"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Ok what level of diabetes is good\n\n"
+        },
+        {
+          "role": "assistant",
+          "content": "**Understanding Diabetes Levels**\n\n                        There is no \"good\" level of having diabetes. Diabetes is a medical condition, not something that comes in \"good\" or \"bad\" levels. However, we measure how well diabetes is controlled:\n\n                        **Key Control Metrics:**\n\n        1. **HbA1c** (3-month average blood sugar):\n        - Normal: < 5.7%\n        - Prediabetes: 5.7-6.4%\n        - Diabetes: \u2265 6.5%\n        - Target for diabetics: Usually < 7.0%\n\n        2. **Fasting Blood Sugar:**\n        - Normal: 70-99 mg/dL\n        - Prediabetes: 100-125 mg/dL\n        - Diabetes: \u2265 126 mg/dL\n\n        3. **Random Blood Sugar:**\n        - Normal: < 140 mg/dL\n        - Diabetes: \u2265 200 mg/dL with symptoms\n\n        **What is \"Good Control\"?**\n        - Maintaining blood sugar within target ranges\n        - Preventing complications\n        - Individualized targets set with your doctor\n\n        **\u26a0\ufe0f Medical Disclaimer:** Always work with healthcare professionals to determine your personal diabetes management goals.",
+          "sources": [
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "source": "Diabetes Care Journal",
+                "type": "research",
+                "topic": "Diabetes"
+              },
+              "similarity": 0.364986777305603,
+              "rank": 1,
+              "source": "user_docs"
+            },
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "topic": "Diabetes",
+                "source": "Diabetes Care Journal",
+                "type": "research"
+              },
+              "similarity": 0.364986777305603,
+              "rank": 2,
+              "source": "user_docs"
+            },
+            {
+              "text": "Research shows intermittent fasting can improve insulin sensitivity, which is particularly beneficial for people with type 2 diabetes or prediabetes.",
+              "metadata": {
+                "source": "Diabetes Care Journal",
+                "topic": "Diabetes",
+                "type": "research"
+              },
+              "similarity": 0.364986777305603,
+              "rank": 3,
+              "source": "user_docs"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Ok which medicine take mostly for siabetes"
+        },
+        {
+          "role": "assistant",
+          "content": "**Diabetes Information** \ud83d\udc89\n                        Diabetes is a chronic condition affecting how your body processes glucose (sugar).\n                        **Types:**\n                            - **Type 1** - Autoimmune, usually diagnosed in childhood\n                            - **Type 2** - Most common, often related to lifestyle\n                            - **Gestational** - Occurs during pregnancy\n\n                        **Management:**\n                            - Regular blood sugar monitoring\n                            - Healthy diet and exercise\n                            - Medication as prescribed\n                            - Regular medical check-ups     \n                        **\u26a0\ufe0f Medical Disclaimer:** I can provide information about cancer, diabetes, and other medical topics. Always consult healthcare professionals for personalized medical advice.",
+          "sources": [
+            {
+              "text": "Antineoplastic 4-piperidone-1-phosphonothioates with potential multi-targeted inhibitory properties.\nA set of 3,5-bis(ylidene)-4-piperidone-1-phosphonothioates 20a\u2012l was synthesized in high yields through dehydrochlorination reaction of 3,5-bis(ylidene)-4-piperidones 18a\u2012l and diethyl chlorothiophosphate 19 in DMF containing quantitative amounts of TEA at 0\u00a0\u00b0C. Most of the synthesized agents exhibit effective antiproliferation properties against a variety of cancer cell lines (MCF7/breast, HCT116/colon, and A431/skin), outperforming the efficacy of the clinically approved drugs. Compound 20c (R\u00a0=\u20093-ClC",
+              "metadata": {
+                "title": "Antineoplastic 4-piperidone-1-phosphonothioates with potential multi-targeted inhibitory properties.",
+                "authors": "Mohamed S Bekheit, Siva S Panda, Benson M Kariuki, Walid Fayad, Ahmed A F Soliman, Hanaa Farag, Adel S Girgis",
+                "pmid": "41254178",
+                "publication_date": "2025",
+                "journal": "Scientific reports"
+              },
+              "similarity": 0.2880113124847412,
+              "rank": 1,
+              "source": "pubmed"
+            },
+            {
+              "text": "Common cancer treatments include surgery, chemotherapy, radiation therapy, immunotherapy, and targeted therapy. Treatment depends on the cancer type and stage.",
+              "metadata": {
+                "source": "American Cancer Society",
+                "topic": "Cancer Treatment",
+                "type": "medical"
+              },
+              "similarity": 0.2620202302932739,
+              "rank": 1,
+              "source": "user_docs"
+            },
+            {
+              "text": "Common cancer treatments include surgery, chemotherapy, radiation therapy, immunotherapy, and targeted therapy. Treatment depends on the cancer type and stage.",
+              "metadata": {
+                "type": "medical",
+                "topic": "Cancer Treatment",
+                "source": "American Cancer Society"
+              },
+              "similarity": 0.2620202302932739,
+              "rank": 2,
+              "source": "user_docs"
+            }
+          ]
+        }
+      ],
+      "created_at": "2025-12-07T16:25:20.860924",
+      "updated_at": "2025-12-07T16:39:25.032718",
+      "message_count": 8
     }
   }
 }

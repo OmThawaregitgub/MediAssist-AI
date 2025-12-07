@@ -18,30 +18,38 @@ from rag import RAGPipeline
 # ============================================
 
 
-# load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+    print("✅ Loaded environment variables from .env")
+except:
+    print("⚠️ Could not load .env file")
 
-# Get API key
-API_KEY = os.getenv('GEMINI_API_KEY')
+# Get API key from environment (now using Groq instead of Gemini)
+API_KEY = os.getenv('GROQ_API_KEY')
 
-print(f"API Key loaded: {'Yes' if API_KEY else 'No'}")
-if API_KEY:
-    print(f"API Key starts with: {API_KEY[:10]}...")
+# Check if we got a valid API key
+if not API_KEY or API_KEY.strip() == "":
+    print("⚠️ No GROQ_API_KEY found in environment")
+    API_KEY = "demo_key"
+    print("⚠️ Using demo mode")
+else:
+    print(f"✅ Found Groq API key: {API_KEY[:10]}...")
 
-# # Initialize global instances
-# llm_client = LLMClient()
-# rag_pipeline
+print(f"API Key loaded: {'Yes' if API_KEY and API_KEY != 'demo_key' else 'No (Demo Mode)'}")
+
 
 
 
 # Get API key - try multiple names
-API_KEY = st.secrets['GEMINI_API_KEY']
+# API_KEY = st.secrets['GEMINI_API_KEY']
 
-key_value = st.secrets['GEMINI_API_KEY']
+# key_value = st.secrets['GEMINI_API_KEY']
     
 # Fallback to your key if not found
 if not API_KEY:
     print("⚠️ Using provided API key")
-    API_KEY = "YOUR_GEMINI_API_KEY"
+    API_KEY = "AIzaSyCrkKQGMluSyoE8Hs-SCPgnFZrO895NF6I"
 print("API_KEY OF GOOGLE = ",API_KEY)
 
 # ============================================
@@ -190,69 +198,143 @@ def init_session_state():
     if 'messages' not in st.session_state:
         st.session_state.messages = []
 
+# ============================================
+# GLOBAL INSTANCES (SINGLETON PATTERN)
+# ============================================
+
+_llm_client_instance = None
+_rag_pipeline_instance = None
+
+def get_llm_client():
+    """Get or create LLM client singleton"""
+    global _llm_client_instance
+    print(f"🔍 get_llm_client() called")
+    print(f"   - Global instance exists: {_llm_client_instance is not None}")
+    
+    if _llm_client_instance is None:
+        print(f"   🆕 Creating NEW LLMClient instance")
+        try:
+            _llm_client_instance = LLMClient()
+            print(f"   ✅ Successfully created LLMClient instance")
+            print(f"   📍 New instance ID: {id(_llm_client_instance)}")
+        except Exception as e:
+            print(f"   ❌ Error creating LLMClient: {e}")
+            # Create a fallback instance
+            _llm_client_instance = LLMClient()
+            _llm_client_instance.demo_mode = True
+            _llm_client_instance.initialized = True
+    else:
+        print(f"   🔄 Returning EXISTING instance")
+        print(f"   📍 Existing instance ID: {id(_llm_client_instance)}")
+    
+    return _llm_client_instance
+
+def get_rag_pipeline():
+    """Get or create RAG pipeline singleton"""
+    global _rag_pipeline_instance
+    if _rag_pipeline_instance is None:
+        _rag_pipeline_instance = RAGPipeline()
+        print("🔄 Created new RAGPipeline singleton")
+    return _rag_pipeline_instance
+
+# ============================================
+# INITIALIZATION FUNCTIONS
+# ============================================
+
+def init_session_state():
+    """Initialize session state"""
+    defaults = {
+        'users': {
+            'admin': {
+                'password_hash': hashlib.sha256('admin123'.encode()).hexdigest(),
+                'email': 'admin@medassist.ai',
+                'full_name': 'Administrator',
+                'created_at': datetime.now().isoformat()
+            }
+        },
+        'current_user': None,
+        'current_conversation_id': None,
+        'conversations': {},
+        'llm_initialized': False,
+        'rag_initialized': False,
+        'editing_conversation': None,
+        'edit_conversation_title': "",
+        'llm_client': None,
+        'rag_pipeline': None
+    }
+    
+    for key, value in defaults.items():
+        if key not in st.session_state:
+            st.session_state[key] = value
+    
+    # Initialize current conversation messages
+    if 'messages' not in st.session_state:
+        st.session_state.messages = []
+
 def initialize_systems():
     """Initialize all AI systems"""
     
     print("🚀 Starting system initialization...")
+    print(f"🔑 API Key available: {'Yes' if API_KEY else 'No'}")
+    if API_KEY:
+        print(f"🔑 API Key: {API_KEY[:10]}...")
     
     # Show a spinner in the UI
     with st.spinner("Initializing AI systems..."):
         
         # Initialize LLM
         if not st.session_state.llm_initialized:
-            print("🔄 Getting LLMClient singleton...")
+            print("🔄 Initializing LLM...")
             try:
                 # Get the singleton instance
                 llm_client = get_llm_client()
+                print(f"✅ Got LLM client instance")
                 
-                # Initialize it
-                result = llm_client.initialize(API_KEY)
-                print(f"LLM initialization result: {result}")
-                
-                # Force set to True
-                st.session_state.llm_initialized = True
-
-                print(f"✅ LLM marked as initialized")
+                # Check if API key is valid
+                if not API_KEY or API_KEY == "demo_key" or API_KEY == "AIzaSyCrkKQGMluSyoE8Hs-SCPgnFZrO895NF6I":
+                    print("⚠️ Using default/demo API key")
+                    # Initialize with demo mode
+                    llm_client.demo_mode = True
+                    llm_client.initialized = True
+                    st.session_state.llm_initialized = True
+                    st.warning("⚠️ Running in Demo Mode - Using sample responses")
+                    print("✅ LLM initialized in demo mode")
+                else:
+                    print(f"🔑 Initializing with API key: {API_KEY[:10]}...")
+                    result = llm_client.initialize(API_KEY)
+                    print(f"LLM initialization result: {result}")
+                    
+                    # Force set to True
+                    st.session_state.llm_initialized = True
+                    print(f"✅ LLM marked as initialized")
+                    
+                    # Test the model
+                    try:
+                        test_response = llm_client.generate("Say hello")
+                        if test_response and "demo mode" not in test_response.lower():
+                            st.success("✅ Connected to Groq AI")
+                            print(f"✅ Test response: {test_response[:50]}...")
+                        else:
+                            st.warning("⚠️ Connected in demo mode")
+                            print(f"⚠️ Demo mode test response: {test_response[:50]}...")
+                    except Exception as test_error:
+                        print(f"⚠️ Test generation error: {test_error}")
+                        st.warning("⚠️ Connected with limited functionality")
                 
             except Exception as e:
-                print(f"❌ LLM initialization error: {e}")
-                st.session_state.llm_initialized = True
+                print(f"❌ LLM initialization error: {str(e)}")
+                import traceback
+                traceback.print_exc()
+                st.session_state.llm_initialized = True  # Mark as initialized anyway
+                st.warning(f"⚠️ LLM initialized in demo mode due to error")
                 print("⚠️ Marked as initialized despite error")
-
-                st.success("✅ Connected to Gemini Flash Latest")
-                return model
-            else:
-                st.error("❌ No response from model")
-                return None
-
-            
-            # Try other models as fallback
-            models_to_try = [
-                'gemini-2.5-flash',
-                'gemini-1.5-flash',
-                'gemini-1.5-pro-latest',
-                'gemini-pro'
-            ]
-            
-            # for model_name in models_to_try:
-            #     try:
-            #         print(f"Trying model: {model_name}")
-            #         model = genai.GenerativeModel(model_name)
-            #         response = model.generate_content("Test")
-            #         if response.text:
-            #             st.session_state.llm_model = model
-            #             st.session_state.llm_initialized = True
-            #             st.success(f"✅ Connected to {model_name}")
-            return 'gemini-2.5-flash'
-            #     except Exception as e2:
-            #         print(f"Failed with {model_name}: {e2}")
-            #         continue
-
         
         # Initialize RAG
         if not st.session_state.rag_initialized:
+            print("🔄 Initializing RAG...")
             try:
                 rag_pipeline = get_rag_pipeline()
+                print(f"✅ Got RAG pipeline instance")
                 
                 # Add sample data
                 sample_data = [
@@ -284,42 +366,91 @@ def initialize_systems():
                 )
                 
                 st.session_state.rag_initialized = True
-                print(f"✅ RAG initialized with {len(sample_data)} documents")
+                print(f"✅ RAG initialized with {len(sample_data)} sample documents")
+                
+                # Show database info
+                try:
+                    db_info = rag_pipeline.get_collection_info()
+                    if db_info.get('has_pubmed'):
+                        st.info(f"✅ PubMed database loaded: {db_info['pubmed_articles']} articles")
+                        print(f"✅ PubMed articles: {db_info['pubmed_articles']}")
+                    else:
+                        print("⚠️ No PubMed database found")
+                except Exception as e:
+                    print(f"⚠️ Could not get database info: {e}")
                 
             except Exception as e:
                 print(f"❌ RAG initialization error: {e}")
-                st.session_state.rag_initialized = False
-                print("⚠️ RAG initialization failed")
+                st.session_state.rag_initialized = True  # Mark as initialized anyway
+                st.warning(f"⚠️ RAG initialized with limited functionality")
+                print("⚠️ RAG initialization had issues")
     
+    print("✅ System initialization complete")
     return True
 
 # ============================================
 # GLOBAL INSTANCES (SINGLETON PATTERN)
 # ============================================
 
-_llm_client_instance = None
-_rag_pipeline_instance = None
 
-def get_llm_client():
-    """Get or create LLM client singleton"""
-    global _llm_client_instance
-    print(f"🔍 get_llm_client() called")
-    print(f"   - Global instance exists: {_llm_client_instance is not None}")
+# ============================================
+# MAIN APP
+# ============================================
+
+def main():
+    """Main application"""
+    init_session_state()
     
-    if _llm_client_instance is None:
-        print(f"   🆕 Creating NEW LLMClient instance")
-        _llm_client_instance = LLMClient()
-        print(f"   📍 New instance ID: {id(_llm_client_instance)}")
+    # Check if user is logged in
+    if st.session_state.current_user is None:
+        render_auth_page()
     else:
-        print(f"   🔄 Returning EXISTING instance")
-        print(f"   📍 Existing instance ID: {id(_llm_client_instance)}")
-        if hasattr(_llm_client_instance, 'initialized'):
-            print(f"   ✅ Instance.initialized: {_llm_client_instance.initialized}")
+        # Check if systems need initialization
+        if not st.session_state.llm_initialized or not st.session_state.rag_initialized:
+            # Show loading screen
+            loading_placeholder = st.empty()
+            loading_placeholder.markdown("""
+            <div style='text-align: center; padding: 5rem;'>
+                <h2>🏥 MediAssist AI</h2>
+                <p>🔄 Initializing AI systems...</p>
+                <p><small>This may take a few moments</small></p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Initialize systems
+            try:
+                success = initialize_systems()
+                if success:
+                    loading_placeholder.success("✅ Systems initialized successfully!")
+                    print("✅ Systems initialized, waiting 2 seconds before rerun...")
+                else:
+                    loading_placeholder.warning("⚠️ Systems initialized with limited functionality")
+                    print("⚠️ Systems initialized with limitations, waiting 2 seconds before rerun...")
+                
+                # Wait and rerun
+                time.sleep(2)
+                print("🔄 Rerunning to show chat interface...")
+                st.rerun()
+                
+            except Exception as e:
+                print(f"❌ Failed to initialize systems: {str(e)}")
+                loading_placeholder.error(f"❌ Failed to initialize systems: {str(e)}")
+                if st.button("Retry Initialization"):
+                    st.session_state.llm_initialized = False
+                    st.session_state.rag_initialized = False
+                    st.rerun()
+                if st.button("Continue Anyway (Demo Mode)"):
+                    st.session_state.llm_initialized = True
+                    st.session_state.rag_initialized = True
+                    st.rerun()
+                return
         else:
-            print(f"   ❌ Instance has no 'initialized' attribute!")
-    
-    return _llm_client_instance
-
+            # Systems are initialized, show chat interface
+            # If no current conversation, create one
+            if not st.session_state.current_conversation_id:
+                create_new_conversation()
+            
+            render_chat_interface()
 
 def get_rag_pipeline():
     """Get or create RAG pipeline singleton"""
@@ -334,77 +465,90 @@ def get_rag_pipeline():
 # ============================================
 
 def generate_response(query: str) -> Dict[str, Any]:
-    """Generate AI response - RAG-first architecture"""
+    """Generate AI response - Vector Database First, then LLM"""
     try:
         print(f"\n" + "="*50)
         print(f"🔍 generate_response() called: '{query}'")
-        print(f"   - llm_initialized: {st.session_state.get('llm_initialized', False)}")
-        print(f"   - rag_initialized: {st.session_state.get('rag_initialized', False)}")
         
         # Initialize variables
         sources = []
-        used_rag = False
+        used_rag = False  # Changed back to used_rag for compatibility
         answer = ""
         
-        # STEP 1: Try RAG first (if available)
+        # STEP 1: Try Vector Database first (both PubMed and user docs)
         if st.session_state.get('rag_initialized', False):
             try:
                 rag_pipeline = get_rag_pipeline()
-                search_results = rag_pipeline.search(query, top_k=2)
-                print(f"   🔍 RAG search found: {len(search_results)} results")
+                
+                # Search across all databases
+                search_results = rag_pipeline.search_all(query, top_k=3)
+                print(f"   🔍 Vector DB search found: {len(search_results)} results")
                 
                 if search_results:
                     sources = search_results
                     used_rag = True
                     
-                    # Combine RAG results into context
-                    rag_context = "\n\n".join([f"Source {i+1}: {r['text']}" 
-                                              for i, r in enumerate(search_results)])
+                    # Combine search results into context
+                    vector_context = "\n\n---\n\n".join([
+                        f"**Source {i+1}** ({r.get('source', 'unknown')}):\n{r['text']}"
+                        for i, r in enumerate(search_results)
+                    ])
                     
-                    print(f"   📚 RAG context created: {len(rag_context)} chars")
+                    print(f"   📚 Vector DB context created: {len(vector_context)} chars")
                     
-                    # Now use LLM to format the RAG content
+                    # Now use LLM to format the vector database content
                     if st.session_state.get('llm_initialized', False):
                         llm_client = get_llm_client()
-                        print(f"   🤖 Calling LLM with RAG context")
+                        print(f"   🤖 Calling LLM with vector database context")
                         
-                        # Create prompt with RAG context
-                        llm_prompt = f"""Based on the following medical information, answer the question: "{query}"
-
-Medical Information:
-{rag_context}
-
-Please provide a clear, concise answer:"""
+                        # Create prompt with vector database context
+                        # Create prompt with vector database context
+                        llm_prompt = f"""Question: "{query}" Here are relevant medical research findings: {vector_context}
+                        Based on this research, directly answer the question. If the research doesn't fully address the question, 
+                        say so and provide the most relevant information available."""
                         
                         answer = llm_client.generate(llm_prompt)
-                        print(f"   ✅ LLM generated answer from RAG: {len(answer)} chars")
+                        print(f"   ✅ LLM generated answer from vector DB: {len(answer)} chars")
                     else:
-                        # LLM not ready, use RAG directly
-                        print(f"   ⚠️ LLM not ready, using RAG text directly")
-                        answer = f"I found this information about your question:\n\n{rag_context}"
+                        # LLM not ready, use vector DB results directly
+                        print(f"   ⚠️ LLM not ready, using vector DB text directly")
+                        answer = f"I found this research information about your question:\n\n{vector_context}"
                 
             except Exception as e:
-                print(f"   ❌ RAG error: {e}")
+                print(f"   ❌ Vector DB search error: {e}")
         
-        # STEP 2: If no RAG results or RAG failed, try LLM directly
+        # STEP 2: If no vector DB results, try LLM with its general knowledge
         if not answer and st.session_state.get('llm_initialized', False):
-            print(f"   🤖 No RAG results, trying LLM directly")
+            print(f"   🤖 No vector DB results, using LLM with general knowledge")
             llm_client = get_llm_client()
-            answer = llm_client.generate(query)
-            print(f"   ✅ LLM generated direct answer: {len(answer)} chars")
+            
+            # Enhanced prompt for better medical responses
+            enhanced_prompt = f"""You are a medical research assistant. Answer this medical question: "{query}"
+
+Please provide:
+1. Accurate medical information based on established knowledge
+2. Clear explanations in simple terms
+3. A note that this is general medical information
+4. Recommendation to consult healthcare professionals for personalized advice
+
+Answer in a helpful, informative way:"""
+            
+            answer = llm_client.generate(enhanced_prompt)
+            print(f"   ✅ LLM generated general knowledge answer: {len(answer)} chars")
         
         # STEP 3: If still no answer, provide fallback
         if not answer:
             print(f"   ⚠️ No answer generated, using fallback")
-            answer = "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting."
+            answer = "I'm here to help with medical questions! I'll search through PubMed research and medical databases to find the most relevant information for you. Please ask me about specific medical topics."
         
         print(f"   📤 Returning answer: {len(answer)} chars, sources: {len(sources)}")
+        print(f"   Used RAG: {used_rag}")
         print("="*50)
         
         return {
             'answer': answer,
             'sources': sources,
-            'used_rag': used_rag
+            'used_rag': used_rag  # Changed back to used_rag
         }
         
     except Exception as e:
@@ -412,10 +556,11 @@ Please provide a clear, concise answer:"""
         import traceback
         traceback.print_exc()
         return {
-            'answer': "I'm here to help with medical questions! Try asking about cancer, diabetes, or intermittent fasting.",
+            'answer': "I'm here to help with medical questions! I search PubMed research and medical databases to provide evidence-based information. Please ask me about specific medical topics.",
             'sources': [],
             'used_rag': False
         }
+    
     
 def create_new_conversation():
     """Create a new conversation"""
@@ -527,23 +672,31 @@ def render_auth_page():
                         if not username or not password:
                             st.error("Please enter both username and password")
                         elif login(username, password):
-                            with st.spinner("Initializing AI systems..."):
-                                initialize_systems()
-                            st.success("✅ Welcome back!")
-                            create_new_conversation()
-                            time.sleep(1)
-                            st.rerun()
+                            # Create a placeholder for initialization messages
+                            init_placeholder = st.empty()
+                            init_placeholder.info("🔄 Initializing AI systems...")
+            
+                            # Initialize systems
+                            try:
+                                success = initialize_systems()
+                                if success:
+                                    init_placeholder.success("✅ Systems initialized successfully!")
+                                else:
+                                    init_placeholder.warning("⚠️ Systems initialized with limited functionality")
+                
+                                    # Create new conversation
+                                    create_new_conversation()
+                
+                                    # Wait and rerun
+                                    time.sleep(2)
+                                    st.rerun()
+                
+                            except Exception as e:
+                                init_placeholder.error(f"❌ Initialization error: {str(e)}")
+                                st.error("Please check your API key and try again")
                         else:
                             st.error("❌ Invalid credentials")
-                
-                with col_btn2:
-                    if st.button("📝 Register", use_container_width=True, type="secondary"):
-                        # Switch to register tab
-                        st.rerun()
-                
-                st.markdown("---")
-                st.info("**Demo account:** `admin` / `admin123`")
-            
+
             with tab2:
                 st.markdown("### Create Account")
                 
@@ -913,42 +1066,6 @@ def render_chat_interface():
 # ============================================
 # MAIN APP
 # ============================================
-
-def main():
-    """Main application"""
-    init_session_state()
-    
-    # Check if user is logged in
-    if st.session_state.current_user is None:
-        render_auth_page()
-    else:
-        # Check if systems need initialization
-        if not st.session_state.llm_initialized or not st.session_state.rag_initialized:
-            # Show loading screen
-            st.markdown("""
-            <div style='text-align: center; padding: 5rem;'>
-                <h2>🏥 MediAssist AI</h2>
-                <p>Initializing systems...</p>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            # Initialize systems
-            if not initialize_systems():
-                st.error("Failed to initialize systems. Please check your API key.")
-                if st.button("Logout"):
-                    st.session_state.current_user = None
-                    st.rerun()
-                return
-            
-            # Rerun to show chat interface
-            st.rerun()
-        else:
-            # Systems are initialized, show chat interface
-            # If no current conversation, create one
-            if not st.session_state.current_conversation_id:
-                create_new_conversation()
-            
-            render_chat_interface()
 
 if __name__ == "__main__":
     main()
