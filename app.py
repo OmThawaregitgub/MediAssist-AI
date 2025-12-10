@@ -7,7 +7,7 @@ from typing import List, Dict, Any
 import PyPDF2
 import time
 from dotenv import load_dotenv
-from model_list import model_list
+# from model_list import model_list
 
 # Import our modular components
 from llm import LLMClient
