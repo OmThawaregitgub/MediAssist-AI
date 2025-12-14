@@ -247,7 +247,7 @@ MediAssist AI solves these problems with:
         │           │  ┌───────────▼─────────────┐  │
         │           │  │   3. LLM Generation     │  │
         │           │  │     (Gemini AI)         │  │
-        │           │  └────────────┬────────────┘ │
+        │           │  └────────────┬────────────┘  │
         │           └───────────────┼───────────────┘
         │                           │
         │                   ┌───────▼───────┐
@@ -271,15 +271,15 @@ MediAssist AI solves these problems with:
 │   or PDF Upload │     │   & Validation  │     │   Management    │
 └─────────────────┘     └─────────────────┘     └────────┬────────┘
                                                           │
-┌─────────────────┐     ┌─────────────────┐     ┌────────▼─────────┐
-│   Display       │◄────│   Response      │◄────│   RAG Pipeline   │
-│   Results       │     │   Generation    │     │                  │
-└─────────────────┘     └─────────────────┘     ├──────────────────┤
-                                                 │ 1. Search DB    │
-                                                 │ 2. Get Context  │
-                                                 │ 3. Call LLM     │
-                                                 │ 4. Format Answer│
-                                                 └─────────────────┘
+┌─────────────────┐     ┌─────────────────┐     ┌────────▼────────┐
+│   Display       │◄────│   Response      │◄────│   RAG Pipeline  │
+│   Results       │     │   Generation    │     │                 │
+└─────────────────┘     └─────────────────┘     ├─────────────────┤
+                                                │ 1. Search DB    │
+                                                │ 2. Get Context  │
+                                                │ 3. Call LLM     │
+                                                │ 4. Format Answer│
+                                                └─────────────────┘
 
 ```
 -----
