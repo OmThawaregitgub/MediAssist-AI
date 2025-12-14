@@ -178,18 +178,18 @@ MediAssist AI solves these problems with:
 ├──────────────────────────────────────────────────────────────────────┤
 │                                                                      │
 │  ┌─────────────────┐       QUERY      ┌─────────────────┐            │
-│  │  🔍RETRIEVAL    │◄────────────────►│  🧠 GENERATION │            │
-│  │  ENGINE         │                  │  ENGINE          │           │
+│  │  🔍RETRIEVAL    │◄───────────────►│  🧠 GENERATION  │            │
+│  │  ENGINE         │                  │  ENGINE         │            │
 │  ├─────────────────┤     CONTEXT      ├─────────────────┤            │
-│  │ • Vector Search │                 │ • Gemini AI      │            │
-│  │ • ChromaDB      │                 │ • Prompt Eng     │            │
-│  │ • Similarity    │                 │ • Summarization  │            │
-│  └─────────────────┘                 └─────────────────┘             │
-│            │                              │                          │
+│  │ • Vector Search │                  │ • Gemini AI     │            │
+│  │ • ChromaDB      │                  │ • Prompt Eng    │            │
+│  │ • Similarity    │                  │ • Summarization │            │
+│  └─────────────────┘                  └─────────────────┘            │
+│            │                            c  │                         │
 │            └───────────────┬───────────────┘                         │
 │                            │                                         │
-│                ┌───────────▼───────────┐                             │
-│                │      RAG ORCHESTRATOR    │                          │
+│                ┌───────────▼─────────────┐                           │
+│                │      RAG ORCHESTRATOR   │                           │
 │                ├─────────────────────────┤                           │
 │                │ • Combine Context       │                           │
 │                │ • Generate Final Answer │                           │
@@ -203,7 +203,7 @@ MediAssist AI solves these problems with:
 ├──────────────────────────────────────────────────────────────────────┤
 │                                                                      │
 │  ┌─────────────────┐                  ┌─────────────────┐            │
-│  │  🗄️ VECTOR DB    │                  │  📄 FILE SYSTEM    │        │
+│  │  🗄️ VECTOR DB   │                  │  📄 FILE SYSTEM │            │
 │  ├─────────────────┤                  ├─────────────────┤            │
 │  │ • ChromaDB      │                  │ • conversations │            │
 │  │ • Embeddings    │                  │ • user_data     │            │
