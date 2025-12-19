@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 import streamlit as st
 from google import genai
-from reg import AdvancedRAGPipeline as RP
+from reg import RegPipeline as RP
 
 # Load environment variables
 load_dotenv()
