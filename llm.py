@@ -10,19 +10,19 @@ load_dotenv()
 class LargeLanguageModel:
     def __init__(self) -> None:
         # Extract the Gemini API key from environment variables.
-        self.API_key = os.getenv("Gemini_Api_Key") or st.secrets["Gemini_Api_Key"]
+        self.API_key = os.getenv("Gemini_Api_Key") 
 
     @staticmethod
     def Remove_extre_space(prompt:str) -> str:
         # Remove the extra space from the propmt.
         return prompt.strip()
     
-    def config_llm(self,model: str = "gemini-robotics-er-1.5-preview") -> bool:
+    def config_llm(self,model: str = "gemini-2.5-flash") -> bool:
         """
         Initilize the model with approprate model and return boolean value.
         As th e model is initilized correctly or not.
 
-        :param model: By default it have "gemini-robotics-er-1.5-preview" you can change it.
+        :param model: By default it have "gemini-2.5-flash" you can change it.
         :type model: Model must have the string data type.
         :return: Boolean value indicating success or failure of model initialization.
         """
@@ -31,7 +31,7 @@ class LargeLanguageModel:
 
         responce = self.client.models.generate_content(
                               
-                                        model="gemini-robotics-er-1.5-preview",
+                                        model="gemini-2.5-flash",
                                         contents="Hello, this is a test."
                                         )
         

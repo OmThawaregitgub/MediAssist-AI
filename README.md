@@ -146,30 +146,30 @@ MediAssist AI solves these problems with:
 │                              │                                       │
 │  ┌─────────────────────────────────────────────────────────────┐     │
 │  │                    STREAMLIT FRONTEND                       │     │
-│  │              (Single-Page Application with React-like)      │    │
+│  │              (Single-Page Application with React-like)      │     │
 │  └─────────────────────────────────────────────────────────────┘     │
 └──────────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼
 ┌──────────────────────────────────────────────────────────────────────┐
-│                    ⚙️ BUSINESS LOGIC LAYER                            │
+│                    ⚙️ BUSINESS LOGIC LAYER                           │
 ├──────────────────────────────────────────────────────────────────────┤
 │                                                                      │
-│  ┌─────────────────────────────────────────────────────────────┐    │
-│  │                CONVERSATION MANAGER                         │    │
-│  ├─────────────────────────────────────────────────────────────┤    │
-│  │ • Create/Edit/Delete Conversations                          │    │
-│  │ • Switch Between Conversations                              │    │
-│  │ • Save/Load from JSON                                       │    │
-│  └─────────────────────────────────────────────────────────────┘    │
-│                              │                                     │
-│  ┌─────────────────────────────────────────────────────────────┐    │
-│  │                 DOCUMENT PROCESSOR                          │    │
-│  ├─────────────────────────────────────────────────────────────┤    │
-│  │ • PDF Text Extraction (PyPDF2)                              │    │
-│  │ • Chunking & Preprocessing                                  │    │
-│  │ • Metadata Extraction                                       │    │
-│  └─────────────────────────────────────────────────────────────┘    │
+│  ┌─────────────────────────────────────────────────────────────┐     │
+│  │                CONVERSATION MANAGER                         │     │
+│  ├─────────────────────────────────────────────────────────────┤     │
+│  │ • Create/Edit/Delete Conversations                          │     │
+│  │ • Switch Between Conversations                              │     │
+│  │ • Save/Load from JSON                                       │     │
+│  └─────────────────────────────────────────────────────────────┘     │
+│                              │                                       │
+│  ┌─────────────────────────────────────────────────────────────┐     │
+│  │                 DOCUMENT PROCESSOR                          │     │
+│  ├─────────────────────────────────────────────────────────────┤     │
+│  │ • PDF Text Extraction (PyPDF2)                              │     │
+│  │ • Chunking & Preprocessing                                  │     │
+│  │ • Metadata Extraction                                       │     │
+│  └─────────────────────────────────────────────────────────────┘     │
 └──────────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼
@@ -178,18 +178,18 @@ MediAssist AI solves these problems with:
 ├──────────────────────────────────────────────────────────────────────┤
 │                                                                      │
 │  ┌─────────────────┐       QUERY      ┌─────────────────┐            │
-│  │  🔍RETRIEVAL    │◄────────────────►│  🧠 GENERATION │            │
-│  │  ENGINE         │                  │  ENGINE          │           │
+│  │  🔍RETRIEVAL    │◄───────────────►│  🧠 GENERATION  │            │
+│  │  ENGINE         │                  │  ENGINE         │            │
 │  ├─────────────────┤     CONTEXT      ├─────────────────┤            │
-│  │ • Vector Search │                 │ • Gemini AI      │            │
-│  │ • ChromaDB      │                 │ • Prompt Eng     │            │
-│  │ • Similarity    │                 │ • Summarization  │            │
-│  └─────────────────┘                 └─────────────────┘             │
-│            │                              │                          │
+│  │ • Vector Search │                  │ • Gemini AI     │            │
+│  │ • ChromaDB      │                  │ • Prompt Eng    │            │
+│  │ • Similarity    │                  │ • Summarization │            │
+│  └─────────────────┘                  └─────────────────┘            │
+│            │                            c  │                         │
 │            └───────────────┬───────────────┘                         │
 │                            │                                         │
-│                ┌───────────▼───────────┐                             │
-│                │      RAG ORCHESTRATOR    │                          │
+│                ┌───────────▼─────────────┐                           │
+│                │      RAG ORCHESTRATOR   │                           │
 │                ├─────────────────────────┤                           │
 │                │ • Combine Context       │                           │
 │                │ • Generate Final Answer │                           │
@@ -203,7 +203,7 @@ MediAssist AI solves these problems with:
 ├──────────────────────────────────────────────────────────────────────┤
 │                                                                      │
 │  ┌─────────────────┐                  ┌─────────────────┐            │
-│  │  🗄️ VECTOR DB    │                  │  📄 FILE SYSTEM    │        │
+│  │  🗄️ VECTOR DB   │                  │  📄 FILE SYSTEM │            │
 │  ├─────────────────┤                  ├─────────────────┤            │
 │  │ • ChromaDB      │                  │ • conversations │            │
 │  │ • Embeddings    │                  │ • user_data     │            │
@@ -238,17 +238,17 @@ MediAssist AI solves these problems with:
         │           │  │   1. Vector Search      │  │
         │           │  │      (ChromaDB)         │  │
         │           │  └───────────┬─────────────┘  │
-        │           │              │                 │
+        │           │              │                │
         │           │  ┌───────────▼─────────────┐  │
         │           │  │   2. Context Building   │  │
         │           │  │   (Retrieved Docs)      │  │
         │           │  └───────────┬─────────────┘  │
-        │           │              │                 │
+        │           │              │                │
         │           │  ┌───────────▼─────────────┐  │
         │           │  │   3. LLM Generation     │  │
         │           │  │     (Gemini AI)         │  │
-        │           │  └───────────┬─────────────┘  │
-        │           └───────────────┼─────────────────┘
+        │           │  └────────────┬────────────┘  │
+        │           └───────────────┼───────────────┘
         │                           │
         │                   ┌───────▼───────┐
         │                   │   RESPONSE    │
@@ -275,11 +275,11 @@ MediAssist AI solves these problems with:
 │   Display       │◄────│   Response      │◄────│   RAG Pipeline  │
 │   Results       │     │   Generation    │     │                 │
 └─────────────────┘     └─────────────────┘     ├─────────────────┤
-                                                 │ 1. Search DB    │
-                                                 │ 2. Get Context  │
-                                                 │ 3. Call LLM     │
-                                                 │ 4. Format Answer│
-                                                 └─────────────────┘
+                                                │ 1. Search DB    │
+                                                │ 2. Get Context  │
+                                                │ 3. Call LLM     │
+                                                │ 4. Format Answer│
+                                                └─────────────────┘
 
 ```
 -----
