@@ -8,11 +8,95 @@ import os
 import bcrypt
 from datetime import datetime as dt
 from pathlib import Path
-from llm import LargeLanguageModel
-import tempfile
 
-# Initialize the LLM
-llm = LargeLanguageModel()
+# Try to initialize the LLM with fallback
+try:
+    from llm import LargeLanguageModel
+    llm = LargeLanguageModel()
+    llm_available = True
+except ImportError:
+    llm_available = False
+except Exception:
+    llm_available = False
+
+# Fallback medical knowledge base
+FALLBACK_MEDICAL_KNOWLEDGE = {
+    "cancer": {
+        "what is": "Cancer is a disease caused by uncontrolled division of abnormal cells in the body.",
+        "symptoms": "Common symptoms include unexplained weight loss, fatigue, lumps, persistent cough, unusual bleeding.",
+        "treatment": "Treatments include surgery, chemotherapy, radiation therapy, immunotherapy, and targeted therapy.",
+        "prevention": "Prevention strategies include not smoking, healthy diet, regular exercise, sun protection, vaccination.",
+        "types": "Common types: breast cancer, lung cancer, prostate cancer, colorectal cancer, skin cancer.",
+        "diagnosis": "Diagnosed through biopsies, imaging tests (CT, MRI), blood tests, and genetic testing."
+    },
+    "diabetes": {
+        "what is": "Diabetes is a chronic condition where the body cannot properly process glucose due to insulin issues.",
+        "symptoms": "Increased thirst, frequent urination, extreme hunger, unexplained weight loss, fatigue.",
+        "types": "Type 1 (autoimmune), Type 2 (insulin resistance), Gestational (during pregnancy).",
+        "treatment": "Medications (insulin, metformin), blood sugar monitoring, diet control, exercise.",
+        "complications": "Heart disease, kidney damage, nerve damage, eye problems, foot issues.",
+        "management": "Regular monitoring, balanced diet, exercise, medication adherence, regular check-ups."
+    },
+    "liver": {
+        "what is": "The liver is a vital organ responsible for detoxification, protein synthesis, and digestion.",
+        "diseases": "Common liver diseases: hepatitis, cirrhosis, fatty liver disease, liver cancer.",
+        "symptoms": "Jaundice, abdominal pain, swelling, fatigue, nausea, dark urine.",
+        "causes": "Alcohol abuse, viral infections, obesity, medications, autoimmune conditions.",
+        "prevention": "Limit alcohol, maintain healthy weight, practice safe sex, get vaccinated for hepatitis.",
+        "treatment": "Depends on condition: medications, lifestyle changes, surgery, or transplantation."
+    },
+    "obesity": {
+        "what is": "Obesity is a condition of excessive body fat that increases health risks.",
+        "causes": "Genetics, overeating, physical inactivity, medications, psychological factors.",
+        "risks": "Heart disease, diabetes, high blood pressure, certain cancers, sleep apnea.",
+        "treatment": "Diet modification, increased physical activity, behavior therapy, medications, surgery.",
+        "prevention": "Balanced diet, regular exercise, portion control, limiting processed foods.",
+        "management": "Calorie control, regular exercise, medical supervision, support groups."
+    }
+}
+
+# Fallback response generator
+def generate_fallback_response(prompt):
+    """Generate a response when LLM is not available"""
+    prompt_lower = prompt.lower()
+    
+    # Check for specific diseases
+    for disease in ["cancer", "diabetes", "liver", "obesity", "fatty", "hepatitis", "tumor"]:
+        if disease in prompt_lower:
+            if disease in FALLBACK_MEDICAL_KNOWLEDGE:
+                knowledge = FALLBACK_MEDICAL_KNOWLEDGE[disease]
+                
+                # Extract specific aspect being asked about
+                for aspect, info in knowledge.items():
+                    if aspect in prompt_lower:
+                        return f"Regarding {disease.capitalize()} ({aspect.replace('_', ' ')}):\n\n{info}\n\n*Note: This is general information. Please consult a healthcare professional for personalized advice.*"
+                
+                # General information about the disease
+                return f"General Information about {disease.capitalize()}:\n\n" + \
+                       f"- What is it: {knowledge['what is']}\n" + \
+                       f"- Common symptoms: {knowledge['symptoms']}\n" + \
+                       f"- Treatment options: {knowledge['treatment']}\n" + \
+                       f"- Prevention: {knowledge['prevention']}\n\n" + \
+                       "*Note: This is general information. Please consult a healthcare professional for personalized advice.*"
+    
+    # General medical questions
+    medical_keywords = ["symptom", "treatment", "cure", "medicine", "drug", "diagnos", "test", 
+                       "prevent", "cause", "risk", "exercise", "diet", "food", "vitamin"]
+    
+    if any(keyword in prompt_lower for keyword in medical_keywords):
+        return "I understand you're asking about medical information. For accurate and personalized medical advice, please consult with a qualified healthcare professional. They can consider your specific situation and provide appropriate guidance.\n\nIf you're experiencing medical symptoms, please seek immediate medical attention."
+    
+    # Greetings and general questions
+    greetings = ["hello", "hi", "hey", "greetings", "good morning", "good afternoon", "good evening"]
+    if any(greeting in prompt_lower for greeting in greetings):
+        return "Hello! I'm MediAssist, your medical information assistant. How can I help you today with medical questions?"
+    
+    # Questions about the assistant
+    if "who are you" in prompt_lower or "what are you" in prompt_lower:
+        return "I'm MediAssist, an AI-powered medical information assistant. I can provide general information about medical conditions, symptoms, treatments, and prevention strategies. Remember, I don't replace professional medical advice."
+    
+    # Default response for other queries
+    return "I understand you're asking: '" + prompt + "'\n\nFor medical questions, I can provide general information about conditions like cancer, diabetes, liver diseases, obesity, and related topics. If your question is medical in nature, please rephrase it specifically, and I'll do my best to provide helpful information.\n\nIf you need specific medical advice, please consult a healthcare professional."
 
 # Page configuration with dark theme
 st.set_page_config(
@@ -1166,7 +1250,10 @@ def main_app():
         st.session_state.tabs[st.session_state.current_tab].append(user_message)
         
         with st.spinner("🌙 MediAssist is thinking..."):
-            response = llm.generate_response(prompt)
+            if llm_available:
+                response = llm.generate_response(prompt)
+            else:
+                response = generate_fallback_response(prompt)
         
         assistant_message = {
             "role": "assistant",

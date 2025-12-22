@@ -10,19 +10,25 @@ load_dotenv()
 class LargeLanguageModel:
     def __init__(self) -> None:
         # Extract the Gemini API key from environment variables.
-        self.API_key = os.getenv("Gemini_Api_Key") 
+        self.API_key = os.getenv("Gemini_Api_Key")
+        if(self.API_key is None):
+            try:
+                self.API_key = st.secrets["Gemini_Api_Key"]
+            except Exception as e:
+                print("Gemini API key not found in environment variables or Streamlit secrets.")
+        
 
     @staticmethod
     def Remove_extre_space(prompt:str) -> str:
         # Remove the extra space from the propmt.
         return prompt.strip()
     
-    def config_llm(self,model: str = "gemini-2.5-flash") -> bool:
+    def config_llm(self,model: str = "gemini-robotics-er-1.5-preview") -> bool:
         """
         Initilize the model with approprate model and return boolean value.
         As th e model is initilized correctly or not.
 
-        :param model: By default it have "gemini-2.5-flash" you can change it.
+        :param model: By default it have "gemini-robotics-er-1.5-preview" you can change it.
         :type model: Model must have the string data type.
         :return: Boolean value indicating success or failure of model initialization.
         """
@@ -31,7 +37,7 @@ class LargeLanguageModel:
 
         responce = self.client.models.generate_content(
                               
-                                        model="gemini-2.5-flash",
+                                        model="gemini-robotics-er-1.5-preview",
                                         contents="Hello, this is a test."
                                         )
         
@@ -58,7 +64,7 @@ class LargeLanguageModel:
 
             # Search for similar documents in the Reg_pipline collection.
             results = reg_pipeline.search_all(query=query, top_k=top_k)
-
+            print(len(results),"=>",results[0:2])
             return results
 
         except Exception as e:
@@ -73,34 +79,45 @@ class LargeLanguageModel:
         if(len(Vector_data_result) > 0):
             context = "\n".join([doc['document'] for doc in Vector_data_result])
 
-        prompt = f"""
-                     You are a helpful medical assistant. That give research information
-                     related to the health care domain specially in ["Cancer","Diabetes","Cardiology"]
-                     based on the context provided. Used contex to answer the given question and
-                     represent the answer in detail manner. An respond in markdown format.If user want 
-                     resopnce in bullet points then provide the response in bullet points. According
-                     to user query manage that ant act as the expert in the medical domain. And do not give
-                     any response if the context is not related to medical field. And do not
-                     give any sensetive information relaed to medicine if any one ask drug name 
-                     or treatment plan. Always suggest to consult a medical professional for such
-                     information. And do not get hallucination. Use the below context to answer the question. And present
-                     it as the user want it(If customer want in tabular form do it like-wise as specify in prompt). If customer not specify anything then present in standard format.
+        prompt_template = f"""
+            You are a helpful medical assistant that provides research information
+            related to the healthcare domain, specifically in ["Cancer","Diabetes","Cardiology"].
 
-
-                     Context: {self.Remove_extre_space(context)}
-                     Question: {self.Remove_extre_space(prompt)}
-                  """
+            IMPORTANT FORMATTING INSTRUCTIONS:
+            1. If the user asks for information in tabular format, ALWAYS use proper Markdown table syntax
+            2. For tables, use: | Column 1 | Column 2 | Column 3 |
+            3. Separate header with: |---|---|
+            4. Make tables complete and readable
+            5. If context doesn't have enough information for a table, present in bullet points instead
+            
+            Rules:
+            - Use the context to answer the given question
+            - Present answers in a detailed manner
+            - Respond in markdown format
+            - If user wants response in bullet points, provide bullet points
+            - If user wants tabular format, provide proper Markdown tables
+            - Act as an expert in the medical domain
+            - Do not give any response if context is not medical-related
+            - Do not give sensitive information related to medicine
+            - Always suggest consulting a medical professional
+            - Do not hallucinate information
+            
+            Context: {self.Remove_extre_space(context)}
+            Question: {self.Remove_extre_space(prompt)}
+            
+            Please provide a comprehensive answer:
+        """
         
-
         if(context != "No relevant context found."):
             try:
                 if(self.config_llm(model=model)):
                     response = self.client.models.generate_content(
                         model=model,
-                        contents=prompt
+                        contents=prompt_template
                     )
-                    return response.text
-                
+                    # Clean up the response if needed
+                    response_text = response.text.strip()
+                    return response_text
                 else:
                     return "Error: LLM model configuration failed."
 
@@ -109,7 +126,5 @@ class LargeLanguageModel:
                 return "Error: An exception occurred while generating the response."
         else:
             return "No relevant context found to answer the question."
-            
-    
-    
+        
 
